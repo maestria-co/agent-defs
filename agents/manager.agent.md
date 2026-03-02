@@ -3,23 +3,6 @@ description: 'Workflow orchestrator — start here for all requests. Delegates t
 name: Manager
 model: claude-sonnet-4.5
 tools: ['agent', 'codebase', 'fetch', 'search']
-agents: ['planner', 'researcher', 'architect', 'coder', 'tester']
-handoffs:
-  - label: Delegate to Planner
-    agent: planner
-    send: false
-  - label: Delegate to Researcher
-    agent: researcher
-    send: false
-  - label: Delegate to Architect
-    agent: architect
-    send: false
-  - label: Delegate to Coder
-    agent: coder
-    send: false
-  - label: Delegate to Tester
-    agent: tester
-    send: false
 ---
 
 # Manager Agent

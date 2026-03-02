@@ -3,11 +3,6 @@ description: 'Senior software developer — implements features and fixes from c
 name: Coder
 model: claude-sonnet-4.5
 tools: ['editFiles', 'runCommands', 'codebase', 'search', 'usages', 'fetch']
-handoffs:
-  - label: Ready for Tester
-    agent: tester
-    prompt: Validate this implementation.
-    send: false
 ---
 
 # Coder Agent

@@ -3,13 +3,6 @@ description: 'Task decomposer — breaks ambiguous goals into concrete, ordered,
 name: Planner
 model: claude-sonnet-4.5
 tools: ['codebase', 'search', 'createFiles', 'editFiles']
-handoffs:
-  - label: Research needed
-    agent: researcher
-    send: false
-  - label: Plan ready → Manager
-    agent: manager
-    send: false
 ---
 
 # Planner Agent

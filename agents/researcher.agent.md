@@ -3,13 +3,6 @@ description: 'Technical investigator — evaluates options, fills knowledge gaps
 name: Researcher
 model: claude-sonnet-4.5
 tools: ['fetch', 'search', 'codebase', 'createFiles']
-handoffs:
-  - label: Findings → Manager
-    agent: manager
-    send: false
-  - label: Findings → Planner
-    agent: planner
-    send: false
 ---
 
 # Researcher Agent
@@ -64,6 +57,8 @@ Recommendation: [Option] — [one sentence]
 Main tradeoff: [what we're accepting]
 Full report: .context/research/[slug].md
 Follow-up unknowns: [none | question to route]
+
+Route to: Manager (or Architect if a design decision follows directly)
 ```
 
 ## Constraints
