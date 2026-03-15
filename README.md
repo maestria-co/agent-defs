@@ -1,76 +1,62 @@
 # agent-defs
 
-A reusable, platform-agnostic multi-agent system for AI-assisted software development. Drop it into any project to give your AI tools specialized roles, consistent workflows, and persistent project context.
+Composable task patterns for AI-assisted software development. Pick a pattern for your task, run it directly, get expert-quality output — no routing, no orchestration overhead.
 
 Works with **GitHub Copilot**, **Claude Code**, and any AI assistant that accepts system prompts.
 
 ---
 
-## What's Inside
+## Patterns
 
-| Directory | Purpose |
-|---|---|
-| `agents/` | Agent role definitions (system prompts + VS Code `.agent.md` files) |
-| `agents/_shared/` | Shared conventions and handoff protocol all agents follow |
-| `context_template/` | Portable `.context/` setup system for new projects |
-| `planning/` | Guide for rebuilding or extending the agent system |
-| `.context/` | This repo's own project context (overview, ADRs, retrospectives) |
+Six patterns cover all software development tasks:
 
----
+| Pattern | When to use | File |
+|---|---|---|
+| `planning-tasks` | Break a goal into ordered, dependency-aware tasks | `.context/patterns/planning-tasks/SKILL.md` |
+| `researching-options` | Evaluate libraries, approaches, or technologies | `.context/patterns/researching-options/SKILL.md` |
+| `designing-systems` | Make an architecture decision and write an ADR | `.context/patterns/designing-systems/SKILL.md` |
+| `implementing-features` | Write or modify code from a clear spec | `.context/patterns/implementing-features/SKILL.md` |
+| `writing-tests` | Write and run tests for an implementation | `.context/patterns/writing-tests/SKILL.md` |
+| `coordinating-work` | Orchestrate 3+ interdependent patterns | `.context/patterns/coordinating-work/SKILL.md` |
 
-## Agents
-
-| Agent | Role |
-|---|---|
-| **Manager** | Coordinates all agents, interfaces with the user, synthesizes outputs |
-| **Architect** | Makes system design and technology decisions, writes ADRs |
-| **Planner** | Breaks goals into concrete, ordered tasks |
-| **Researcher** | Gathers information, evaluates options, produces research reports |
-| **Coder** | Implements code from specifications |
-| **Tester** | Writes tests, validates implementations, reports on quality |
-
-Full documentation: [`agents/README.md`](agents/README.md)
-
----
-
-## Workflow
-
-All requests flow through the **Manager**, which routes to specialists as needed:
-
-```
-User → Manager → (Planner → Researcher?) → Architect? → Coder → Tester → Manager
-```
+**Pattern selection guide:** `.context/patterns/GUIDE.md`
 
 ---
 
 ## Quick Start
 
-### Option A: Direct invocation
-Paste an agent file into your AI chat as a system prompt:
+See [`QUICK_START.md`](QUICK_START.md) for copy-paste prompt templates for each pattern.
 
+**Basic pattern:**
 ```
-[paste contents of agents/manager.agent.md]
+Use the [pattern-name] skill.
 
-Hi, I need to add user authentication to my Express app.
-```
-
-### Option B: VS Code Copilot Chat
-The `.agent.md` files use VS Code's `chatagent` format. Reference them directly in Copilot Chat using `@agent-name` once added to your workspace.
-
-### Option C: Project-wide context
-Reference the agents from your project's `CLAUDE.md` or `.github/copilot-instructions.md`:
-
-```markdown
-## Agent System
-This project uses a multi-agent system. See agents/ for role definitions.
-When handling complex tasks, follow the workflow in agents/README.md.
+<task>[what you want to do]</task>
+<context>
+Stack: [language/framework]
+Relevant files: [paths]
+Constraints: [any limits]
+</context>
 ```
 
 ---
 
-## Context Template
+## Workflow Recipes
 
-The `context_template/` directory contains a portable setup system that generates a `.context/` directory in any project — giving AI agents persistent knowledge about your codebase.
+End-to-end examples for common development tasks:
+
+| Recipe | Patterns used | File |
+|---|---|---|
+| Simple bug fix | `implementing-features` + `writing-tests` | `recipes/simple-task.md` |
+| Multi-file feature | `planning-tasks` + `implementing-features` + `writing-tests` | `recipes/complex-task.md` |
+| Architecture decision | `researching-options` + `designing-systems` | `recipes/design-task.md` |
+| Full feature (OAuth example) | All 5 patterns | `recipes/feature-workflow.md` |
+
+---
+
+## Context System
+
+`context_template/` contains a setup system that generates a `.context/` directory in any project — giving AI tools persistent knowledge about your codebase (standards, decisions, domain entities, workflows).
 
 **One-time setup:**
 ```bash
@@ -79,24 +65,29 @@ cat ~/tools/agent-defs/context_template/SETUP_PROMPT.md | pbcopy
 # Paste into Claude Code or Copilot agent mode
 ```
 
-This generates structured documentation for standards, architecture, testing, domains, and workflows — loaded automatically by both Claude Code and VS Code Copilot.
-
 Full documentation: [`context_template/README.md`](context_template/README.md)
+
+---
+
+## Troubleshooting
+
+Pattern output too vague? Wrong scope? Test blocked? See [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
 
 ---
 
 ## Key Principles
 
-- **Earn your place** — every line in an agent definition must prevent a concrete mistake
 - **Simplicity first** — add complexity only when it demonstrably improves outcomes
-- **File-based context** — use `.context/` for knowledge that should persist across sessions
-- **Human checkpoints** — agents stop and check in before irreversible actions
+- **Context awareness** — write state to `.context/` before context clears; use git as checkpoints
+- **Human checkpoints** — stop and check in after 3–5 major actions or before irreversible changes
+- **Verify before done** — check each acceptance criterion explicitly before signaling completion
 
 ---
 
-## Adding New Agents
+## Legacy: Multi-Agent System
 
-1. Copy an existing agent file as a starting point
-2. Fill in: Purpose, Triggers, Inputs, Outputs, Responsibilities, Handoffs, Constraints, Anti-patterns
-3. Add it to the roster table in [`agents/README.md`](agents/README.md)
-4. Update the workflow diagram if it changes the flow
+> The original agent-based system (Manager, Planner, Researcher, Architect, Coder, Tester) has been archived. It still works but is no longer the recommended approach.
+
+Agent files: `agents/_archive/`  
+Migration guide: [`MIGRATION_GUIDE.md`](MIGRATION_GUIDE.md)  
+Why patterns instead: See `MIGRATION_GUIDE.md#Replacing the Handoff Protocol`

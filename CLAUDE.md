@@ -47,17 +47,17 @@ Pattern shared conventions: @.context/patterns/_shared/conventions.md
 
 ## Legacy: Multi-Agent System
 
-> ⚠️ **Deprecated.** The agent system below still works but is no longer the recommended approach.
+> ⚠️ **Archived.** Agent files are in `agents/_archive/`. They still work but are no longer the recommended approach.
 > Use the patterns above instead. See `MIGRATION_GUIDE.md` to convert.
 
 | Agent | File | Pattern equivalent |
 |---|---|---|
-| Manager | agents/manager.agent.md | `coordinating-work` + direct pattern selection |
-| Architect | agents/architect.agent.md | `designing-systems` |
-| Planner | agents/planner.agent.md | `planning-tasks` |
-| Researcher | agents/researcher.agent.md | `researching-options` |
-| Coder | agents/coder.agent.md | `implementing-features` |
-| Tester | agents/tester.agent.md | `writing-tests` |
+| Manager | agents/_archive/manager.agent.md | `coordinating-work` + direct pattern selection |
+| Architect | agents/_archive/architect.agent.md | `designing-systems` |
+| Planner | agents/_archive/planner.agent.md | `planning-tasks` |
+| Researcher | agents/_archive/researcher.agent.md | `researching-options` |
+| Coder | agents/_archive/coder.agent.md | `implementing-features` |
+| Tester | agents/_archive/tester.agent.md | `writing-tests` |
 
 Legacy workflow: `User → Manager → (Planner → Researcher?) → Architect? → Coder → Tester → Manager`
 

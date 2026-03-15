@@ -1,5 +1,7 @@
 # Agent Definitions
 
+> ⚠️ **Legacy system.** Agent files have been moved to `agents/_archive/`. The recommended approach is to use patterns directly from `.context/patterns/`. See `MIGRATION_GUIDE.md` and `QUICK_START.md`.
+
 This directory contains reusable, platform-agnostic AI agent definitions for software development teams. Each agent is a markdown file with a detailed system prompt, designed to be loaded into any AI assistant (GitHub Copilot, Claude, ChatGPT, etc.).
 
 ---
