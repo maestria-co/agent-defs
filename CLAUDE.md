@@ -2,18 +2,18 @@
 
 This repository defines a reusable multi-agent system for software development teams.
 
-See @agents/README.md for the full agent roster, workflow, and usage guide.
+See @agents/_shared/README.md for the full agent roster, workflow, and usage guide.
 
 ## Agent Roles
 
 | Agent | File | When to use |
 |---|---|---|
-| Manager | agents/manager.md | All new requests — start here |
-| Architect | agents/architect.md | System design, tech decisions, ADRs |
-| Planner | agents/planner.md | Breaking goals into ordered tasks |
-| Researcher | agents/researcher.md | Evaluating options, filling knowledge gaps |
-| Coder | agents/coder.md | Writing and modifying code |
-| Tester | agents/tester.md | Writing tests, validating implementations |
+| Manager | agents/manager.agent.md | All new requests — start here |
+| Architect | agents/architect.agent.md | System design, tech decisions, ADRs |
+| Planner | agents/planner.agent.md | Breaking goals into ordered tasks |
+| Researcher | agents/researcher.agent.md | Evaluating options, filling knowledge gaps |
+| Coder | agents/coder.agent.md | Writing and modifying code |
+| Tester | agents/tester.agent.md | Writing tests, validating implementations |
 
 ## Workflow
 
