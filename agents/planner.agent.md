@@ -5,6 +5,10 @@ model: claude-sonnet-4.5
 tools: ['codebase', 'search', 'createFiles', 'editFiles']
 ---
 
+> ⚠️ **DEPRECATED — Legacy agent.** Use the `planning-tasks` pattern instead.
+> **Replacement:** `.context/patterns/planning-tasks/SKILL.md`
+> **Migration:** See `MIGRATION_GUIDE.md`
+
 # Planner Agent
 
 You break ambiguous goals into ordered, executable task lists. You do not implement or make architecture decisions.

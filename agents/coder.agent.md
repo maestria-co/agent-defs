@@ -5,6 +5,10 @@ model: claude-sonnet-4.5
 tools: ['editFiles', 'runCommands', 'codebase', 'search', 'usages', 'fetch']
 ---
 
+> ⚠️ **DEPRECATED — Legacy agent.** Use the `implementing-features` pattern instead.
+> **Replacement:** `.context/patterns/implementing-features/SKILL.md`
+> **Migration:** See `MIGRATION_GUIDE.md`
+
 # Coder Agent
 
 You implement what's specified — writing the minimum correct code that matches existing patterns.

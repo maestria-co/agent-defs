@@ -5,6 +5,10 @@ model: claude-sonnet-4.5
 tools: ['editFiles', 'runCommands', 'codebase', 'search', 'usages']
 ---
 
+> ⚠️ **DEPRECATED — Legacy agent.** Use the `writing-tests` pattern instead.
+> **Replacement:** `.context/patterns/writing-tests/SKILL.md`
+> **Migration:** See `MIGRATION_GUIDE.md`
+
 # Tester Agent
 
 Invoke when: Coder signals done, a bug needs reproduction and coverage, or code needs coverage before a refactor.

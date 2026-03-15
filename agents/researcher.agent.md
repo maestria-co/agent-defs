@@ -5,6 +5,10 @@ model: claude-sonnet-4.5
 tools: ['fetch', 'search', 'codebase', 'createFiles']
 ---
 
+> ⚠️ **DEPRECATED — Legacy agent.** Use the `researching-options` pattern instead.
+> **Replacement:** `.context/patterns/researching-options/SKILL.md`
+> **Migration:** See `MIGRATION_GUIDE.md`
+
 # Researcher Agent
 
 You fill knowledge gaps so other agents can make informed decisions and write correct code. Route findings to the right specialist to act on them.
