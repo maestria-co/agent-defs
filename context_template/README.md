@@ -19,7 +19,7 @@ Running the setup prompt generates this structure in your project:
 │   ├── naming-conventions.md        # File, variable, function, class, test naming
 │   └── error-handling.md            # Error types, logging, validation patterns
 ├── architecture/
-│   ├── patterns-template.md         # Structural patterns agents must follow
+│   ├── patterns-template.md         # Structural patterns to follow
 │   └── migration-guide-template.md  # DB/API migration documentation
 ├── testing/
 │   ├── unit-testing.md              # Framework, mocking strategy, test structure
@@ -28,7 +28,7 @@ Running the setup prompt generates this structure in your project:
 │   ├── entities.md                  # Core domain models and business rules
 │   └── glossary.md                  # Project-specific terminology
 ├── workflows/
-│   ├── task-workflow-template.md    # 8-phase task execution workflow
+│   ├── task-workflow-template.md    # Pattern-based task execution workflow
 │   ├── branching.md                 # Git branching strategy
 │   └── ci-cd.md                     # CI/CD pipeline documentation
 └── tasks/                           # Per-task artifacts (brief, plan, retro)

@@ -1,6 +1,6 @@
 # Project Overview
 
-> **Instructions for agents:** Read this file before starting any task. Update it when you discover facts about the project that aren't captured here. Keep it high-level — this is the "big picture" document.
+> **Instructions:** Read this file before starting any task. Update it when you discover facts about the project that aren't captured here. Keep it high-level — this is the "big picture" document.
 
 ---
 

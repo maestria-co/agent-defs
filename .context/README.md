@@ -50,50 +50,65 @@ For tasks that span multiple sessions or long context windows, use structured st
 
 ---
 
-## How Agents Use This Directory
+## How to Use This Directory
 
-### Reading (before starting work)
-Agents should read relevant context before beginning any non-trivial task:
+### Before Starting Work (pre-flight)
+Read relevant context before beginning any non-trivial task:
 - Always read `project-overview.md` for project-level context
 - Read `decisions/` entries relevant to the area being worked in
 - Skim recent `retrospectives/` entries for recent learnings
+- Check `patterns/GUIDE.md` to select the right pattern for your task
 
-### Writing (after completing work)
-Agents write back to `.context/` when they:
+### After Completing Work (write-back)
+Write back to `.context/` when you:
 - Make a significant architecture or design decision → `decisions/ADR-NNN-title.md`
 - Complete a task with learnings worth preserving → `retrospectives/YYYY-MM-DD.md`
 - Discover facts about the project that aren't documented → `project-overview.md`
+
+### Selecting a Pattern
+Pick a pattern from `.context/patterns/` based on what you're doing:
+
+| Task type | Pattern |
+|---|---|
+| Break a goal into ordered tasks | `planning-tasks` |
+| Evaluate libraries, approaches, options | `researching-options` |
+| Make an architecture decision (ADR) | `designing-systems` |
+| Write or modify code | `implementing-features` |
+| Write or run tests | `writing-tests` |
+| Orchestrate 3+ patterns | `coordinating-work` |
+
+See `.context/patterns/GUIDE.md` for the full selection guide and composition patterns.
 
 ---
 
 ## The Learning Loop
 
 ```
-Agent does work
+Work is done
       │
       ▼
-Agent appends to retrospectives/YYYY-MM-DD.md
+Append to retrospectives/YYYY-MM-DD.md
       │
       ▼
 Human reviews retrospective entries periodically
       │
       ▼
 Valuable learnings are promoted:
-  - Patterns → agent definition files (agents/*.md)
+  - Patterns → .context/patterns/ SKILL.md files
   - Decisions → decisions/ADR-NNN-*.md
   - Project facts → project-overview.md
       │
       ▼
-Agents are smarter next time
+Every future task starts more informed
 ```
 
-This loop is how the system improves over time without requiring manual updates to every agent file.
+This loop is how the system improves over time without requiring manual updates to every file.
 
 ---
 
 ## Rules
 
 - **Never delete entries** from decisions/ or retrospectives/. Superseded ADRs are marked "Superseded" but kept.
-- **Keep project-overview.md current.** It's the first thing every agent reads.
+- **Keep project-overview.md current.** It's the first thing read on every task.
 - **Be specific in retro entries.** Vague entries ("things went well") have no learning value.
-- **Humans promote, agents append.** Agents write raw learnings. Humans decide what gets elevated to permanent documentation.
+- **Humans promote, patterns append.** Patterns write raw learnings. Humans decide what gets elevated to permanent documentation.
