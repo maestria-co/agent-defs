@@ -1,6 +1,6 @@
 # Shared Pattern Conventions
 
-All patterns in `.context/patterns/` follow these conventions. When a convention here
+All patterns in `skills/` follow these conventions. When a convention here
 conflicts with a rule in a specific pattern file, the **pattern-specific rule wins**.
 
 > Extracted from `agents/_shared/conventions.md`. That file remains in `agents/_shared/`

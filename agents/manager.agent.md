@@ -6,8 +6,8 @@ tools: ['agent', 'codebase', 'fetch', 'search']
 ---
 
 > ⚠️ **DEPRECATED — Legacy agent.** Use patterns directly instead.
-> **Replacement:** Select a pattern from `.context/patterns/GUIDE.md` based on your task.
-> For multi-pattern orchestration: `.context/patterns/coordinating-work/SKILL.md`
+> **Replacement:** Select a skill from `skills/GUIDE.md` based on your task.
+> For multi-skill orchestration: `skills/coordinating-work/SKILL.md`
 > **Migration:** See `MIGRATION_GUIDE.md`
 
 # Manager Agent

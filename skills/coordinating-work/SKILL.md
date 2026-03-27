@@ -59,7 +59,7 @@ Use this selection guide to identify which patterns apply:
 | Making a system design or tech decision | `designing-systems` |
 | Writing or modifying code | `implementing-features` |
 | Writing or running tests | `writing-tests` |
-| Synchronizing `.context/` with the codebase | `_skills/context-review` |
+| Synchronizing `.context/` with the codebase | `skills/context-review` |
 
 For simple tasks with clear specs, skip `planning-tasks` and go directly to the relevant pattern.
 

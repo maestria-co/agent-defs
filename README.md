@@ -1,35 +1,67 @@
 # agent-defs
 
-Composable task patterns for AI-assisted software development. Pick a pattern for your task, run it directly, get expert-quality output — no routing, no orchestration overhead.
+Reusable agents, skills, and prompts for AI-assisted software development. Structured as a `.copilot`-compatible customization kit.
 
 Works with **GitHub Copilot**, **Claude Code**, and any AI assistant that accepts system prompts.
 
 ---
 
-## Patterns
+## Structure
 
-Six patterns cover all software development tasks:
+```
+agents/           # Agent definitions (*.agent.md)
+skills/           # Composable skills (SKILL.md per folder)
+prompts/          # Reusable prompt files (*.prompt.md)
+.context/         # Project context (decisions, retrospectives)
+context_template/ # Template for generating .context/ in other projects
+recipes/          # End-to-end workflow examples
+build-guide/      # Build guide documentation
+```
 
-| Pattern | When to use | File |
+---
+
+## Skills
+
+Eight skills cover all software development tasks:
+
+| Skill | When to use | File |
 |---|---|---|
-| `planning-tasks` | Break a goal into ordered, dependency-aware tasks | `.context/patterns/planning-tasks/SKILL.md` |
-| `researching-options` | Evaluate libraries, approaches, or technologies | `.context/patterns/researching-options/SKILL.md` |
-| `designing-systems` | Make an architecture decision and write an ADR | `.context/patterns/designing-systems/SKILL.md` |
-| `implementing-features` | Write or modify code from a clear spec | `.context/patterns/implementing-features/SKILL.md` |
-| `writing-tests` | Write and run tests for an implementation | `.context/patterns/writing-tests/SKILL.md` |
-| `coordinating-work` | Orchestrate 3+ interdependent patterns | `.context/patterns/coordinating-work/SKILL.md` |
+| `planning-tasks` | Break a goal into ordered, dependency-aware tasks | `skills/planning-tasks/SKILL.md` |
+| `researching-options` | Evaluate libraries, approaches, or technologies | `skills/researching-options/SKILL.md` |
+| `designing-systems` | Make an architecture decision and write an ADR | `skills/designing-systems/SKILL.md` |
+| `implementing-features` | Write or modify code from a clear spec | `skills/implementing-features/SKILL.md` |
+| `writing-tests` | Write and run tests for an implementation | `skills/writing-tests/SKILL.md` |
+| `coordinating-work` | Orchestrate 3+ interdependent skills | `skills/coordinating-work/SKILL.md` |
+| `context-review` | Sync `.context/` docs with the codebase | `skills/context-review/SKILL.md` |
+| `evaluate-skill` | Evaluate a SKILL.md file for quality | `skills/evaluate-skill/SKILL.md` |
 
-**Pattern selection guide:** `.context/patterns/GUIDE.md`
+**Skill selection guide:** `skills/GUIDE.md`
+
+---
+
+## Agents
+
+| Agent | File | Description |
+|---|---|---|
+| Manager | `agents/manager.agent.md` | Orchestrates multi-pattern workflows |
+| Architect | `agents/architect.agent.md` | System design and architecture decisions |
+| Planner | `agents/planner.agent.md` | Task decomposition and planning |
+| Researcher | `agents/researcher.agent.md` | Technology evaluation and research |
+| Coder | `agents/coder.agent.md` | Code implementation |
+| Tester | `agents/tester.agent.md` | Test writing and execution |
+
+All agents follow: [`agents/_shared/conventions.md`](agents/_shared/conventions.md)
+Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-protocol.md)
 
 ---
 
 ## Quick Start
 
-See [`QUICK_START.md`](QUICK_START.md) for copy-paste prompt templates for each pattern.
+See [`QUICK_START.md`](QUICK_START.md) for copy-paste prompt templates for each skill.
 
 **Basic pattern:**
 ```
-Use the [pattern-name] skill.
+Use the [skill-name] skill.
 
 <task>[what you want to do]</task>
 <context>
@@ -45,12 +77,12 @@ Constraints: [any limits]
 
 End-to-end examples for common development tasks:
 
-| Recipe | Patterns used | File |
+| Recipe | Skills used | File |
 |---|---|---|
 | Simple bug fix | `implementing-features` + `writing-tests` | `recipes/simple-task.md` |
 | Multi-file feature | `planning-tasks` + `implementing-features` + `writing-tests` | `recipes/complex-task.md` |
 | Architecture decision | `researching-options` + `designing-systems` | `recipes/design-task.md` |
-| Full feature (OAuth example) | All 5 patterns | `recipes/feature-workflow.md` |
+| Full feature (OAuth example) | All 5 core skills | `recipes/feature-workflow.md` |
 
 ---
 
@@ -81,13 +113,3 @@ Pattern output too vague? Wrong scope? Test blocked? See [`TROUBLESHOOTING.md`](
 - **Context awareness** — write state to `.context/` before context clears; use git as checkpoints
 - **Human checkpoints** — stop and check in after 3–5 major actions or before irreversible changes
 - **Verify before done** — check each acceptance criterion explicitly before signaling completion
-
----
-
-## Legacy: Multi-Agent System
-
-> The original agent-based system (Manager, Planner, Researcher, Architect, Coder, Tester) has been archived. It still works but is no longer the recommended approach.
-
-Agent files: `agents/_archive/`  
-Migration guide: [`MIGRATION_GUIDE.md`](MIGRATION_GUIDE.md)  
-Why patterns instead: See `MIGRATION_GUIDE.md#Replacing the Handoff Protocol`
