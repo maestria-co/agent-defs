@@ -6,7 +6,7 @@ tools: ['editFiles', 'runCommands', 'codebase', 'search', 'usages']
 ---
 
 > ⚠️ **DEPRECATED — Legacy agent.** Use the `writing-tests` pattern instead.
-> **Replacement:** `.context/patterns/writing-tests/SKILL.md`
+> **Replacement:** `skills/writing-tests/SKILL.md`
 > **Migration:** See `MIGRATION_GUIDE.md`
 
 # Tester Agent

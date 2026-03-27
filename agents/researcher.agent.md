@@ -6,7 +6,7 @@ tools: ['fetch', 'search', 'codebase', 'createFiles']
 ---
 
 > ⚠️ **DEPRECATED — Legacy agent.** Use the `researching-options` pattern instead.
-> **Replacement:** `.context/patterns/researching-options/SKILL.md`
+> **Replacement:** `skills/researching-options/SKILL.md`
 > **Migration:** See `MIGRATION_GUIDE.md`
 
 # Researcher Agent

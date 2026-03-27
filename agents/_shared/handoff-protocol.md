@@ -1,8 +1,8 @@
 # Handoff Protocol
 
-> ⚠️ **Legacy reference.** This protocol applied to the multi-agent system (now in `agents/_archive/`). In the agentless system, handoffs are replaced by direct `.context/` file reads. See `.context/tasks/CONTEXT_STRUCTURE.md` for how context flows between patterns.
+> ⚠️ **Legacy reference.** This protocol applied to the multi-agent system (now in `agents/`). In the agentless system, handoffs are replaced by direct `.context/` file reads. See `.context/tasks/CONTEXT_STRUCTURE.md` for how context flows between patterns.
 >
-> The valuable elements of this protocol (XML tag conventions, self-verify, output format discipline) were extracted and live in all pattern SKILL.md files and `.context/patterns/_shared/conventions.md`.
+> The valuable elements of this protocol (XML tag conventions, self-verify, output format discipline) were extracted and live in all pattern SKILL.md files and `skills/_shared/conventions.md`.
 
 This document defines how agents hand work off to each other. Consistent handoffs ensure no context is lost between agents and that every agent has what it needs to begin work immediately.
 

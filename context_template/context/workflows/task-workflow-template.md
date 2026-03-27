@@ -34,7 +34,7 @@ When in doubt, use the medium path. Upgrade to full if blockers are encountered.
 | Write or run tests | `writing-tests` |
 | Orchestrate 3+ patterns | `coordinating-work` |
 
-See `.context/patterns/GUIDE.md` for the full selection guide and composition patterns.
+See `skills/GUIDE.md` for the full selection guide and composition patterns.
 
 ---
 

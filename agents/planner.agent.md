@@ -6,7 +6,7 @@ tools: ['codebase', 'search', 'createFiles', 'editFiles']
 ---
 
 > ⚠️ **DEPRECATED — Legacy agent.** Use the `planning-tasks` pattern instead.
-> **Replacement:** `.context/patterns/planning-tasks/SKILL.md`
+> **Replacement:** `skills/planning-tasks/SKILL.md`
 > **Migration:** See `MIGRATION_GUIDE.md`
 
 # Planner Agent

@@ -1,6 +1,6 @@
 # Shared Agent Conventions
 
-> ⚠️ **Legacy reference.** The canonical version of these conventions is now in `.context/patterns/_shared/conventions.md`. That version is what the active patterns use. This file is retained for reference with the archived agent system in `agents/_archive/`.
+> ⚠️ **Legacy reference.** The canonical version of these conventions is now in `skills/_shared/conventions.md`. That version is what the active patterns use. This file is retained for reference with the archived agent system in `agents/`.
 
 All agents in this system follow these conventions. Each agent file references this document and inherits these rules. When a convention in this file conflicts with a rule in a specific agent file, the **agent-specific rule wins**.
 

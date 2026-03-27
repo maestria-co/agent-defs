@@ -1,6 +1,6 @@
 # Pattern Guide: When to Use Each Pattern
 
-Quick reference for selecting and composing patterns in `.context/patterns/`.
+Quick reference for selecting and composing skills in `skills/`.
 
 ---
 
@@ -14,8 +14,8 @@ Quick reference for selecting and composing patterns in `.context/patterns/`.
 | Writing or modifying code | `implementing-features` |
 | Writing or running tests | `writing-tests` |
 | Composing 3+ patterns for a complex workflow | `coordinating-work` |
-| Syncing `.context/` docs with the codebase | `_skills/context-review` |
-| Evaluating a SKILL.md file | `_skills/evaluate-skill` |
+| Syncing `.context/` docs with the codebase | `context-review` |
+| Evaluating a SKILL.md file | `evaluate-skill` |
 
 ---
 
@@ -127,14 +127,14 @@ planning-tasks
 | "How should we design this system?" | `designing-systems` |
 | "What should we build next?" | `planning-tasks` |
 | "Refactor this module" | `planning-tasks` (if non-trivial) → `implementing-features` → `writing-tests` |
-| "Is our `.context/` up to date?" | `_skills/context-review` |
-| "Review this SKILL.md file" | `_skills/evaluate-skill` |
+| "Is our `.context/` up to date?" | `context-review` |
+| "Review this SKILL.md file" | `evaluate-skill` |
 
 ---
 
 ## Shared Conventions
 
-All patterns follow the conventions in `.context/patterns/_shared/conventions.md`:
+All skills follow the conventions in `skills/_shared/conventions.md`:
 - XML tag structure for structured output
 - One-question clarity rule
 - Self-verify before completing
@@ -154,4 +154,4 @@ All patterns follow the conventions in `.context/patterns/_shared/conventions.md
 | `implementing-features` | Source code files |
 | `writing-tests` | Test files |
 | `coordinating-work` | Orchestrates others; no direct file output |
-| `_skills/context-review` | `.context/` documentation files |
+| `context-review` | `.context/` documentation files |

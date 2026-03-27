@@ -6,7 +6,7 @@ tools: ['codebase', 'search', 'fetch', 'createFiles', 'editFiles']
 ---
 
 > ⚠️ **DEPRECATED — Legacy agent.** Use the `designing-systems` pattern instead.
-> **Replacement:** `.context/patterns/designing-systems/SKILL.md`
+> **Replacement:** `skills/designing-systems/SKILL.md`
 > **Migration:** See `MIGRATION_GUIDE.md`
 
 # Architect Agent

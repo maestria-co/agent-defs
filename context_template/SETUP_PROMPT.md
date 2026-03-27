@@ -113,14 +113,14 @@ Reference specific context files in your prompts with `#` (e.g., `#.context/over
 ```
 ## Pattern System
 
-Agentless task patterns are in `.context/patterns/`. Select a pattern by task type:
+Agentless task patterns are in `skills/`. Select a pattern by task type:
 - planning-tasks: break a goal into ordered steps
 - researching-options: evaluate libraries or approaches
 - designing-systems: architecture decisions and ADRs
 - implementing-features: write or modify code
 - writing-tests: write and run tests
 - coordinating-work: orchestrate multi-pattern workflows
-See `.context/patterns/GUIDE.md` for the full selection guide.
+See `skills/GUIDE.md` for the full selection guide.
 ```
 
 ## Step 6 — Final Review Request

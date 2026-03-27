@@ -6,7 +6,7 @@ tools: ['editFiles', 'runCommands', 'codebase', 'search', 'usages', 'fetch']
 ---
 
 > ⚠️ **DEPRECATED — Legacy agent.** Use the `implementing-features` pattern instead.
-> **Replacement:** `.context/patterns/implementing-features/SKILL.md`
+> **Replacement:** `skills/implementing-features/SKILL.md`
 > **Migration:** See `MIGRATION_GUIDE.md`
 
 # Coder Agent
