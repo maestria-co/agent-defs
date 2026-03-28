@@ -1,9 +1,12 @@
 ---
 name: task-retrospective
 description: >
-  Structured reflection after completing tasks to capture lessons learned. Use when:
-  finishing a medium or complex task, encountering unexpected issues, or when a task
-  took significantly longer than estimated. Feeds into context-maintenance for promotion.
+  Structured reflection after completing tasks to capture lessons learned. Use this
+  skill after finishing any medium or complex task, after encountering surprising
+  behavior, after a task that took much longer than expected, or after debugging a
+  tricky issue. If you learned something during a task that would help next time,
+  use this skill — the knowledge captured here feeds into `context-maintenance` for
+  promotion to permanent docs.
 ---
 
 # Skill: Task Retrospective

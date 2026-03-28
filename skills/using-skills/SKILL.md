@@ -2,8 +2,10 @@
 name: using-skills
 description: >
   Teaches agents how to discover, select, and invoke skills from the skill library.
-  Use when: an agent needs to decide which skill to use, compose multiple skills,
-  or understand what's available. Not a user-facing skill — embedded in agent behavior.
+  Use this skill whenever you're uncertain which skill applies to a task, when
+  composing multiple skills for complex work, or when you need to understand what
+  skills are available. This is your go-to when facing an ambiguous task and need
+  to figure out the right approach before diving into implementation.
 user-invocable: false
 ---
 

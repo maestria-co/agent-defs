@@ -1,11 +1,13 @@
 ---
 name: context-maintenance
 description: >
-  Keeps `.context/` documentation accurate and current. Use when: completing a task
-  and needing to update docs with new learnings, promoting lessons from retrospectives
-  to permanent docs, pruning stale task folders, or resolving duplication between
-  `.context/` files. Do not use when: scanning the full codebase to sync (use
-  `context-review` instead).
+  Keeps `.context/` documentation accurate and current. Use this skill after
+  completing any non-trivial task, when you've learned something new about the
+  project, when promoting lessons from retrospectives, when pruning stale task
+  folders, or when you notice documentation that's outdated or duplicated. If you
+  just finished a task and learned something worth preserving, this is the right
+  skill — even if the user doesn't explicitly ask. For full codebase-level syncs,
+  use `context-review` instead.
 ---
 
 # Skill: Context Maintenance

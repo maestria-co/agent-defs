@@ -2,9 +2,11 @@
 name: task-plan
 description: >
   Defines the canonical plan.md format used as a handoff document between agents
-  and across context boundaries. Use when: creating a new task plan, resuming a
-  task from a plan, or updating an in-progress plan. Not user-invocable — agents
-  reference this when working with plan files.
+  and across context boundaries. Use this skill whenever creating a new task plan,
+  resuming work on a task with an existing plan, updating an in-progress plan, or
+  when writing a plan that another agent (or yourself after context reset) needs to
+  pick up cold. If a task has 3+ steps or spans multiple sessions, you need a plan.md
+  and this skill tells you the format.
 user-invocable: false
 ---
 

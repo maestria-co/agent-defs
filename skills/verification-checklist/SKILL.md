@@ -2,8 +2,10 @@
 name: verification-checklist
 description: >
   Evidence-based verification process to run before marking any task complete.
-  Use when: finishing a task and about to report completion. Ensures functional
-  correctness, standards compliance, test coverage, and integration safety.
+  Use this skill every time you're about to report that work is done — for features,
+  bug fixes, refactoring, or any code change. This catches the most common failure
+  mode: declaring "done" without proof. If you're finishing up and about to tell
+  the user the task is complete, run this checklist first.
 user-invocable: false
 ---
 
@@ -126,7 +128,8 @@ When reporting completion, include a summary:
 
 ## Constraints
 
-- Every check requires evidence — a bare `[x]` without proof is a violation
+- Every check requires evidence — a bare `[x]` without proof defeats the purpose,
+  because the checklist exists precisely to catch "I think it works" assumptions
 - The checklist applies to the agent's own work, not the existing codebase
 - Do not spend more than 5 minutes on the checklist — it's a gate, not an audit
 - If you find issues during self-review, fix them — don't just note them

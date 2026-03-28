@@ -1,9 +1,12 @@
 ---
 name: common-constraints
 description: >
-  Universal rules that all agents must follow to prevent rationalization, infinite loops,
-  and unchecked work. Referenced by every other skill implicitly. Use when: any agent
-  is performing work — these constraints are always active.
+  Universal behavioral rules that prevent catastrophic agent failures — rationalization
+  loops, unchecked claims, scope creep, and convention violations. These constraints
+  are always active during any agent work. Consult this skill whenever you're about
+  to declare work complete, when you've failed at the same approach multiple times,
+  or when modifying code. If you catch yourself saying "it should work" without
+  evidence, this skill applies.
 user-invocable: false
 ---
 
@@ -11,17 +14,22 @@ user-invocable: false
 
 ## Purpose
 
-Non-negotiable rules that prevent catastrophic agent failures. These are not guidelines —
-they are hard constraints. Every agent, every skill, every task.
+These constraints exist because agents — like humans — have predictable failure modes.
+We claim success without checking. We try the same failing approach five times. We
+modify code we haven't fully read. We add scope nobody asked for. Each constraint
+below targets a specific failure pattern that, left unchecked, leads to broken builds,
+wasted time, or lost trust.
 
 This skill extends what `skills/_shared/conventions.md` covers (tone, format, simplicity)
-with behavioral constraints that prevent specific failure modes.
+with behavioral guardrails that prevent the worst outcomes.
 
 ---
 
 ## Constraint 1: Evidence Requirement
 
-**"It should work" is not verification.**
+**Why this matters:** Users lose trust fast when an agent says "done" and the feature
+is broken. Showing proof before claiming success is the single highest-impact habit
+for maintaining credibility.
 
 Never claim success without proof. Proof means:
 
@@ -49,10 +57,10 @@ that the acceptance criteria are met.
 
 ## Constraint 2: Failure Escalation
 
-**After 3 failed attempts at the same approach, stop.**
-
-Agents can get stuck in loops — trying the same fix repeatedly, each time believing
-"this time it will work." This constraint breaks the loop.
+**Why this matters:** Agents can get stuck in loops — trying the same fix repeatedly,
+each time believing "this time it will work." Without an explicit limit, this burns
+through context and time while making zero progress. Setting a threshold of 3 breaks
+the loop early enough to be useful.
 
 ### Protocol
 
@@ -75,7 +83,10 @@ of the same approach. Changing a parameter is not a new approach. Switching from
 
 ## Constraint 3: Read-First Discipline
 
-**Never modify code without reading surrounding context first.**
+**Why this matters:** The most common source of bugs introduced by agents is modifying
+code without understanding the surrounding context. A function that looks safe to change
+might have callers relying on its exact behavior. Reading first costs minutes;
+fixing blind changes costs hours.
 
 ### Before Modifying a File
 
@@ -106,10 +117,10 @@ GOOD: Reading the config, understanding each section, then making targeted chang
 
 ## Constraint 4: Convention Adherence
 
-**Check `.context/standards/` before implementing.**
-
-Project conventions exist for consistency. Don't invent new patterns when the project
-already has established ones.
+**Why this matters:** Inconsistent code is harder to read, review, and maintain.
+When every file follows different patterns, the next person (human or agent) has to
+re-learn the codebase each time. Following established conventions keeps the cognitive
+load low.
 
 ### Lookup Order
 
@@ -131,7 +142,9 @@ If you notice a conflict between documented conventions and actual code:
 
 ## Constraint 5: Self-Review Gate
 
-**Review your own work before declaring completion.**
+**Why this matters:** It's tempting to report work as done the moment the last line
+is written. But a quick self-review catches 80% of the issues a code reviewer would
+find — saving a round trip that can take hours or days.
 
 Before reporting a task as done, run through these questions:
 
@@ -147,7 +160,9 @@ If any answer is "no" or "I'm not sure," fix it before reporting completion.
 
 ## Constraint 6: Scope Discipline
 
-**Do only what was asked. Do not gold-plate.**
+**Why this matters:** Gold-plating and "while I'm here" refactors are how small tasks
+become large PRs that are hard to review and risky to merge. Staying focused on what
+was asked makes work predictable and trustworthy.
 
 - Fix the bug that was reported — don't refactor the entire module
 - Implement the feature as specified — don't add "nice to have" extras

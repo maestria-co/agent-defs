@@ -1,10 +1,13 @@
 ---
 name: initialize-repo
 description: >
-  Automates the setup of `.context/` for a new project. Use when: setting up a
-  repository to use the agent-defs system for the first time, onboarding a project
-  that has no `.context/` directory, or bootstrapping context after cloning agent-defs.
-  Do not use when: `.context/` already exists and is populated.
+  Automates the setup of `.context/` for a new project. Use this skill whenever
+  someone mentions setting up a new repository, onboarding a project to the agent
+  system, bootstrapping context, or when you detect a project has no `.context/`
+  directory. Also use when someone says "initialize", "set up", or "configure" in
+  relation to project context, or when cloning agent-defs for the first time.
+  Skip only when `.context/` already exists and is populated — in that case use
+  `context-review` instead.
 user-invocable: true
 ---
 

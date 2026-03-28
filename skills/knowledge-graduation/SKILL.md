@@ -1,9 +1,11 @@
 ---
 name: knowledge-graduation
 description: >
-  Graduate validated patterns from .context/ to local skills. Use when: reviewing
-  .context/ for patterns that have proven stable and broad enough to become reusable
-  skills. Part of the knowledge lifecycle: ad-hoc → documented → graduated.
+  Graduate validated patterns from `.context/` to reusable local skills. Use this
+  skill when reviewing `.context/` files and noticing patterns that keep recurring
+  across tasks, when retrospectives show the same lessons being re-learned, or
+  during periodic context review cycles. Also use after completing 10+ tasks when
+  patterns should be mature enough to evaluate for promotion.
 user-invocable: false
 ---
 

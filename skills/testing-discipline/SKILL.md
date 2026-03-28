@@ -1,18 +1,21 @@
 ---
 name: testing-discipline
 description: >
-  Test quality standards and TDD practices. Use when: writing tests, reviewing
-  test quality, or deciding test strategy for a feature. Complements `writing-tests`
-  (which handles test execution) with principles and anti-patterns.
+  Test quality standards and TDD practices. Use this skill whenever writing tests,
+  reviewing test quality, deciding what to mock, choosing test strategy, or evaluating
+  test coverage. Also use when you notice tests that are brittle, slow, or always
+  passing regardless of implementation. Complements `writing-tests` (which handles
+  test execution) with the principles that make tests actually useful.
 ---
 
 # Skill: Testing Discipline
 
 ## Purpose
 
-Enforce test quality — not just test existence. This skill covers TDD workflow,
-test structure, mocking strategy, anti-patterns, and coverage targets. Use alongside
-`writing-tests` for the full testing workflow.
+Tests that exist but don't catch bugs are worse than no tests — they create false
+confidence. This skill focuses on test quality over test quantity: TDD workflow,
+test structure, mocking strategy, anti-patterns, and when coverage numbers lie.
+Use alongside `writing-tests` for the full testing workflow.
 
 ---
 

@@ -1,9 +1,11 @@
 ---
 name: commit-discipline
 description: >
-  Git commit conventions and branch management standards. Use when: making commits,
-  creating branches, or reviewing commit history. Ensures atomic commits, clear messages,
-  and consistent branch naming.
+  Git commit conventions and branch management standards. Use this skill whenever
+  making commits, creating branches, reviewing commit history, or preparing code
+  for a pull request. Also use when you notice messy commit history, unclear messages,
+  or files that shouldn't be committed. If you're about to run `git commit`, consult
+  this skill first.
 ---
 
 # Skill: Commit Discipline

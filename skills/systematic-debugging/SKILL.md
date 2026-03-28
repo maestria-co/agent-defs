@@ -1,9 +1,12 @@
 ---
 name: systematic-debugging
 description: >
-  4-phase debugging process for reliable issue resolution. Use when: investigating a bug,
-  diagnosing unexpected behavior, or handling a production incident. Prevents symptom-chasing
-  and ensures root causes are found and verified.
+  4-phase debugging process (Reproduce → Root-Cause Trace → Defense-in-Depth Fix →
+  Verify) for reliable issue resolution. Use this skill whenever investigating a bug,
+  diagnosing unexpected behavior, debugging test failures, troubleshooting production
+  incidents, or when something "worked yesterday but doesn't today". If you find
+  yourself changing code hoping the bug disappears without understanding why, stop
+  and use this skill instead.
 ---
 
 # Skill: Systematic Debugging

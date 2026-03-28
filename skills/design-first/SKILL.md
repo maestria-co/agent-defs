@@ -1,10 +1,12 @@
 ---
 name: design-first
 description: >
-  Triage whether a task needs architecture planning before implementation. Use when:
-  starting a new task to decide if you should design first or implement directly.
-  Routes to designing-systems when design is needed, or straight to implementation
-  when it's not.
+  Triage whether a task needs architecture planning before implementation. Use this
+  skill at the start of every non-trivial task to decide whether to design first or
+  implement directly. Especially important when the task involves new modules, data
+  model changes, API design, technology choices, or cross-cutting changes affecting
+  3+ files. If you're about to start coding a complex feature without a design,
+  pause and use this skill first.
 user-invocable: false
 ---
 

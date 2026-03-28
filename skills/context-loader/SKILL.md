@@ -1,10 +1,12 @@
 ---
 name: context-loader
 description: >
-  Teaches agents how to efficiently discover and read `.context/` files at the start
-  of any task. Use when: starting a task and needing to load relevant project context,
-  resuming work after a context reset, or determining which context files are relevant
-  for a specific task type. Do not use when: you already have the needed context loaded.
+  Teaches agents how to efficiently discover and read `.context/` files. Use this
+  skill at the start of every task — any time you begin work on a feature, bug fix,
+  refactoring, test writing, or architecture decision. Also use when resuming work
+  after a context reset, switching between tasks, or whenever you're unsure which
+  context files are relevant. If you're about to start coding without checking project
+  context first, stop and use this skill.
 ---
 
 # Skill: Context Loader
