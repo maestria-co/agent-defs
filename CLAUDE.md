@@ -46,14 +46,20 @@ Pick a skill directly based on your task:
 
 ## Agents
 
-| Agent      | File                         | Skill equivalent        |
-| ---------- | ---------------------------- | ----------------------- |
-| Manager    | `agents/manager.agent.md`    | `coordinating-work`     |
-| Architect  | `agents/architect.agent.md`  | `designing-systems`     |
-| Planner    | `agents/planner.agent.md`    | `planning-tasks`        |
-| Researcher | `agents/researcher.agent.md` | `researching-options`   |
-| Coder      | `agents/coder.agent.md`      | `implementing-features` |
-| Tester     | `agents/tester.agent.md`     | `writing-tests`         |
+The **Manager** is the primary entry point — start here for any multi-step task.
+Specialist agents are invoked by the Manager via delegation.
+
+| Agent      | File                         | Status | Skill equivalent        |
+| ---------- | ---------------------------- | ------ | ----------------------- |
+| Manager    | `agents/manager.agent.md`    | Active | `coordinating-work`     |
+| Architect  | `agents/architect.agent.md`  | Legacy | `designing-systems`     |
+| Planner    | `agents/planner.agent.md`    | Legacy | `planning-tasks`        |
+| Researcher | `agents/researcher.agent.md` | Legacy | `researching-options`   |
+| Coder      | `agents/coder.agent.md`      | Legacy | `implementing-features` |
+| Tester     | `agents/tester.agent.md`     | Legacy | `writing-tests`         |
+
+> Specialist agents are functional but still reference the legacy format. Use the
+> corresponding skill directly for standalone work, or let the Manager delegate.
 
 All agents follow: `agents/_shared/conventions.md`
 Handoff protocol: `agents/_shared/handoff-protocol.md`

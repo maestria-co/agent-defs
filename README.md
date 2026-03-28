@@ -71,14 +71,18 @@ build-guide/      # Build guide documentation
 
 ## Agents
 
-| Agent      | File                         | Description                              |
-| ---------- | ---------------------------- | ---------------------------------------- |
-| Manager    | `agents/manager.agent.md`    | Orchestrates multi-pattern workflows     |
-| Architect  | `agents/architect.agent.md`  | System design and architecture decisions |
-| Planner    | `agents/planner.agent.md`    | Task decomposition and planning          |
-| Researcher | `agents/researcher.agent.md` | Technology evaluation and research       |
-| Coder      | `agents/coder.agent.md`      | Code implementation                      |
-| Tester     | `agents/tester.agent.md`     | Test writing and execution               |
+The **Manager** is the primary entry point for all multi-step development tasks. It reads project context, delegates to specialist agents, tracks progress, and enforces discipline constraints.
+
+| Agent      | File                         | Status | Description                                      |
+| ---------- | ---------------------------- | ------ | ------------------------------------------------ |
+| Manager    | `agents/manager.agent.md`    | Active | Orchestrates workflows, delegates to specialists |
+| Architect  | `agents/architect.agent.md`  | Legacy | System design and architecture decisions         |
+| Planner    | `agents/planner.agent.md`    | Legacy | Task decomposition and planning                  |
+| Researcher | `agents/researcher.agent.md` | Legacy | Technology evaluation and research               |
+| Coder      | `agents/coder.agent.md`      | Legacy | Code implementation                              |
+| Tester     | `agents/tester.agent.md`     | Legacy | Test writing and execution                       |
+
+> Specialist agents are functional but still reference the legacy format. Use the corresponding skill directly for standalone work, or let the Manager delegate.
 
 All agents follow: [`agents/_shared/conventions.md`](agents/_shared/conventions.md)
 Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-protocol.md)
