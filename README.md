@@ -73,16 +73,32 @@ build-guide/      # Build guide documentation
 
 The **Manager** is the primary entry point for all multi-step development tasks. It reads project context, delegates to specialist agents, tracks progress, and enforces discipline constraints.
 
-| Agent      | File                         | Status | Description                                      |
-| ---------- | ---------------------------- | ------ | ------------------------------------------------ |
-| Manager    | `agents/manager.agent.md`    | Active | Orchestrates workflows, delegates to specialists |
-| Architect  | `agents/architect.agent.md`  | Legacy | System design and architecture decisions         |
-| Planner    | `agents/planner.agent.md`    | Legacy | Task decomposition and planning                  |
-| Researcher | `agents/researcher.agent.md` | Legacy | Technology evaluation and research               |
-| Coder      | `agents/coder.agent.md`      | Legacy | Code implementation                              |
-| Tester     | `agents/tester.agent.md`     | Legacy | Test writing and execution                       |
+### Core Agents (12 total)
 
-> Specialist agents are functional but still reference the legacy format. Use the corresponding skill directly for standalone work, or let the Manager delegate.
+| Agent      | File                         | Description                                      |
+| ---------- | ---------------------------- | ------------------------------------------------ |
+| Manager    | `agents/manager.agent.md`    | Orchestrates workflows, delegates to specialists |
+| Planner    | `agents/planner.agent.md`    | Task decomposition and planning                  |
+| Researcher | `agents/researcher.agent.md` | Technology evaluation and research               |
+| Architect  | `agents/architect.agent.md`  | System design and architecture decisions         |
+| Coder      | `agents/coder.agent.md`      | Code implementation from specs                   |
+| Tester     | `agents/tester.agent.md`     | Test writing and execution                       |
+| Reviewer   | `agents/reviewer.agent.md`   | Code review for correctness and quality          |
+
+### Orchestration Agents
+
+| Agent             | File                                | Description                   |
+| ----------------- | ----------------------------------- | ----------------------------- |
+| Workspace-Manager | `agents/workspace-manager.agent.md` | Multi-project workspace tasks |
+| Monorepo-Manager  | `agents/monorepo-manager.agent.md`  | Cross-package monorepo tasks  |
+
+### Specialized Support Agents
+
+| Agent              | File                                 | Description                     |
+| ------------------ | ------------------------------------ | ------------------------------- |
+| Dev-Support-Triage | `agents/dev-support-triage.agent.md` | Bug report and support triage   |
+| Product-Manager    | `agents/product-manager.agent.md`    | Requirements and specifications |
+| Code-Researcher    | `agents/code-researcher.agent.md`    | Deep codebase analysis          |
 
 All agents follow: [`agents/_shared/conventions.md`](agents/_shared/conventions.md)
 Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-protocol.md)

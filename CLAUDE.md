@@ -49,17 +49,32 @@ Pick a skill directly based on your task:
 The **Manager** is the primary entry point — start here for any multi-step task.
 Specialist agents are invoked by the Manager via delegation.
 
-| Agent      | File                         | Status | Skill equivalent        |
-| ---------- | ---------------------------- | ------ | ----------------------- |
-| Manager    | `agents/manager.agent.md`    | Active | `coordinating-work`     |
-| Architect  | `agents/architect.agent.md`  | Legacy | `designing-systems`     |
-| Planner    | `agents/planner.agent.md`    | Legacy | `planning-tasks`        |
-| Researcher | `agents/researcher.agent.md` | Legacy | `researching-options`   |
-| Coder      | `agents/coder.agent.md`      | Legacy | `implementing-features` |
-| Tester     | `agents/tester.agent.md`     | Legacy | `writing-tests`         |
+### Core Agents
 
-> Specialist agents are functional but still reference the legacy format. Use the
-> corresponding skill directly for standalone work, or let the Manager delegate.
+| Agent      | File                         | Skill equivalent         |
+| ---------- | ---------------------------- | ------------------------ |
+| Manager    | `agents/manager.agent.md`    | `coordinating-work`      |
+| Planner    | `agents/planner.agent.md`    | `planning-tasks`         |
+| Researcher | `agents/researcher.agent.md` | `researching-options`    |
+| Architect  | `agents/architect.agent.md`  | `designing-systems`      |
+| Coder      | `agents/coder.agent.md`      | `implementing-features`  |
+| Tester     | `agents/tester.agent.md`     | `writing-tests`          |
+| Reviewer   | `agents/reviewer.agent.md`   | `verification-checklist` |
+
+### Orchestration Agents
+
+| Agent             | File                                | Purpose                       |
+| ----------------- | ----------------------------------- | ----------------------------- |
+| Workspace-Manager | `agents/workspace-manager.agent.md` | Multi-project workspace tasks |
+| Monorepo-Manager  | `agents/monorepo-manager.agent.md`  | Cross-package monorepo tasks  |
+
+### Specialized Support Agents
+
+| Agent              | File                                 | Purpose                         |
+| ------------------ | ------------------------------------ | ------------------------------- |
+| Dev-Support-Triage | `agents/dev-support-triage.agent.md` | Bug report and support triage   |
+| Product-Manager    | `agents/product-manager.agent.md`    | Requirements and specifications |
+| Code-Researcher    | `agents/code-researcher.agent.md`    | Deep codebase analysis          |
 
 All agents follow: `agents/_shared/conventions.md`
 Handoff protocol: `agents/_shared/handoff-protocol.md`

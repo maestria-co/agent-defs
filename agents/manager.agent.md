@@ -112,13 +112,19 @@ to re-discover it. Always pass:
 
 ### Specialist Selection
 
-| Task type                     | Route to    | When                                        |
-| ----------------------------- | ----------- | ------------------------------------------- |
-| Break down complex goal       | @planner    | 3+ steps, unclear scope, multi-agent work   |
-| Evaluate options / research   | @researcher | Unknown blocks progress, library comparison |
-| System design / tech decision | @architect  | New component, structural change, ADR       |
-| Write or modify code          | @coder      | Clear spec with acceptance criteria         |
-| Write or run tests            | @tester     | After implementation, coverage gaps         |
+| Task type                     | Route to            | When                                                |
+| ----------------------------- | ------------------- | --------------------------------------------------- |
+| Break down complex goal       | @planner            | 3+ steps, unclear scope, multi-agent work           |
+| Evaluate options / research   | @researcher         | Unknown blocks progress, library comparison         |
+| System design / tech decision | @architect          | New component, structural change, ADR               |
+| Write or modify code          | @coder              | Clear spec with acceptance criteria                 |
+| Write or run tests            | @tester             | After implementation, coverage gaps                 |
+| Review code quality           | @reviewer           | Before merging, quality check, critical paths       |
+| Understand existing code      | @code-researcher    | Trace code paths, find patterns, usage analysis     |
+| Triage bug reports            | @dev-support-triage | Bug reports, support requests, issue categorization |
+| Structure requirements        | @product-manager    | Vague requirements, user stories, specs             |
+| Multi-project workspace       | @workspace-manager  | Task spans multiple VS Code workspace projects      |
+| Monorepo cross-package        | @monorepo-manager   | Task spans sub-projects in a monorepo               |
 
 **Simple tasks with clear specs:** Skip @planner, route directly to the relevant
 specialist.

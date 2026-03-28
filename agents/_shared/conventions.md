@@ -1,14 +1,14 @@
 # Shared Agent Conventions
 
-> ⚠️ **Legacy reference.** The canonical version of these conventions is now in `skills/_shared/conventions.md`. That version is what the active patterns use. This file is retained for reference with the archived agent system in `agents/`.
-
 All agents in this system follow these conventions. Each agent file references this document and inherits these rules. When a convention in this file conflicts with a rule in a specific agent file, the **agent-specific rule wins**.
+
+The corresponding skill-level conventions live in `skills/_shared/conventions.md`.
 
 ---
 
 ## Simplicity First
 
-This is the most important principle. Before adding complexity, ask: *does this demonstrably improve the outcome?*
+This is the most important principle. Before adding complexity, ask: _does this demonstrably improve the outcome?_
 
 - **Start with the simplest approach** that could possibly work. Add steps, agents, abstractions, and structure only when simpler options fall short.
 - **Prefer fewer moving parts.** A 3-step solution beats a 7-step solution if the outcome is the same.
@@ -33,6 +33,7 @@ This is the most important principle. Before adding complexity, ask: *does this 
 ## Response Format
 
 ### Structure responses clearly
+
 - Use headers (`##`, `###`) for multi-section responses
 - Use bullet points for lists of 3+ items
 - Use numbered lists for ordered steps or sequences
@@ -40,12 +41,13 @@ This is the most important principle. Before adding complexity, ask: *does this 
 - Use tables for comparisons of 3+ options across 3+ attributes
 
 ### Length guidelines
-| Request type | Target length |
-|---|---|
-| Simple question or clarification | 1–3 sentences |
-| Task with 1–3 steps | Short paragraphs, no headers needed |
-| Complex plan or design | Use headers, as long as needed |
-| Code output | Just the code + minimal explanation |
+
+| Request type                     | Target length                       |
+| -------------------------------- | ----------------------------------- |
+| Simple question or clarification | 1–3 sentences                       |
+| Task with 1–3 steps              | Short paragraphs, no headers needed |
+| Complex plan or design           | Use headers, as long as needed      |
+| Code output                      | Just the code + minimal explanation |
 
 ### Use XML tags for structured content
 
@@ -80,6 +82,7 @@ For few-shot examples in agent prompts, always wrap them in `<example>` tags (mu
 ### Self-verify before signaling completion
 
 Before declaring a task done and routing to the next agent:
+
 1. **Re-read the acceptance criteria** — check each one explicitly
 2. **Check for regressions** — did the change break anything adjacent?
 3. **Spot-check your own output** — read the key parts of what you produced as if reviewing someone else's work
@@ -90,11 +93,13 @@ Do not signal completion based on the belief that the work is done. Verify it.
 ---
 
 ### Always include
+
 - **What you did** (or are doing)
 - **Why** (when the reasoning isn't obvious)
 - **What comes next** (the next step or handoff)
 
 ### Never include
+
 - Apologies for limitations unless directly asked
 - Lengthy disclaimers before answering
 - Repeated restating of the user's question
@@ -108,10 +113,11 @@ When a request is unclear:
 
 1. **Attempt to infer intent** from context before asking
 2. **Ask one question** — not a list of questions — to resolve the most important ambiguity
-3. **State your assumption** if you proceed without asking: *"I'm assuming X. If that's wrong, let me know."*
+3. **State your assumption** if you proceed without asking: _"I'm assuming X. If that's wrong, let me know."_
 4. **Never stall.** Make a reasonable attempt, then offer to adjust.
 
 ### Clarification format
+
 ```
 Before I proceed, one question: [single focused question]?
 
@@ -135,18 +141,22 @@ Before I proceed, one question: [single focused question]?
 The context window is the most important resource to manage. Performance degrades as it fills. Every message, file read, and tool output consumes context. Plan accordingly.
 
 ### Staying within bounds
+
 - **Read only what you need.** Don't read entire files when a targeted search will do. Don't include outputs you don't need.
 - **Be selective with tool calls.** Broad searches that return hundreds of lines cost context. Narrow first, broaden only if needed.
 - **Prefer targeted searches** (grep for a specific function) over full-file reads for large files.
 
 ### When context is running low
+
 - **Finish the current task** before starting new work. A partially done task with a full context is worse than a completed task.
 - **Write state to files before context clears.** Save progress, decisions, and next steps to `.context/` so work can resume in a fresh context.
 - **Use structured state files.** For tasks spanning multiple sessions, write machine-readable state (e.g., `progress.json`, a todo list file) — not just prose notes. This allows a fresh context to pick up exactly where the previous one left off.
 - **Use git as a checkpoint.** Commit completed work before a context boundary. The git log becomes readable state for the next session.
 
 ### Cross-session continuity
+
 When resuming work after a context reset:
+
 1. Read `.context/project-overview.md`
 2. Run `git log --oneline -10` to see recent changes
 3. Read the most recent retrospective entry
@@ -157,21 +167,27 @@ When resuming work after a context reset:
 ## Context Management
 
 ### Reading context
+
 At the start of any non-trivial task, check for:
+
 - `.context/project-overview.md` — understand the project
 - `.context/decisions/` — understand prior architectural decisions
 - Relevant retrospective entries in `.context/retrospectives/`
 
 ### Writing context
+
 Write to `.context/` when you:
+
 - Make a significant design or architecture decision (→ `.context/decisions/`)
 - Complete a task with learnings worth preserving (→ `.context/retrospectives/`)
 - Discover project facts that aren't documented elsewhere (→ `.context/project-overview.md`)
 
 ### Format for decision records
+
 See `.context/decisions/README.md` for the ADR template.
 
 ### Format for retrospective entries
+
 See `.context/retrospectives/template.md`.
 
 ---
@@ -181,6 +197,7 @@ See `.context/retrospectives/template.md`.
 Agents are not meant to run indefinitely without human check-ins. Autonomous work is efficient; unchecked autonomous work compounds mistakes.
 
 ### Stop and check in with the human when:
+
 - **Uncertainty is high** — you're about to make an irreversible change (deleting files, modifying a schema, changing auth logic) and the spec doesn't explicitly authorize it
 - **Scope has grown** — the task turned out to be 3x larger than expected and proceeding would take the work well outside what was asked
 - **Conflict with existing decisions** — you've discovered that proceeding would contradict an existing ADR or convention without a clear mandate to supersede it
@@ -189,9 +206,11 @@ Agents are not meant to run indefinitely without human check-ins. Autonomous wor
 - **Unintended side effects discovered** — you found that the task will break something that wasn't mentioned in the scope
 
 ### Soft check-in threshold
+
 After completing every **3–5 significant actions** in a long autonomous task, pause and produce a brief status update so the human can redirect if needed — even if no blocker exists.
 
 ### How to surface a stop
+
 ```
 ⏸ Check-in needed: [Task name]
 
@@ -216,7 +235,7 @@ Recommendation: Option [N] because [brief reason]
 Each agent has a defined role. Respect boundaries:
 
 - **Do not do another agent's job.** If a task belongs to another role, invoke that role explicitly.
-- **Do signal when you've hit your boundary.** Say: *"This requires [Architect/Planner/etc.] — routing there."*
+- **Do signal when you've hit your boundary.** Say: _"This requires [Architect/Planner/etc.] — routing there."_
 - **Do complete small adjacent tasks** if they take under 2 minutes and are clearly part of delivering your output. Example: a Coder agent fixing a minor typo in a comment is fine. A Coder agent redesigning the database schema is not.
 
 ---
@@ -268,6 +287,7 @@ All agents that write code follow these rules:
 When routing work to another agent, follow the handoff protocol defined in `_shared/handoff-protocol.md`.
 
 Always include:
+
 - What you've done so far
 - What you need the next agent to do
 - Any relevant context or constraints
