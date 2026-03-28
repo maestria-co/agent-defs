@@ -22,18 +22,48 @@ build-guide/      # Build guide documentation
 
 ## Skills
 
-Eight skills cover all software development tasks:
+21 skills organized into four categories:
 
-| Skill | When to use | File |
-|---|---|---|
-| `planning-tasks` | Break a goal into ordered, dependency-aware tasks | `skills/planning-tasks/SKILL.md` |
-| `researching-options` | Evaluate libraries, approaches, or technologies | `skills/researching-options/SKILL.md` |
-| `designing-systems` | Make an architecture decision and write an ADR | `skills/designing-systems/SKILL.md` |
-| `implementing-features` | Write or modify code from a clear spec | `skills/implementing-features/SKILL.md` |
-| `writing-tests` | Write and run tests for an implementation | `skills/writing-tests/SKILL.md` |
-| `coordinating-work` | Orchestrate 3+ interdependent skills | `skills/coordinating-work/SKILL.md` |
-| `context-review` | Sync `.context/` docs with the codebase | `skills/context-review/SKILL.md` |
-| `evaluate-skill` | Evaluate a SKILL.md file for quality | `skills/evaluate-skill/SKILL.md` |
+### Infrastructure Skills
+
+| Skill                 | When to use                                 | File                                  |
+| --------------------- | ------------------------------------------- | ------------------------------------- |
+| `initialize-repo`     | Set up `.context/` for a new project        | `skills/initialize-repo/SKILL.md`     |
+| `context-loader`      | Load project context at task start          | `skills/context-loader/SKILL.md`      |
+| `context-maintenance` | Update `.context/` after a task             | `skills/context-maintenance/SKILL.md` |
+| `context-review`      | Full codebase scan to sync `.context/` docs | `skills/context-review/SKILL.md`      |
+| `using-skills`        | Discover and select the right skill         | `skills/using-skills/SKILL.md`        |
+
+### Planning & Design Skills
+
+| Skill                 | When to use                                       | File                                  |
+| --------------------- | ------------------------------------------------- | ------------------------------------- |
+| `planning-tasks`      | Break a goal into ordered, dependency-aware tasks | `skills/planning-tasks/SKILL.md`      |
+| `task-plan`           | Create/update canonical plan.md handoff documents | `skills/task-plan/SKILL.md`           |
+| `design-first`        | Triage: design first or implement directly        | `skills/design-first/SKILL.md`        |
+| `researching-options` | Evaluate libraries, approaches, or technologies   | `skills/researching-options/SKILL.md` |
+| `designing-systems`   | Make an architecture decision and write an ADR    | `skills/designing-systems/SKILL.md`   |
+
+### Implementation Skills
+
+| Skill                   | When to use                               | File                                    |
+| ----------------------- | ----------------------------------------- | --------------------------------------- |
+| `implementing-features` | Write or modify code from a clear spec    | `skills/implementing-features/SKILL.md` |
+| `writing-tests`         | Write and run tests for an implementation | `skills/writing-tests/SKILL.md`         |
+| `systematic-debugging`  | Structured 4-phase debugging process      | `skills/systematic-debugging/SKILL.md`  |
+
+### Discipline & Process Skills
+
+| Skill                    | When to use                                   | File                                     |
+| ------------------------ | --------------------------------------------- | ---------------------------------------- |
+| `common-constraints`     | Universal agent rules (always active)         | `skills/common-constraints/SKILL.md`     |
+| `verification-checklist` | Pre-completion verification with evidence     | `skills/verification-checklist/SKILL.md` |
+| `testing-discipline`     | TDD practices and test quality standards      | `skills/testing-discipline/SKILL.md`     |
+| `commit-discipline`      | Git commit conventions and branch management  | `skills/commit-discipline/SKILL.md`      |
+| `task-retrospective`     | Structured reflection after completing tasks  | `skills/task-retrospective/SKILL.md`     |
+| `knowledge-graduation`   | Promote validated patterns to reusable skills | `skills/knowledge-graduation/SKILL.md`   |
+| `coordinating-work`      | Orchestrate 3+ interdependent skills          | `skills/coordinating-work/SKILL.md`      |
+| `evaluate-skill`         | Evaluate a SKILL.md file for quality          | `skills/evaluate-skill/SKILL.md`         |
 
 **Skill selection guide:** `skills/GUIDE.md`
 
@@ -41,14 +71,14 @@ Eight skills cover all software development tasks:
 
 ## Agents
 
-| Agent | File | Description |
-|---|---|---|
-| Manager | `agents/manager.agent.md` | Orchestrates multi-pattern workflows |
-| Architect | `agents/architect.agent.md` | System design and architecture decisions |
-| Planner | `agents/planner.agent.md` | Task decomposition and planning |
-| Researcher | `agents/researcher.agent.md` | Technology evaluation and research |
-| Coder | `agents/coder.agent.md` | Code implementation |
-| Tester | `agents/tester.agent.md` | Test writing and execution |
+| Agent      | File                         | Description                              |
+| ---------- | ---------------------------- | ---------------------------------------- |
+| Manager    | `agents/manager.agent.md`    | Orchestrates multi-pattern workflows     |
+| Architect  | `agents/architect.agent.md`  | System design and architecture decisions |
+| Planner    | `agents/planner.agent.md`    | Task decomposition and planning          |
+| Researcher | `agents/researcher.agent.md` | Technology evaluation and research       |
+| Coder      | `agents/coder.agent.md`      | Code implementation                      |
+| Tester     | `agents/tester.agent.md`     | Test writing and execution               |
 
 All agents follow: [`agents/_shared/conventions.md`](agents/_shared/conventions.md)
 Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-protocol.md)
@@ -60,6 +90,7 @@ Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-
 See [`QUICK_START.md`](QUICK_START.md) for copy-paste prompt templates for each skill.
 
 **Basic pattern:**
+
 ```
 Use the [skill-name] skill.
 
@@ -77,12 +108,12 @@ Constraints: [any limits]
 
 End-to-end examples for common development tasks:
 
-| Recipe | Skills used | File |
-|---|---|---|
-| Simple bug fix | `implementing-features` + `writing-tests` | `recipes/simple-task.md` |
-| Multi-file feature | `planning-tasks` + `implementing-features` + `writing-tests` | `recipes/complex-task.md` |
-| Architecture decision | `researching-options` + `designing-systems` | `recipes/design-task.md` |
-| Full feature (OAuth example) | All 5 core skills | `recipes/feature-workflow.md` |
+| Recipe                       | Skills used                                                  | File                          |
+| ---------------------------- | ------------------------------------------------------------ | ----------------------------- |
+| Simple bug fix               | `implementing-features` + `writing-tests`                    | `recipes/simple-task.md`      |
+| Multi-file feature           | `planning-tasks` + `implementing-features` + `writing-tests` | `recipes/complex-task.md`     |
+| Architecture decision        | `researching-options` + `designing-systems`                  | `recipes/design-task.md`      |
+| Full feature (OAuth example) | All 5 core skills                                            | `recipes/feature-workflow.md` |
 
 ---
 
@@ -91,6 +122,7 @@ End-to-end examples for common development tasks:
 `context_template/` contains a setup system that generates a `.context/` directory in any project — giving AI tools persistent knowledge about your codebase (standards, decisions, domain entities, workflows).
 
 **One-time setup:**
+
 ```bash
 # From your target project directory:
 cat ~/tools/agent-defs/context_template/SETUP_PROMPT.md | pbcopy

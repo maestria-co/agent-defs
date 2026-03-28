@@ -20,27 +20,40 @@ build-guide/     # Build guide documentation
 
 Pick a skill directly based on your task:
 
-| Task type | Skill | File |
-|---|---|---|
-| Break a goal into ordered tasks | `planning-tasks` | `skills/planning-tasks/SKILL.md` |
-| Evaluate libraries or approaches | `researching-options` | `skills/researching-options/SKILL.md` |
-| Make an architecture decision (ADR) | `designing-systems` | `skills/designing-systems/SKILL.md` |
-| Write or modify code | `implementing-features` | `skills/implementing-features/SKILL.md` |
-| Write or run tests | `writing-tests` | `skills/writing-tests/SKILL.md` |
-| Orchestrate 3+ skills | `coordinating-work` | `skills/coordinating-work/SKILL.md` |
-| Sync `.context/` docs with codebase | `context-review` | `skills/context-review/SKILL.md` |
-| Evaluate a SKILL.md file | `evaluate-skill` | `skills/evaluate-skill/SKILL.md` |
+| Task type                                   | Skill                    | File                                     |
+| ------------------------------------------- | ------------------------ | ---------------------------------------- |
+| Set up `.context/` for a new project        | `initialize-repo`        | `skills/initialize-repo/SKILL.md`        |
+| Load project context at task start          | `context-loader`         | `skills/context-loader/SKILL.md`         |
+| Update `.context/` after a task             | `context-maintenance`    | `skills/context-maintenance/SKILL.md`    |
+| Discover and select the right skill         | `using-skills`           | `skills/using-skills/SKILL.md`           |
+| Break a goal into ordered tasks             | `planning-tasks`         | `skills/planning-tasks/SKILL.md`         |
+| Create/update a plan.md handoff document    | `task-plan`              | `skills/task-plan/SKILL.md`              |
+| Triage: design first or implement directly  | `design-first`           | `skills/design-first/SKILL.md`           |
+| Evaluate libraries or approaches            | `researching-options`    | `skills/researching-options/SKILL.md`    |
+| Make an architecture decision (ADR)         | `designing-systems`      | `skills/designing-systems/SKILL.md`      |
+| Write or modify code                        | `implementing-features`  | `skills/implementing-features/SKILL.md`  |
+| Write or run tests                          | `writing-tests`          | `skills/writing-tests/SKILL.md`          |
+| Debug a bug systematically                  | `systematic-debugging`   | `skills/systematic-debugging/SKILL.md`   |
+| Universal agent constraints (always active) | `common-constraints`     | `skills/common-constraints/SKILL.md`     |
+| Verify work before marking complete         | `verification-checklist` | `skills/verification-checklist/SKILL.md` |
+| TDD practices and test quality              | `testing-discipline`     | `skills/testing-discipline/SKILL.md`     |
+| Git commit conventions                      | `commit-discipline`      | `skills/commit-discipline/SKILL.md`      |
+| Reflect after completing a task             | `task-retrospective`     | `skills/task-retrospective/SKILL.md`     |
+| Promote patterns to reusable skills         | `knowledge-graduation`   | `skills/knowledge-graduation/SKILL.md`   |
+| Orchestrate 3+ skills                       | `coordinating-work`      | `skills/coordinating-work/SKILL.md`      |
+| Sync `.context/` docs with codebase         | `context-review`         | `skills/context-review/SKILL.md`         |
+| Evaluate a SKILL.md file                    | `evaluate-skill`         | `skills/evaluate-skill/SKILL.md`         |
 
 ## Agents
 
-| Agent | File | Skill equivalent |
-|---|---|---|
-| Manager | `agents/manager.agent.md` | `coordinating-work` |
-| Architect | `agents/architect.agent.md` | `designing-systems` |
-| Planner | `agents/planner.agent.md` | `planning-tasks` |
-| Researcher | `agents/researcher.agent.md` | `researching-options` |
-| Coder | `agents/coder.agent.md` | `implementing-features` |
-| Tester | `agents/tester.agent.md` | `writing-tests` |
+| Agent      | File                         | Skill equivalent        |
+| ---------- | ---------------------------- | ----------------------- |
+| Manager    | `agents/manager.agent.md`    | `coordinating-work`     |
+| Architect  | `agents/architect.agent.md`  | `designing-systems`     |
+| Planner    | `agents/planner.agent.md`    | `planning-tasks`        |
+| Researcher | `agents/researcher.agent.md` | `researching-options`   |
+| Coder      | `agents/coder.agent.md`      | `implementing-features` |
+| Tester     | `agents/tester.agent.md`     | `writing-tests`         |
 
 All agents follow: `agents/_shared/conventions.md`
 Handoff protocol: `agents/_shared/handoff-protocol.md`
@@ -52,6 +65,7 @@ See `QUICK_START.md` for copy-paste prompt templates for each skill.
 ## Workflow Recipes
 
 See `recipes/` for end-to-end examples:
+
 - `recipes/simple-task.md` — single bug fix
 - `recipes/complex-task.md` — multi-file feature
 - `recipes/design-task.md` — research + architecture decision
