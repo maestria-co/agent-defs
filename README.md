@@ -107,19 +107,29 @@ Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-
 
 ## Installation
 
-Copy all skills and agents into your `~/.copilot` folder:
+Copy all skills and agents into your AI tool's config folder:
 
-**macOS / Linux**
+**macOS / Linux — GitHub Copilot**
 ```bash
 ./install.sh
 ```
 
-**Windows (PowerShell)**
+**macOS / Linux — Claude Code**
+```bash
+./install.sh --claude
+```
+
+**Windows — GitHub Copilot**
 ```powershell
 .\install.ps1
 ```
 
-Re-run after any `git pull` to pick up updates. Both scripts copy everything — skills, agents, `_shared/` conventions, and `GUIDE.md`.
+**Windows — Claude Code**
+```powershell
+.\install.ps1 -Claude
+```
+
+Re-run after any `git pull` to pick up updates. The `--claude` / `-Claude` flag installs to `~/.claude/skills/` and `~/.claude/agents/`, then automatically updates your `~/.claude/CLAUDE.md` with a skills reference table so Claude Code knows what's available.
 
 ---
 
