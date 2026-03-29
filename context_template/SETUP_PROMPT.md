@@ -40,13 +40,16 @@ From this scan, identify:
 
 Create the following directories if they don't exist:
 ```
+
 .context/
 .context/standards/
 .context/architecture/
 .context/testing/
 .context/domains/
+.context/styling/
 .context/workflows/
 .context/tasks/
+
 ```
 
 ## Step 3 — Copy Universal Files Verbatim
@@ -78,12 +81,14 @@ For each file below, generate project-specific content based on Step 1. Replace 
 | `.context/domains/glossary.md` | Infer terms from model names, function names, README, and comments. Add any word with a project-specific meaning. |
 | `.context/workflows/branching.md` | Check `.github/`, `git branch -a`, or CONTRIBUTING.md. Document what you find; use sensible defaults if nothing exists. |
 | `.context/workflows/ci-cd.md` | Check `.github/workflows/` or other CI config. Document what's there; fall back to local commands if no CI exists. |
+| `.context/styling/style-guide-template.md` | If the project has a frontend (React, Vue, etc.), scan component files for CSS approach (Tailwind, CSS Modules, etc.), color tokens, and component patterns. If backend-only or CLI, skip this file. |
 
 ## Step 5 — Update AI Configuration Files
 
 **For Claude Code — create or update `CLAUDE.md`:**
 If `CLAUDE.md` exists, add the following block at the top (do not remove existing content):
 ```
+
 ## Project Context
 
 See @.context/overview.md for project overview and tech stack.
@@ -91,6 +96,7 @@ See @.context/standards/ for coding standards and conventions.
 See @.context/architecture/ for architectural patterns and decisions.
 See @.context/domains/ for domain entities and terminology.
 See @.context/workflows/ for task workflow and branching strategy.
+
 ```
 
 If `CLAUDE.md` does not exist, create it at the project root with the block above.
@@ -98,6 +104,7 @@ If `CLAUDE.md` does not exist, create it at the project root with the block abov
 **For VS Code GitHub Copilot — create or update `.github/copilot-instructions.md`:**
 Create `.github/` if it doesn't exist. Create or update `.github/copilot-instructions.md`:
 ```
+
 ## Project Context
 
 Read `.context/overview.md` for project overview and tech stack before starting any task.
@@ -107,20 +114,24 @@ Read `.context/domains/entities.md` for domain model and business rules.
 Read `.context/workflows/task-workflow-template.md` for how tasks should be executed.
 
 Reference specific context files in your prompts with `#` (e.g., `#.context/overview.md`).
+
 ```
 
 **If agent-defs patterns are available**, also add to both files:
 ```
+
 ## Pattern System
 
 Agentless task patterns are in `skills/`. Select a pattern by task type:
+
 - planning-tasks: break a goal into ordered steps
 - researching-options: evaluate libraries or approaches
 - designing-systems: architecture decisions and ADRs
 - implementing-features: write or modify code
 - writing-tests: write and run tests
 - coordinating-work: orchestrate multi-pattern workflows
-See `skills/GUIDE.md` for the full selection guide.
+  See `skills/GUIDE.md` for the full selection guide.
+
 ```
 
 ## Step 6 — Final Review Request

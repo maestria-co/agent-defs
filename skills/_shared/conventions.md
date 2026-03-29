@@ -10,7 +10,7 @@ conflicts with a rule in a specific pattern file, the **pattern-specific rule wi
 
 ## Simplicity First
 
-This is the most important principle. Before adding complexity, ask: *does this demonstrably improve the outcome?*
+This is the most important principle. Before adding complexity, ask: _does this demonstrably improve the outcome?_
 
 - **Start with the simplest approach** that could possibly work. Add steps, patterns, and abstractions only when simpler options fall short.
 - **Prefer fewer moving parts.** A 3-step solution beats a 7-step solution if the outcome is the same.
@@ -34,6 +34,7 @@ This is the most important principle. Before adding complexity, ask: *does this 
 ## Response Format
 
 ### Structure responses clearly
+
 - Use headers (`##`, `###`) for multi-section responses
 - Use bullet points for lists of 3+ items
 - Use numbered lists for ordered steps or sequences
@@ -42,12 +43,12 @@ This is the most important principle. Before adding complexity, ask: *does this 
 
 ### Length guidelines
 
-| Request type | Target length |
-|---|---|
-| Simple question or clarification | 1–3 sentences |
-| Task with 1–3 steps | Short paragraphs, no headers needed |
-| Complex plan or design | Use headers, as long as needed |
-| Code output | Just the code + minimal explanation |
+| Request type                     | Target length                       |
+| -------------------------------- | ----------------------------------- |
+| Simple question or clarification | 1–3 sentences                       |
+| Task with 1–3 steps              | Short paragraphs, no headers needed |
+| Complex plan or design           | Use headers, as long as needed      |
+| Code output                      | Just the code + minimal explanation |
 
 ---
 
@@ -78,6 +79,7 @@ misinterpretation of structured content.
 ```
 
 **Consistent tag names:**
+
 - `<task>` — what to do
 - `<context>` — background needed to do it
 - `<constraints>` — must-follow rules
@@ -111,10 +113,11 @@ When a request is unclear:
 
 1. **Attempt to infer intent** from context before asking
 2. **Ask one question** — not a list — to resolve the most important ambiguity
-3. **State your assumption** if you proceed without asking: *"I'm assuming X. If that's wrong, let me know."*
+3. **State your assumption** if you proceed without asking: _"I'm assuming X. If that's wrong, let me know."_
 4. **Never stall.** Make a reasonable attempt, then offer to adjust.
 
 **Clarification format:**
+
 ```
 Before I proceed, one question: [single focused question]?
 
@@ -138,15 +141,18 @@ Before I proceed, one question: [single focused question]?
 The context window is the most important resource to manage. Performance degrades as it fills.
 
 ### Staying within bounds
+
 - **Read only what you need.** Don't read entire files when a targeted search will do.
 - **Prefer targeted searches** (grep for a specific function) over full-file reads for large files.
 
 ### When context is running low
+
 - **Finish the current task** before starting new work.
 - **Write state to files before context clears.** Save progress, decisions, and next steps to `.context/` so work can resume in a fresh context.
 - **Use git as a checkpoint.** Commit completed work before a context boundary.
 
 ### Resuming after a context reset
+
 1. Read `.context/project-overview.md`
 2. Run `git log --oneline -10`
 3. Read any in-progress state files
@@ -167,6 +173,7 @@ Stop and check in with the user when:
 **Soft threshold:** After every 3–5 significant actions in a long task, pause and produce a brief status update even if no blocker exists.
 
 **Check-in format:**
+
 ```
 ⏸ Check-in: [Task name]
 

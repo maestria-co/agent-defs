@@ -27,6 +27,8 @@ Running the setup prompt generates this structure in your project:
 ├── domains/
 │   ├── entities.md                  # Core domain models and business rules
 │   └── glossary.md                  # Project-specific terminology
+├── styling/
+│   └── style-guide-template.md     # UI/CSS conventions (optional — skip for backend-only)
 ├── workflows/
 │   ├── task-workflow-template.md    # Pattern-based task execution workflow
 │   ├── branching.md                 # Git branching strategy
@@ -51,11 +53,13 @@ Both tools read the same `.context/` files — write once, works in both.
 ## Quick Start
 
 1. **Clone or install agent-defs** somewhere on your machine:
+
    ```bash
    git clone https://github.com/[org]/agent-defs ~/tools/agent-defs
    ```
 
 2. **Navigate to your project:**
+
    ```bash
    cd ~/my-project
    ```
@@ -71,14 +75,15 @@ Both tools read the same `.context/` files — write once, works in both.
 
 ## What Each Folder Contains
 
-| Folder | Purpose |
-|---|---|
-| `standards/` | How code should be written: style, naming, error handling |
-| `architecture/` | Structural patterns, ADRs, migration history |
-| `testing/` | Test framework, mocking conventions, coverage rules |
-| `domains/` | Business entities, relationships, project-specific terminology |
-| `workflows/` | Task execution, branching, CI/CD |
-| `tasks/` | Per-task artifacts: brief, plan, research, retrospective |
+| Folder          | Purpose                                                          |
+| --------------- | ---------------------------------------------------------------- |
+| `standards/`    | How code should be written: style, naming, error handling        |
+| `architecture/` | Structural patterns, ADRs, migration history                     |
+| `testing/`      | Test framework, mocking conventions, coverage rules              |
+| `domains/`      | Business entities, relationships, project-specific terminology   |
+| `styling/`      | UI/CSS conventions, design tokens, component patterns (optional) |
+| `workflows/`    | Task execution, branching, CI/CD                                 |
+| `tasks/`        | Per-task artifacts: brief, plan, research, retrospective         |
 
 ---
 
@@ -92,10 +97,10 @@ Both tools read the same `.context/` files — write once, works in both.
 
 ## Template vs Generated Content
 
-| Location | What it is |
-|---|---|
-| `agent-defs/context_template/` | Generic templates — this repository. Not project-specific. |
-| `your-project/.context/` | Generated, project-specific, living documentation. Commit this. |
+| Location                       | What it is                                                      |
+| ------------------------------ | --------------------------------------------------------------- |
+| `agent-defs/context_template/` | Generic templates — this repository. Not project-specific.      |
+| `your-project/.context/`       | Generated, project-specific, living documentation. Commit this. |
 
 The templates in `context_template/` are the starting point. The generated `.context/` in your project is the real artifact — it should evolve with your project.
 
@@ -104,6 +109,7 @@ The templates in `context_template/` are the starting point. The generated `.con
 ## Keeping `.context/` Up to Date
 
 See `.context/META.md` for the full maintenance guide. Short version:
+
 - After each task: add a retrospective entry
 - Weekly: promote lessons from retrospectives to subdirectory files
 - Monthly: prune anything that no longer reflects how the project works
