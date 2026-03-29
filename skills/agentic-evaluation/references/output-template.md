@@ -23,14 +23,14 @@ Use this template when rendering evaluation results. Fill in every bracket place
 
 ## Dimension Scores
 
-| Dimension                    | Score   | Status                  |
-| ---------------------------- | ------- | ----------------------- |
-| Purpose & Scope Clarity      | [score] | [PASS / WARNING / FAIL] |
-| Instruction Clarity          | [score] | [PASS / WARNING / FAIL] |
-| Prompt vs Skill Separation   | [score] | [PASS / WARNING / FAIL] |
-| Context Window Efficiency    | [score] | [PASS / WARNING / FAIL] |
-| Performance & Latency        | [score] | [PASS / WARNING / FAIL] |
-| Anthropic Best Practices     | [score] | [PASS / WARNING / FAIL] |
+| Dimension                  | Score   | Status                  |
+| -------------------------- | ------- | ----------------------- |
+| Purpose & Scope Clarity    | [score] | [PASS / WARNING / FAIL] |
+| Instruction Clarity        | [score] | [PASS / WARNING / FAIL] |
+| Prompt vs Skill Separation | [score] | [PASS / WARNING / FAIL] |
+| Context Window Efficiency  | [score] | [PASS / WARNING / FAIL] |
+| Performance & Latency      | [score] | [PASS / WARNING / FAIL] |
+| Anthropic Best Practices   | [score] | [PASS / WARNING / FAIL] |
 
 ---
 
