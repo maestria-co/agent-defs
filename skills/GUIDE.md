@@ -6,27 +6,54 @@ Quick reference for selecting and composing skills in `skills/`.
 
 ## Quick Selection
 
-| If your task involves…                        | Use                      |
-| --------------------------------------------- | ------------------------ |
-| Setting up `.context/` for a new project      | `initialize-repo`        |
-| Loading project context at task start         | `context-loader`         |
-| Updating `.context/` after a task             | `context-maintenance`    |
-| Deciding which skill to use                   | `using-skills`           |
-| Breaking a complex goal into ordered tasks    | `planning-tasks`         |
-| Creating or updating a task plan.md           | `task-plan`              |
-| Deciding whether to design first or implement | `design-first`           |
-| Evaluating options or filling a knowledge gap | `researching-options`    |
-| Making a system design or technology decision | `designing-systems`      |
-| Writing or modifying code                     | `implementing-features`  |
-| Writing or running tests                      | `writing-tests`          |
-| Debugging a bug systematically                | `systematic-debugging`   |
-| Checking work before marking complete         | `verification-checklist` |
-| Making a git commit                           | `commit-discipline`      |
-| Reflecting after completing a task            | `task-retrospective`     |
-| Promoting patterns to reusable skills         | `knowledge-graduation`   |
-| Composing 3+ patterns for a complex workflow  | `coordinating-work`      |
-| Syncing `.context/` docs with the codebase    | `context-review`         |
-| Evaluating a SKILL.md file                    | `evaluate-skill`         |
+| If your task involves…                             | Use                            |
+| -------------------------------------------------- | ------------------------------ |
+| Setting up `.context/` for a new project           | `initialize-repo`              |
+| Setting up `.context/` for a monorepo              | `initialize-monorepo`          |
+| Bootstrapping all projects in a VS Code workspace  | `initialize-workspace`         |
+| Locating the agent-defs context_template           | `find-context-template`        |
+| Loading project context at task start              | `context-loader`               |
+| Updating `.context/` after a task                  | `context-maintenance`          |
+| Writing or reviewing `.context/` docs for quality  | `context-document-guidelines`  |
+| Syncing `.context/` docs with the codebase         | `context-review`               |
+| Deciding which skill to use                        | `using-skills`                 |
+| Breaking a complex goal into ordered tasks         | `planning-tasks`               |
+| Creating or updating a task plan.md                | `task-plan`                    |
+| Deciding whether to design first or implement      | `design-first`                 |
+| Evaluating options or filling a knowledge gap      | `researching-options`          |
+| Making a system design or technology decision      | `designing-systems`            |
+| Writing or modifying code                          | `implementing-features`        |
+| Writing or running tests                           | `writing-tests`                |
+| Debugging a bug systematically                     | `systematic-debugging`         |
+| Checking work before marking complete              | `verification-checklist`       |
+| Making a git commit                                | `commit-discipline`            |
+| Reflecting after completing a task                 | `task-retrospective`           |
+| Promoting patterns to reusable skills              | `knowledge-graduation`         |
+| Composing 3+ patterns for a complex workflow       | `coordinating-work`            |
+| Evaluating a SKILL.md file                         | `evaluate-skill`               |
+| Writing a Jira user story with acceptance criteria | `jira-story`                   |
+| Defining and structuring sprint goals              | `sprint-goals`                 |
+| Writing or improving an RFC document               | `rfc-format`                   |
+| Refactoring an existing RFC for clarity            | `rfc-refactor`                 |
+| Capturing meeting decisions and action items       | `post-meeting`                 |
+| Generating release notes from git history          | `deployment-release-notes`     |
+| Researching pre-deployment requirements            | `deployment-release-research`  |
+| Updating or auditing project dependencies          | `dependency-management`        |
+| Locating code patterns in a large codebase         | `code-identifier`              |
+| Executing the technical release process            | `tech-release-guide`           |
+| Researching release readiness and blockers         | `tech-release-research`        |
+| Assessing impact/risk before a code change         | `impact-assessor`              |
+| Evaluating evidence quality before acting on it    | `evidence-analyzer`            |
+| Finding and prioritizing technical debt / hacks    | `workaround-detector`          |
+| Explaining a technical concept in plain language   | `eli5-extractor`               |
+| Orchestrating full bug triage end-to-end           | `triage-orchestration`         |
+| Triaging and routing incoming support tickets      | `support-triage`               |
+| Upgrading a language, framework, or major dep      | `upgrade-repo`                 |
+| Setting up git worktrees for parallel work         | `start-worktree`               |
+| Categorizing issues/tickets for a backlog          | `categorizer`                  |
+| Assessing compute/carbon footprint of a change     | `ecological-impact`            |
+| Querying and analyzing application logs            | `log-query`                    |
+| Analyzing code paths, patterns, and usage          | `code-analysis`                |
 
 ---
 
@@ -223,21 +250,31 @@ planning-tasks
 
 ## Choosing by Task Type
 
-| Task type                               | Recommended pattern(s)                                                        |
-| --------------------------------------- | ----------------------------------------------------------------------------- |
-| "Set up this new repo for AI agents"    | `initialize-repo`                                                             |
-| "Build this feature" (simple)           | `implementing-features` → `writing-tests`                                     |
-| "Build this feature" (complex)          | `planning-tasks` → `implementing-features` × N → `writing-tests` × N          |
-| "Fix this bug"                          | `systematic-debugging` → `writing-tests` (add regression test)                |
-| "Should we use library X or Y?"         | `researching-options`                                                         |
-| "How should we design this system?"     | `designing-systems`                                                           |
-| "What should we build next?"            | `planning-tasks`                                                              |
-| "Refactor this module"                  | `planning-tasks` (if non-trivial) → `implementing-features` → `writing-tests` |
-| "Is our `.context/` up to date?"        | `context-review`                                                              |
-| "Review this SKILL.md file"             | `evaluate-skill`                                                              |
-| "This task needs architecture planning" | `design-first` → `designing-systems` → `implementing-features`                |
-| "I just finished a task"                | `task-retrospective` → `context-maintenance`                                  |
-| "Promote our best practices to skills"  | `knowledge-graduation`                                                        |
+| Task type                                    | Recommended pattern(s)                                                        |
+| -------------------------------------------- | ----------------------------------------------------------------------------- |
+| "Set up this new repo for AI agents"         | `initialize-repo`                                                             |
+| "Set up our monorepo for AI agents"          | `initialize-monorepo`                                                         |
+| "Set up all projects in this workspace"      | `initialize-workspace`                                                        |
+| "Build this feature" (simple)                | `implementing-features` → `writing-tests`                                     |
+| "Build this feature" (complex)               | `planning-tasks` → `implementing-features` × N → `writing-tests` × N          |
+| "Fix this bug"                               | `systematic-debugging` → `writing-tests` (add regression test)                |
+| "Triage this incident end-to-end"            | `triage-orchestration`                                                        |
+| "Process these support tickets"              | `support-triage` → `triage-orchestration` (for bugs)                          |
+| "Should we use library X or Y?"              | `researching-options`                                                         |
+| "How should we design this system?"          | `designing-systems`                                                           |
+| "What should we build next?"                 | `planning-tasks`                                                              |
+| "Refactor this module"                       | `planning-tasks` (if non-trivial) → `implementing-features` → `writing-tests` |
+| "Upgrade our Node/Python/framework version"  | `upgrade-repo`                                                                |
+| "Update our dependencies"                    | `dependency-management`                                                       |
+| "What breaks if I change X?"                 | `impact-assessor`                                                             |
+| "Find the tech debt in this codebase"        | `workaround-detector`                                                         |
+| "Write a Jira story for this feature"        | `jira-story`                                                                  |
+| "Write an RFC for this proposal"             | `rfc-format`                                                                  |
+| "Is our `.context/` up to date?"             | `context-review`                                                              |
+| "Review this SKILL.md file"                  | `evaluate-skill`                                                              |
+| "This task needs architecture planning"      | `design-first` → `designing-systems` → `implementing-features`                |
+| "I just finished a task"                     | `task-retrospective` → `context-maintenance`                                  |
+| "Promote our best practices to skills"       | `knowledge-graduation`                                                        |
 
 ---
 
@@ -256,25 +293,52 @@ All skills follow the conventions in `skills/_shared/conventions.md`:
 
 ## Files Written by Each Pattern
 
-| Pattern                  | Writes to                                                    |
-| ------------------------ | ------------------------------------------------------------ |
-| `initialize-repo`        | `.context/` directory (full setup)                           |
-| `context-loader`         | Nothing (read-only)                                          |
-| `context-maintenance`    | `.context/` documentation files                              |
-| `using-skills`           | Nothing (routing only)                                       |
-| `planning-tasks`         | `.context/plans/`                                            |
-| `task-plan`              | `.context/tasks/[TASK-ID]/plan.md`                           |
-| `design-first`           | Nothing (triage decision) or lightweight design in `plan.md` |
-| `researching-options`    | `.context/research/`                                         |
-| `designing-systems`      | `.context/decisions/`                                        |
-| `implementing-features`  | Source code files                                            |
-| `writing-tests`          | Test files                                                   |
-| `systematic-debugging`   | Source code (fix) + test files (regression)                  |
-| `verification-checklist` | Nothing (verification summary in chat)                       |
-| `commit-discipline`      | Git commits                                                  |
-| `task-retrospective`     | `.context/retrospectives.md`                                 |
-| `knowledge-graduation`   | `skills/[new-skill]/SKILL.md` + `GUIDE.md`                   |
-| `coordinating-work`      | Orchestrates others; no direct file output                   |
-| `context-review`         | `.context/` documentation files                              |
-| `common-constraints`     | Nothing (behavioral constraints, always active)              |
-| `testing-discipline`     | Nothing (quality standards, referenced during testing)       |
+| Pattern                        | Writes to                                                    |
+| ------------------------------ | ------------------------------------------------------------ |
+| `initialize-repo`              | `.context/` directory (full setup)                           |
+| `initialize-monorepo`          | `.context/` root + `packages/[name]/.context/`               |
+| `initialize-workspace`         | `.context/` per project + workspace-level overview           |
+| `find-context-template`        | Nothing (search and report only)                             |
+| `context-loader`               | Nothing (read-only)                                          |
+| `context-maintenance`          | `.context/` documentation files                              |
+| `context-document-guidelines`  | Nothing (quality standards reference)                        |
+| `using-skills`                 | Nothing (routing only)                                       |
+| `planning-tasks`               | `.context/plans/`                                            |
+| `task-plan`                    | `.context/tasks/[TASK-ID]/plan.md`                           |
+| `design-first`                 | Nothing (triage decision) or lightweight design in `plan.md` |
+| `researching-options`          | `.context/research/`                                         |
+| `designing-systems`            | `.context/decisions/`                                        |
+| `implementing-features`        | Source code files                                            |
+| `writing-tests`                | Test files                                                   |
+| `systematic-debugging`         | Source code (fix) + test files (regression)                  |
+| `verification-checklist`       | Nothing (verification summary in chat)                       |
+| `commit-discipline`            | Git commits                                                  |
+| `task-retrospective`           | `.context/retrospectives/`                                   |
+| `knowledge-graduation`         | `skills/[new-skill]/SKILL.md` + `GUIDE.md`                   |
+| `coordinating-work`            | Orchestrates others; no direct file output                   |
+| `context-review`               | `.context/` documentation files                              |
+| `common-constraints`           | Nothing (behavioral constraints, always active)              |
+| `testing-discipline`           | Nothing (quality standards, referenced during testing)       |
+| `jira-story`                   | Jira ticket content (in chat or file)                        |
+| `sprint-goals`                 | Sprint planning doc (in chat or file)                        |
+| `rfc-format`                   | RFC document (in chat or file)                               |
+| `rfc-refactor`                 | Updated RFC document                                         |
+| `post-meeting`                 | Meeting notes doc (in chat or file)                          |
+| `deployment-release-notes`     | Release notes entry                                          |
+| `deployment-release-research`  | Pre-deployment research report                               |
+| `dependency-management`        | Updated manifest + lock files; git commits per dep           |
+| `code-identifier`              | Nothing (search and report only)                             |
+| `tech-release-guide`           | Nothing (procedural guidance; outputs git tags, commits)     |
+| `tech-release-research`        | Release readiness report                                     |
+| `impact-assessor`              | Impact assessment report (in chat)                           |
+| `evidence-analyzer`            | Evidence quality assessment (in chat)                        |
+| `workaround-detector`          | Workaround report; optionally tickets/`.context/` notes      |
+| `eli5-extractor`               | Plain-language explanation (in chat or doc)                  |
+| `triage-orchestration`         | `.context/retrospectives/`; bug fix + regression test        |
+| `support-triage`               | Triage report; routed tickets                                |
+| `upgrade-repo`                 | Updated manifests + source code; git commits                 |
+| `start-worktree`               | Git worktree directory                                       |
+| `categorizer`                  | Categorized issue table (in chat or file)                    |
+| `ecological-impact`            | Impact report (in chat)                                      |
+| `log-query`                    | Findings summary (in chat)                                   |
+| `code-analysis`                | Analysis report (in chat or `.context/`)                     |
