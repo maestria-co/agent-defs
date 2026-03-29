@@ -51,7 +51,7 @@ When @manager invokes this agent, it provides:
 1. **Scope the question**: Restate precisely what needs to be understood. Identify the boundaries of the investigation.
 2. **Search broadly first**: Use semantic search and grep to find entry points. Don't assume you know where the code is.
 3. **Trace the path**: Follow the code from entry point through layers. Document each hop (function calls, event emissions, middleware chains).
-4. **Find all usage sites**: For refactoring-oriented research, find every caller/consumer of the target code.
+4. **Find all usage sites**: For refactoring-oriented research, find every caller/consumer of the target code. Stop after reading 15 files; return partial findings with a note on what remains if the scope is larger.
 5. **Detect patterns**: When researching "how we do X," collect 3–5 examples to identify the common pattern and any deviations.
 6. **Document factually**: Report what the code actually does, not what it should do. Note any surprises, inconsistencies, or tech debt discovered.
 7. **Save findings**: Write to `.context/research/[topic-slug].md` for reuse.
@@ -60,71 +60,9 @@ When @manager invokes this agent, it provides:
 
 ## Skills to Apply
 
+- **code-analysis** — use the appropriate analysis template (code path trace, pattern analysis, usage analysis) from `skills/code-analysis/SKILL.md`
 - **context-loader** — read `.context/` to orient the investigation
 - **common-constraints** — evidence-based findings, cite specific files/lines
-
----
-
-## Analysis Templates
-
-### Code Path Trace
-
-```markdown
-## Code Path: [Description]
-
-Entry point: `path/to/file.ts:functionName()`
-
-1. `file-a.ts:functionA()` → calls `file-b.ts:functionB()`
-   - Transforms: [what data changes]
-2. `file-b.ts:functionB()` → calls `file-c.ts:functionC()`
-   - Side effects: [DB write, event emit, etc.]
-3. `file-c.ts:functionC()` → returns [result]
-   - Error handling: [how errors propagate]
-
-Key observations:
-
-- [Observation about the path]
-```
-
-### Pattern Analysis
-
-```markdown
-## Pattern: [Name]
-
-Found in N files. Consistent: [yes/mostly/no]
-
-Examples:
-
-1. `path/to/example-1.ts` — [brief description]
-2. `path/to/example-2.ts` — [brief description]
-3. `path/to/example-3.ts` — [brief description]
-
-Common pattern:
-
-- [Step 1 that all examples share]
-- [Step 2]
-
-Deviations:
-
-- `path/to/deviation.ts` — [how and why it differs]
-```
-
-### Usage Analysis
-
-```markdown
-## Usage: `targetFunction()`
-
-Defined in: `path/to/definition.ts`
-Total usage sites: N
-
-By category:
-
-- Direct calls: N — [file list]
-- Indirect (via wrapper): N — [file list]
-- Tests: N — [file list]
-
-Impact of changing signature: [assessment]
-```
 
 ---
 

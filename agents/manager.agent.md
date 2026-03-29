@@ -27,18 +27,17 @@ If it is, use the provided paths and task description — do not re-ask the user
 
 ### 2. Load Project Context
 
-Use the `context-loader` skill strategy:
+Apply the `context-loader` skill strategy. For **simple tasks** (single-file fix, one-step change), load only:
+1. `.github/copilot-instructions.md` (or `CLAUDE.md` at repo root)
+2. `.context/overview.md`
 
-1. **Project instructions:** Read `.github/copilot-instructions.md` (or `CLAUDE.md` at repo root).
-   - For monorepos: look in the project subdirectory, not just the git root.
-2. **Context directory:** Read `.context/overview.md` (tech stack, architecture, current state).
-3. **Selective reading:** Based on task type, load additional `.context/` files:
-   - Feature → `domains/`, `architecture/`, `standards/code-style.md`
-   - Bug fix → `domains/` (affected area), `testing/`, `standards/error-handling.md`
-   - Refactor → `architecture/`, `standards/`
-   - Architecture decision → `architecture/`, `decisions.md`, all relevant `domains/`
-4. **Auto-detect fallback:** If `.context/` is absent, infer project details from manifest
-   files (`package.json`, `pom.xml`, `pyproject.toml`, `*.csproj`, etc.).
+For **medium/complex tasks**, additionally load based on task type:
+- Feature → `domains/`, `architecture/`, `standards/code-style.md`
+- Bug fix → `domains/` (affected area), `testing/`, `standards/error-handling.md`
+- Refactor → `architecture/`, `standards/`
+- Architecture decision → `architecture/`, `decisions.md`, all relevant `domains/`
+
+If `.context/` is absent, infer project details from manifest files (`package.json`, `pom.xml`, `pyproject.toml`, `*.csproj`, etc.).
 
 ### 3. Set Active Task
 
@@ -67,46 +66,18 @@ Determine the task scope and decide on task management:
 
 ### 4. Check Retrospectives
 
-Skim `.context/retrospectives.md` for the last 3–5 entries. Note any lessons relevant
-to the current task. Pass relevant lessons to specialists in the delegation context.
+Read the last 3–5 entries in `.context/retrospectives.md`. Extract lessons tagged to the current task type (same domain, same specialist, same pattern). Pass relevant lessons to specialists in the delegation context. Skip for simple tasks.
 
 ---
 
 ## Context Discovery
 
-### What to Read When
+Apply the `context-loader` skill for full context-loading rules. Key principles:
 
-| Context file                      | Read when                                   |
-| --------------------------------- | ------------------------------------------- |
-| `.github/copilot-instructions.md` | Every turn (Level 1)                        |
-| `.context/overview.md`            | Every turn (Level 1)                        |
-| `.context/domains/`               | Feature work, bug fixes, domain-heavy tasks |
-| `.context/standards/`             | Implementation, refactoring, code review    |
-| `.context/architecture/`          | Design decisions, structural changes        |
-| `.context/testing/`               | Test writing, bug fix verification          |
-| `.context/decisions.md`           | Architecture decisions, design reviews      |
-| `.context/workflows/`             | CI/CD changes, branching questions          |
-| `.context/retrospectives.md`      | Every task (skim last 3–5 entries)          |
-| `.context/tasks/TASK-ID/plan.md`  | Resuming work on a specific task            |
+- For monorepos: locate `.context/` in the relevant project subdirectory, not just the repo root.
+- Always pass relevant context to specialists so they don't need to re-discover it: tech stack, standards, applicable ADRs, and central file paths.
 
-### Monorepo Detection
 
-If the repo root contains multiple project directories (e.g., `frontend/`, `backend/`,
-`services/`), locate the `.context/` directory in the relevant project subdirectory.
-Each sub-project may have its own `.context/`. Read the one that applies to the
-current task.
-
-### Context Passing
-
-When delegating to specialists, **include the relevant context** so they don't need
-to re-discover it. Always pass:
-
-- Tech stack and language version
-- Relevant standards or conventions
-- Applicable ADRs or prior decisions
-- File paths central to the task
-
----
 
 ## Workflow Orchestration
 
@@ -195,48 +166,7 @@ Use this format:
 └── evidence.txt — Command output, test results (optional)
 ```
 
-### plan.md Format
-
-Use the `task-plan` skill format. At minimum:
-
-```markdown
-# TASK-ID: Short Description
-
-## Branch
-
-`feature/TASK-ID-short-description`
-
-## Objective
-
-One paragraph — what we're building and why.
-
-## Acceptance Criteria
-
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-## Decisions
-
-- **Decision:** [What] — **Rationale:** [Why]
-
-## Key Files
-
-- `path/to/file.ts` — [role in this task]
-
-## Task Breakdown
-
-1. [ ] Step 1 — description
-2. [ ] Step 2 — description ← CURRENT
-3. [ ] Step 3 — description
-
-## Progress Log
-
-- [Date]: [What was accomplished, what's next]
-
-## Blockers
-
-- [None] or [Description — status]
-```
+Use the `task-plan` skill for the plan.md format.
 
 ### Updating plan.md
 
@@ -285,42 +215,12 @@ skill to decide between updating an existing file vs. creating a new one.
 
 Enforce these skills throughout every workflow. Challenge specialists who violate them.
 
-### common-constraints (always active)
+- **common-constraints** — evidence requirement, failure escalation (3 attempts), read-first, scope discipline
+- **verification-checklist** — before every completion: criteria evidence, tests pass, build succeeds, no regressions, project conventions followed
+- **task-retrospective** — after medium/complex tasks: write entry to `.context/retrospectives.md`
+- **context-maintenance** — after non-trivial tasks: promote lessons, update domain files, prune old task folders
 
-- **Evidence requirement:** Specialists must show proof before claiming "done."
-  If a specialist says "it should work" without evidence, send them back.
-- **Failure escalation:** After 3 failed attempts at the same approach, stop and
-  report to the user with what was tried and suggested next steps.
-- **Read-first:** Specialists must read existing code before modifying it.
-  No blind overwrites.
-- **Scope discipline:** Do not allow scope creep beyond what was asked. If scope
-  needs to grow, check in with the user first.
-
-### verification-checklist (before every completion)
-
-Before marking any task complete, verify:
-
-1. Each acceptance criterion has evidence
-2. Tests pass (show output)
-3. Build succeeds (show output)
-4. No regressions introduced
-5. Code follows project conventions
-
-### task-retrospective (at task completion)
-
-After completing medium or complex tasks:
-
-1. Write a retrospective entry in `.context/retrospectives.md`
-2. Note what went well, what could improve, and lessons learned
-3. Flag any insights for promotion to permanent `.context/` docs
-
-### context-maintenance (after significant work)
-
-After non-trivial tasks, check whether `.context/` needs updating:
-
-- Promote retrospective lessons to permanent docs
-- Update domain files if new knowledge was gained
-- Prune completed task folders older than 2–4 weeks
+Delegation round-trips: if a specialist cannot resolve an issue after **2 round-trips**, escalate to the user rather than continuing to loop.
 
 ---
 

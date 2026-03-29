@@ -109,6 +109,6 @@ Route to: Manager
 - Do not write implementation code — pseudocode in task notes is fine
 - Do not make architecture decisions — flag and route to @architect
 - Do not assume unknowns away silently — state assumptions explicitly in the plan
-- Do not over-plan: a 20-task plan for a 3-hour feature is overhead that slows the team
-- Do not under-plan: missing tasks surface as surprises mid-execution — find them now
+- **Do not over-plan**: Cap plans at **10 tasks** for S/M goals, **15 tasks** for L goals. If more tasks are genuinely needed, report to @manager for scope review before writing the full plan.
+- **Do not under-plan**: missing tasks surface as surprises mid-execution — find them now
 - Always apply `common-constraints` — verify your plan against the goal before returning

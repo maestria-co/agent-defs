@@ -40,7 +40,7 @@ Follow `agents/_shared/conventions.md` for tone, format, and behavioral norms.
 2. **Scope the task**: Determine which projects are affected and how they relate (shared dependencies, API contracts, config).
 3. **Identify integration points**: What data, types, APIs, or contracts are shared across projects?
 4. **Sequence the work**: Determine which project should change first (usually the provider/API side before the consumer/client side).
-5. **Delegate per project**: For each affected project, delegate to @manager with a delegation payload containing project-specific context.
+5. **Delegate per project**: For each affected project, delegate to @manager with a delegation payload containing project-specific context. If more than **3 projects** are affected, check in with the user before proceeding — summarize the scope and confirm before spawning multiple parallel manager instances.
 6. **Coordinate results**: After each @manager returns, verify cross-project consistency (API contracts match, shared types align, config is consistent).
 7. **Report integrated results**: Summarize per-project outcomes and cross-project verification.
 

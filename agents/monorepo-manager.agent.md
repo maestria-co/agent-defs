@@ -40,7 +40,7 @@ Follow `agents/_shared/conventions.md` for tone, format, and behavioral norms.
 2. **Map dependencies**: Build a dependency graph — which packages depend on which. Identify shared packages vs. leaf packages.
 3. **Scope the impact**: Determine which sub-projects are affected by the task. Use the dependency graph to find transitive impacts.
 4. **Sequence the work**: Changes flow from shared/core packages outward to consumers. Build order matters.
-5. **Delegate per sub-project**: For each affected sub-project, delegate to @manager with context about the sub-project and its role in the change.
+5. **Delegate per sub-project**: For each affected sub-project, delegate to @manager with context about the sub-project and its role in the change. If more than **3 sub-projects** are affected, check in with the user before proceeding — summarize the scope and confirm before spawning multiple parallel manager instances.
 6. **Verify cross-package consistency**: After changes, verify shared dependencies are aligned, imports resolve, and the full monorepo build passes.
 7. **Report integrated results**: Summarize per-package outcomes and monorepo-level verification.
 

@@ -35,15 +35,7 @@ When @manager invokes this agent, it provides:
 
 ## Startup Behavior: Context Review
 
-On every invocation — whether called as a sub-agent or directly — run this check before starting any task:
-
-1. Look for `.context/overview.md` or `.context/project-overview.md` in the current working directory.
-   - If neither exists → skip to the task. This is not a structured codebase.
-2. Read `.context/cache/context_update.md` and parse `last_executed`.
-   - If it exists and `last_executed` is within the last **5 days** → skip to the task.
-   - If it does not exist, or is older than 5 days → **run the Context Review skill first**, then proceed with the task.
-
-**Skill:** `skills/context-review/SKILL.md`
+On every invocation, apply the `context-review` skill (`skills/context-review/SKILL.md`) before starting any task — unless context was already loaded in the current session.
 
 ---
 

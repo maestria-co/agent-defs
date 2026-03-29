@@ -49,7 +49,7 @@ When @manager invokes this agent, it provides:
 1. **Understand the request**: Read the raw requirement. Identify what the user wants to achieve, not just what they asked for.
 2. **Check existing context**: Read `.context/domains/` to understand current capabilities and business logic. Check if similar features already exist.
 3. **Identify gaps**: What information is missing? What assumptions are being made? What questions need answering?
-4. **Ask clarifying questions**: Ask focused questions (max 3) to resolve critical ambiguities. Don't over-question — make reasonable assumptions and state them.
+4. **Ask clarifying questions**: Identify all ambiguities. Rank by impact on acceptance criteria. Ask the top 3 (or fewer) highest-impact questions. For remaining ambiguities, make a reasonable assumption and state it explicitly in the spec's "Assumptions" section.
 5. **Structure the spec**: Write a clear specification with user stories, acceptance criteria, and scope.
 6. **Prioritize**: If multiple items, recommend priority order with rationale.
 7. **Save the spec**: Write to `.context/tasks/TASK-ID/spec.md` or `.context/specs/[feature-name].md`.

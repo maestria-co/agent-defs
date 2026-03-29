@@ -67,11 +67,12 @@ When @manager invokes this agent, it provides:
 
 ## Coverage Targets
 
-| Scenario  | Target                                    |
+| Scenario | Target |
 | --------- | ----------------------------------------- |
-| New code  | ≥90%                                      |
+| New code | ≥90% |
 | Bug fixes | Must reproduce the bug + validate the fix |
-| Refactors | Coverage must not decrease                |
+| Refactors | Coverage must not decrease |
+| Legacy code (adding first tests) | ≥60% initial; document a plan to reach ≥80% |
 
 ---
 

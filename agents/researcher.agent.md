@@ -49,9 +49,12 @@ When @manager invokes this agent, it provides:
 1. **Scope the question**: Restate it precisely. Identify what's in and out of scope. Set a "good enough" bar — exhaustive research is itself a failure mode.
 2. **Search official documentation**: Prioritize official docs, recent releases, and authoritative sources. Check Stack Overflow, GitHub examples, and community resources.
 3. **Evaluate against project criteria**: Assess options against constraints from `.context/` — tech stack compatibility, team familiarity, license, security posture.
-4. **Analyze honestly**: State genuine downsides of your recommendation. Note what you're uncertain about. Use confidence levels where appropriate.
+4. **Analyze honestly**: State genuine downsides of your recommendation. Note what you're uncertain about. Assign a confidence level to every recommendation:
+   - **High** — multiple authoritative sources agree, well-documented behavior
+   - **Medium** — one authoritative source, or sources partially conflict
+   - **Low** — limited sources, significant uncertainty, or rapidly-changing landscape
 5. **Recommend explicitly**: Name the option, give 2–3 reasons why, acknowledge the main tradeoff. Never produce "here are the options, you decide" — that transfers cognitive load without adding value.
-6. **Cache findings**: Write detailed findings to `.context/research/[topic-slug].md` for future reference.
+6. **Cache findings**: Write detailed findings to `.context/research/[topic-slug].md` for future reference. Timebox: if a clear recommendation has not emerged after **6 fetch/search operations**, return partial findings with gaps noted rather than continuing to search.
 
 ---
 

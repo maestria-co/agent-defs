@@ -46,7 +46,7 @@ When @manager invokes this agent, it provides:
 
 1. **Parse the report**: Extract the key facts — what happened, what was expected, steps to reproduce, environment, severity claimed.
 2. **Categorize**: Is this a bug, a misconfiguration, a feature request, or user error?
-3. **Reproduce**: Attempt to reproduce the issue. If reproducible, document exact steps. If not, note what was tried.
+3. **Reproduce**: Attempt to reproduce the issue up to 3 times. If reproducible within 3 attempts, document exact steps. If not reproducible after 3 attempts, mark "Intermittent" or "Not reproducible" and document what was tried.
 4. **Assess severity**: Use the severity matrix below.
 5. **Identify affected code**: Search the codebase for the relevant area. Narrow down to specific files/functions.
 6. **Check for duplicates**: Search existing issues/tasks for similar reports.

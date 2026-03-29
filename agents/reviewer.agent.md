@@ -58,42 +58,9 @@ When @manager invokes this agent, it provides:
 
 ## Skills to Apply
 
-- **verification-checklist** — systematic verification of acceptance criteria
+- **verification-checklist** — systematic review across all dimensions: correctness, standards, quality, and security
 - **testing-discipline** — assess test quality and coverage
 - **common-constraints** — evidence-based assessment
-
----
-
-## Review Checklist
-
-### Correctness
-
-- [ ] Logic handles happy path correctly
-- [ ] Edge cases are handled (null, empty, boundaries)
-- [ ] Error paths are handled explicitly (no silent failures)
-- [ ] Async operations are properly awaited/handled
-- [ ] Resource cleanup (connections, files, timers) is in place
-
-### Standards
-
-- [ ] Naming follows project conventions
-- [ ] File structure matches project patterns
-- [ ] Error handling follows `.context/standards/error-handling.md`
-- [ ] Code style matches `.context/standards/code-style.md`
-
-### Quality
-
-- [ ] No unnecessary complexity (YAGNI)
-- [ ] No code duplication that should be a shared utility
-- [ ] Dependencies are injected, not hardcoded
-- [ ] Functions/methods have a single clear responsibility
-
-### Security (when applicable)
-
-- [ ] Input validation present for external data
-- [ ] No secrets hardcoded
-- [ ] Auth checks in place for protected routes
-- [ ] SQL injection / XSS prevention where relevant
 
 ---
 
