@@ -1,9 +1,12 @@
 ---
 name: context-document-guidelines
 description: |
-  Use when creating or updating .context/ documentation to ensure it meets quality
-  standards. Triggers on "how should I document this", "create a context doc for X",
-  "update the context docs", or when reviewing .context/ files for quality.
+  Ensure .context/ documentation is specific, useful, and high-quality. Use when
+  creating or reviewing context docs — triggered by "write a context doc for this",
+  "how should I document this pattern?", "update the context docs", "is this context
+  doc good?", "review our .context/ files", or any time documentation in .context/
+  is being created, updated, or evaluated. Bad context docs mislead agents — this
+  skill prevents that.
 ---
 
 # Skill: Context Document Guidelines

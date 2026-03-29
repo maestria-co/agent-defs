@@ -1,10 +1,12 @@
 ---
 name: initialize-monorepo
 description: >
-  Bootstrap .context/ for a monorepo with multiple packages or services. Use when setting up 
-  context documentation for a monorepo, triggered by "initialize this monorepo", "set up 
-  context for our monorepo", or when a monorepo has no .context/ documentation and needs to 
-  be onboarded to the agent system. Extends initialize-repo for the multi-package case.
+  Bootstrap .context/ for a monorepo with multiple packages or services. Use when
+  setting up the agent system for a monorepo — triggered by "initialize this monorepo",
+  "set up context for our monorepo", "we have a packages/ directory and need context
+  docs", "our Nx/Turborepo/Lerna workspace needs bootstrapping", or any time a
+  multi-package repo has no .context/ and needs to be onboarded. Creates both a
+  root-level overview and per-package context directories.
 user-invocable: true
 ---
 

@@ -1,11 +1,12 @@
 ---
 name: post-meeting
 description: >
-  Use after any meeting to capture decisions, action items, and context. Triggers on
-  "write up the meeting", "capture meeting notes", "document what we decided", or
-  immediately after a meeting conversation. Converts meeting discussions into durable,
-  actionable records to prevent decisions from being lost and action items from falling
-  through the cracks.
+  Capture meeting decisions, action items, and context as a durable written record. Use
+  immediately after any meeting — triggered by "write up the meeting", "document what we
+  decided", "capture meeting notes", "I just got off a call and need to record the
+  decisions", "send a meeting summary", or whenever important decisions were made
+  verbally and need to be preserved. Prevents decisions from evaporating and action
+  items from falling through the cracks.
 ---
 
 # Skill: Post-Meeting

@@ -1,9 +1,11 @@
 ---
 name: code-identifier
 description: >
-  Use when locating specific code patterns, components, or features in a large
-  codebase. Triggers on "find where X is implemented", "locate the code that
-  does Y", "which file handles Z", or when navigating an unfamiliar codebase.
+  Find where specific code lives in a large or unfamiliar codebase. Use whenever
+  someone asks "where is X implemented?", "which file handles Y?", "find the code
+  that does Z", "where does the auth logic live?", "I need to locate the payment
+  processing code", or any time navigation through an unknown codebase is needed.
+  Also use when an agent needs to locate an entry point before making changes.
 ---
 
 # Skill: Code Identifier

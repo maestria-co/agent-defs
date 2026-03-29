@@ -1,10 +1,12 @@
 ---
 name: eli5-extractor
 description: >
-  Use when a technical concept needs to be explained simply to a non-technical
-  audience, or when documentation needs to be made accessible. Triggers on
-  "explain this simply", "ELI5", "how do I explain X to a stakeholder", "make
-  this accessible", or when bridging technical and non-technical communication.
+  Translate a complex technical concept into plain English for a non-technical audience.
+  Use whenever someone says "explain this simply", "ELI5", "how do I explain X to my
+  boss?", "make this understandable for stakeholders", "my PM doesn't get what a cache
+  is", "write a non-technical explanation of Y", or when bridging communication between
+  engineers and anyone who doesn't speak the jargon. Produces an analogy-driven
+  explanation with jargon replaced and the "so what" made explicit.
 ---
 
 # Skill: ELI5 Extractor

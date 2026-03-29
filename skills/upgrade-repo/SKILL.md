@@ -1,9 +1,11 @@
 ---
 name: upgrade-repo
 description: >
-  Use when upgrading a language version, framework, or major dependency in a
-  repository. Triggers on "upgrade Node to v22", "migrate to React 19",
-  "upgrade this framework", or "we need to update to the latest version of X".
+  Safely upgrade a language version, framework, or major dependency. Use when someone
+  says "upgrade Node to v22", "migrate to React 19", "we need to get off this old
+  version", "update our framework", or "how do we upgrade X?". Also triggers when a
+  security advisory requires a version bump. Prevents the most common upgrade pitfalls:
+  skipping migration guides, multi-major jumps, and losing rollback options.
 ---
 
 # Skill: Upgrade Repo
@@ -11,319 +13,88 @@ description: >
 ## Purpose
 
 Upgrade language versions, frameworks, and major dependencies safely with a
-structured pre/during/post process and a clear rollback plan. This skill prevents
-the most common upgrade failures: skipping migration guides, introducing breaking
-changes without testing, and losing the ability to roll back.
+structured pre/during/post process and a clear rollback plan. The goal is to stay
+in control at every step: understand breaking changes before touching code, verify
+the build after each fix, and keep commits granular enough that any problem can be
+isolated and reverted.
 
 ---
 
 ## Pre-Upgrade
 
-**Goal:** Understand the scope and prepare for safe execution.
+### 1. Research Before Touching Code
 
-### Step 1: Research
+Read the official release notes, migration guide, and CHANGELOG for the new version:
+- What is removed or renamed?
+- What patterns are deprecated?
+- Are there any required migration steps?
 
-Before changing any code:
+Skipping the migration guide is the #1 cause of upgrade pain — breaking changes are
+always documented.
 
-1. **Read official release notes**
-   - What's new in this version?
-   - What's deprecated?
-   - What's removed?
+### 2. Check Dependency Compatibility
 
-2. **Read migration guide**
-   - Every major version has a migration guide — find it
-   - List all breaking changes
-   - Note recommended migration steps
+Verify your direct dependencies support the new version. Run your package manager's
+outdated/audit command and check whether dependencies need to update alongside the upgrade.
 
-3. **Read CHANGELOG**
-   - Scan for unexpected behavior changes
-   - Look for performance implications
-   - Check for security fixes (might be why you're upgrading)
+### 3. Assess Scope
 
-### Step 2: Check Dependency Compatibility
+Search the codebase for deprecated API usage before starting. This turns vague fear
+into a concrete list of files to update and helps you estimate the effort.
 
-Verify the ecosystem supports the new version:
+### 4. Create a Dedicated Branch and Tag
 
 ```bash
-# Node.js ecosystem
-npm outdated
-
-# Python
-pip list --outdated
-
-# .NET
-dotnet list package --outdated
-```
-
-**Check each dependency:**
-- [ ] Does it support the new version?
-- [ ] Does it require updating too?
-- [ ] Are there known compatibility issues?
-
-### Step 3: Assess Scope
-
-Search the codebase for impacted patterns:
-
-```bash
-# Search for deprecated API usage
-git grep "oldAPIName"
-
-# Search for version-specific imports
-git grep "from 'framework/old-module'"
-
-# Count affected files
-git grep "deprecatedPattern" | wc -l
-```
-
-**Document:**
-- How many files use deprecated APIs?
-- Which files will need changes?
-- Estimated effort (hours/days)?
-
-### Step 4: Create Upgrade Branch
-
-Prepare version control:
-
-```bash
-# Create a dedicated branch
 git checkout -b upgrade/[name]-[old-version]-to-[new-version]
-
-# Tag the current state for easy rollback
 git tag pre-upgrade-[name]-$(date +%Y%m%d)
-
-# Push the tag
 git push origin pre-upgrade-[name]-$(date +%Y%m%d)
 ```
 
-### Step 5: Document Rollback Plan
-
-Write down the exact steps to revert:
-
-```markdown
-## Rollback Plan
-
-If upgrade fails:
-
-1. Revert to tagged state:
-   ```
-   git checkout pre-upgrade-[name]-[date] -- .
-   ```
-
-2. Or reset the branch:
-   ```
-   git reset --hard pre-upgrade-[name]-[date]
-   ```
-
-3. Or revert the merge:
-   ```
-   git revert -m 1 [merge-commit]
-   ```
-
-4. Restore dependencies:
-   ```
-   npm install  # or equivalent
-   ```
-
-5. Rebuild and verify tests pass.
-```
+The tag is your rollback anchor — push it before making any changes.
 
 ---
 
 ## Upgrade Process
 
-**Goal:** Incrementally upgrade with verification at each step.
-
 ### Rule: One Major Version at a Time
 
-**Never jump multiple major versions in one step.**
+Never jump multiple major versions in one step. If upgrading Node 16 → 22,
+go 16 → 18 → 20 → 22. Verify tests pass after each step. This isolates which
+version introduced each breakage and keeps PRs reviewable.
 
-Example: Upgrading Node 16 → 22
+### Per-Version Steps
 
-```bash
-# Wrong: Direct jump
-nvm install 22  # ❌ Too big a leap
+1. **Update version** in the manifest (`package.json`, `pyproject.toml`, `go.mod`, etc.)  
+   Commit this change before installing so the diff is readable.
 
-# Right: Incremental
-nvm install 18  # ✅ 16 → 18
-# Fix issues, verify tests
-nvm install 20  # ✅ 18 → 20
-# Fix issues, verify tests
-nvm install 22  # ✅ 20 → 22
-# Fix issues, verify tests
-```
+2. **Install dependencies** — check the output for conflicts
 
-### Step 1: Update Version in Manifest Files
+3. **Fix build errors first** — imports, syntax, renamed APIs — before running tests.  
+   Fix in order: import errors → syntax → type errors → API changes.  
+   Commit after each logical group of fixes.
 
-Update version declarations:
+4. **Run tests** — fix failures one at a time, commit each fix separately.
 
-- `package.json` (Node.js)
-- `requirements.txt` / `pyproject.toml` (Python)
-- `.csproj` / `global.json` (.NET)
-- `build.gradle` / `pom.xml` (Java)
-- `Cargo.toml` (Rust)
-- `go.mod` (Go)
+5. **Address deprecation warnings** — these become errors in the next major version,
+   so clearing them now prevents the next upgrade from being painful.
 
-**Commit this change before installing:**
-
-```bash
-git add package.json
-git commit -m "chore: bump [package] from [old] to [new]"
-```
-
-### Step 2: Install Dependencies
-
-```bash
-# Node.js
-npm install
-
-# Python
-pip install -r requirements.txt
-
-# .NET
-dotnet restore
-```
-
-**Check for dependency conflicts in the output.**
-
-### Step 3: Fix Compilation/Import Errors
-
-Run the build **before** running tests:
-
-```bash
-# Node.js
-npm run build
-
-# Python
-python -m compileall .
-
-# .NET
-dotnet build
-```
-
-**Fix errors in this order:**
-
-1. Import/module errors (missing or renamed modules)
-2. Syntax errors (deprecated syntax)
-3. Type errors (stricter type checking in new version)
-4. API errors (removed or renamed functions)
-
-**Commit after each category of fixes:**
-
-```bash
-git add .
-git commit -m "fix: update imports for [package] [new-version]"
-```
-
-### Step 4: Run Test Suite
-
-After build succeeds:
-
-```bash
-npm test  # or equivalent
-```
-
-**Fix test failures one at a time:**
-
-- [ ] Read the failure message carefully
-- [ ] Is the test broken or is the code broken?
-- [ ] Fix the root cause
-- [ ] Re-run tests
-- [ ] Commit the fix
-
-```bash
-git add .
-git commit -m "fix: update [test-name] for [package] [new-version]"
-```
-
-### Step 5: Address Deprecation Warnings
-
-Scan build and test output for warnings:
-
-```
-⚠️  DeprecationWarning: oldAPI is deprecated. Use newAPI instead.
-```
-
-**Address each warning:**
-
-1. Search for usage: `git grep "oldAPI"`
-2. Replace with recommended alternative
-3. Verify tests still pass
-4. Commit the change
-
-```bash
-git add .
-git commit -m "refactor: replace deprecated oldAPI with newAPI"
-```
-
-### Step 6: Commit Working State
-
-Before moving to the next major version:
-
-```bash
-# Verify everything works
-npm run build && npm test
-
-# Commit if all green
-git add .
-git commit -m "chore: [package] upgrade to [version] complete"
-```
+6. **Commit the working state** before advancing to the next major version.
 
 ---
 
 ## Post-Upgrade
 
-**Goal:** Verify the upgrade is complete and stable.
+### Verification Checklist
 
-### Step 1: Full Test Suite
+- [ ] All tests pass (unit, integration, e2e)
+- [ ] Build succeeds with no errors or unaddressed deprecation warnings
+- [ ] Critical user paths tested manually
+- [ ] Performance hasn't regressed (startup time, key latencies)
+- [ ] Dependencies are compatible with the new version
 
-Run the **complete** test suite:
+### Document in `.context/`
 
-```bash
-# Unit tests
-npm run test:unit
-
-# Integration tests
-npm run test:integration
-
-# End-to-end tests
-npm run test:e2e
-```
-
-**All tests must be green before proceeding.**
-
-### Step 2: Manual Testing of Critical Paths
-
-Test the features users rely on most:
-
-- [ ] Authentication (login, logout, token refresh)
-- [ ] Payments (if applicable)
-- [ ] Key user workflows (top 3-5 features)
-- [ ] Admin functions (if applicable)
-
-**Document any behavioral changes observed.**
-
-### Step 3: Performance Testing
-
-For major upgrades, verify performance hasn't regressed:
-
-```bash
-# Memory usage
-npm run benchmark:memory
-
-# Startup time
-time npm start
-
-# Request latency (if applicable)
-npm run benchmark:api
-```
-
-**Compare to pre-upgrade baseline.**
-
-### Step 4: Update Context Documentation
-
-Document the upgrade decision:
-
-**`.context/decisions/upgrade-[package]-[date].md`:**
+Add a decision record at `.context/decisions/upgrade-[package]-[date].md`:
 
 ```markdown
 # Upgrade [Package] to [New Version]
@@ -332,131 +103,43 @@ Document the upgrade decision:
 Upgraded from [old] to [new] on [date].
 
 ## Rationale
-- [Why we upgraded: security fix, new features, dependency requirement]
+[Why: security fix / new features / dependency requirement]
 
-## Breaking Changes
-- [List breaking changes from migration guide]
-- [How we addressed each one]
+## Breaking Changes & Mitigations
+- [Change]: [how we addressed it]
 
 ## Migration Notes
-- [Patterns that changed]
-- [New best practices with this version]
-- [Things to watch for]
+[Patterns that changed; new best practices to follow going forward]
 
 ## Rollback
 Tag: `pre-upgrade-[name]-[date]`
 ```
 
-**Update `.context/architecture/` if patterns changed:**
-
-```markdown
-## Post-[Package]-[Version] Patterns
-
-With [package] [version], we now:
-- [new pattern replacing old pattern]
-- [new API replacing deprecated API]
-```
-
-### Step 5: Write Release Notes
-
-Add an entry for the upgrade:
-
-```markdown
-## [Version] - [Date]
-
-### Changed
-- Upgraded [package] from [old] to [new]
-- [Breaking changes that affect users, if any]
-- [New capabilities now available]
-
-### Migration
-- [Steps users must take, if any]
-- [Deprecated patterns to replace]
-```
-
----
-
-## Upgrade Verification Checklist
-
-Before merging the upgrade:
-
-- [ ] All tests pass (unit, integration, e2e)
-- [ ] Build succeeds with no errors
-- [ ] No unaddressed deprecation warnings
-- [ ] Critical paths tested manually
-- [ ] Performance hasn't regressed
-- [ ] `.context/decisions.md` updated with upgrade rationale
-- [ ] `.context/architecture/` updated if patterns changed
-- [ ] Release notes written
-- [ ] Rollback plan documented and tested
-- [ ] Dependencies are compatible with new version
-
 ---
 
 ## Rollback Procedure
 
-If the upgrade causes production issues:
-
-### Immediate Rollback
-
 ```bash
-# Revert to the tagged pre-upgrade state
+# Revert to the pre-upgrade state
 git checkout pre-upgrade-[name]-[date]
-
-# Create a rollback branch
 git checkout -b rollback/[package]-[date]
 
-# Restore dependencies
-npm install  # or equivalent
-
-# Verify tests pass
-npm test
-
-# Deploy
+# Restore dependencies and verify
+[install command]  # npm install / pip install / etc.
+[test command]
 ```
 
-### Long-Term Rollback
-
-If the upgrade must be abandoned:
-
-```bash
-# Close the upgrade branch
-git checkout main
-git branch -D upgrade/[name]-[old]-to-[new]
-
-# Document why in .context/decisions/
-```
-
----
-
-## Special Cases
-
-### Security-Driven Upgrades
-
-When upgrading due to a CVE:
-
-1. **Upgrade to the minimum safe version** — Don't take unnecessary changes
-2. **Test specifically for the vulnerability** — Verify the fix works
-3. **Expedite deployment** — Security fixes can't wait for the next release
-4. **Document the CVE** — Link to the security advisory in commit message
-
-### Breaking Change Mitigation
-
-If a breaking change affects many files:
-
-1. **Create a compatibility shim** — Adapter layer for old code
-2. **Migrate incrementally** — Update files over time
-3. **Deprecate the shim** — Set a deadline to remove it
-4. **Track progress** — Keep a checklist of files to migrate
+If the upgrade must be abandoned entirely, delete the upgrade branch and document
+the reason in `.context/decisions/`.
 
 ---
 
 ## Constraints
 
-- **Never skip the migration guide** — Breaking changes are always documented
-- **Never upgrade multiple major-version dependencies in one commit** — Upgrade one at a time
-- **Never merge an upgrade with failing tests** — All tests must be green
-- **Never upgrade in a production hotfix** — Upgrades need dedicated branches and full testing
-- **Never delete deprecation warnings without addressing them** — They indicate future breaking changes
-- **Always tag before upgrading** — You must be able to roll back
-- **Always document the rationale** — Future maintainers need to know why
+- Read the migration guide before writing any code
+- One major version per upgrade branch — not multiple
+- Merge only when all tests are green
+- Never upgrade in a production hotfix branch — upgrades need dedicated branches and full testing
+- Always tag before upgrading so you can roll back
+- Document the rationale — future maintainers need to know why the version changed
+

@@ -1,9 +1,11 @@
 ---
 name: dependency-management
 description: >
-  Use when updating, auditing, or managing project dependencies. Triggers on
-  "update dependencies", "fix security vulnerability", "check for outdated packages",
-  "upgrade [library]", or when a dependency audit is needed.
+  Update, audit, and manage project dependencies safely. Use whenever someone says
+  "update dependencies", "we have a security vulnerability", "this package is outdated",
+  "fix the npm audit warnings", "upgrade [library] to latest", "check for outdated
+  packages", or when a dependency audit reveals CVEs. Works across all package
+  ecosystems (npm, pip, Maven, NuGet, Cargo, Go modules).
 ---
 
 # Skill: Dependency Management
@@ -67,11 +69,15 @@ Full test suite + build + lint clean
 
 ## Rollback Plan
 
-Keep the pre-update lock file committed to a branch. To revert:
+Before updating, commit the current lock file to a branch. To revert to the pre-update state:
 
 ```bash
-git checkout [branch] -- package-lock.json && npm ci
+# Restore the lock file and reinstall
+git checkout [branch] -- [lock-file]
+[install command]   # npm ci / pip install / dotnet restore / etc.
 ```
+
+Replace `[lock-file]` with the appropriate file: `package-lock.json`, `yarn.lock`, `Pipfile.lock`, `poetry.lock`, `packages.lock.json`, `go.sum`, etc.
 
 ---
 

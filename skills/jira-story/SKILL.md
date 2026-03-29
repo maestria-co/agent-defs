@@ -2,10 +2,11 @@
 name: jira-story
 user-invocable: true
 description: >
-  Use when creating or formatting Jira user stories and tickets. Triggers on requests
-  to write a ticket, create a story, format a Jira issue, or draft acceptance criteria.
-  Formats user stories with consistent structure to prevent under-specified stories
-  that block developers.
+  Write a well-structured Jira user story or ticket. Use whenever someone says "write
+  a Jira ticket", "create a story for this feature", "draft acceptance criteria",
+  "format this as a Jira issue", "turn this into a story", or provides a feature idea
+  that needs to be formalized into a backlog item. Prevents under-specified stories
+  that force developers to hunt for missing information or make incorrect assumptions.
 ---
 
 # Skill: Jira Story
