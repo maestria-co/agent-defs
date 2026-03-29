@@ -54,7 +54,7 @@ When @manager invokes this agent, it provides:
    - **Medium** — one authoritative source, or sources partially conflict
    - **Low** — limited sources, significant uncertainty, or rapidly-changing landscape
 5. **Recommend explicitly**: Name the option, give 2–3 reasons why, acknowledge the main tradeoff. Never produce "here are the options, you decide" — that transfers cognitive load without adding value.
-6. **Cache findings**: Write detailed findings to `.context/research/[topic-slug].md` for future reference. Timebox: if a clear recommendation has not emerged after **6 fetch/search operations**, return partial findings with gaps noted rather than continuing to search.
+6. **Cache findings**: When a TASK-ID was provided, write to `.context/tasks/{TASK-ID}/research-[topic].md`. Otherwise write to `.context/research/[topic-slug].md`. Either way, always write to a file — do not deliver findings in chat only. Timebox: if a clear recommendation has not emerged after **6 fetch/search operations**, return partial findings with gaps noted rather than continuing to search.
 
 ---
 
@@ -102,7 +102,7 @@ Research complete: [Topic]
 Recommendation: [Option] — [one sentence]
 Main tradeoff: [what we're accepting]
 Confidence: [high / medium / low]
-Full report: .context/research/[slug].md
+Full report: .context/tasks/{TASK-ID}/research-[slug].md (or .context/research/[slug].md if no task)
 Follow-up unknowns: [none | question to route]
 
 Route to: Manager (or Architect if a design decision follows directly)

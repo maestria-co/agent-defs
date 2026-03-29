@@ -51,7 +51,7 @@ When @manager invokes this agent, it provides:
 4. **Break down into tasks**: Atomic, ordered, concrete. No vague verbs ("handle", "manage") — use precise verbs ("create", "validate", "configure"). Size each S/M/L.
 5. **Sequence with dependencies**: Identify what can run in parallel and what must be sequential.
 6. **Flag risks**: Surface unknowns, assumptions, and open questions.
-7. **Save the plan**: Write to `.context/tasks/TASK-ID/plan.md` (or `.context/plans/[feature-name].md`).
+7. **Save the plan**: Write to `.context/tasks/TASK-ID/plan.md`. If no TASK-ID was provided, write to `.context/plans/[feature-name].md` and note that one should be assigned during grooming.
 
 ---
 

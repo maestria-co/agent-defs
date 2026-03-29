@@ -106,6 +106,18 @@ Do not signal completion based on belief. Verify it.
 
 - **Reading:** At the start of any non-trivial task, check `.context/project-overview.md`, `.context/decisions/`, and relevant retrospective entries.
 - **Writing:** Write to `.context/` when you make a significant decision (→ `decisions/`), complete a task with learnings (→ `retrospectives/`), or discover undocumented project facts (→ `project-overview.md`).
+- **Task-scoped writing:** When a TASK-ID or STORY-ID was provided (i.e., you are working in the context of a named task), write **all** output artifacts under `.context/tasks/{TASK-ID}/` — not the generic folders. This co-locates every finding, analysis, and decision so the team (and future agents) can reconstruct what happened without hunting across the context tree.
+
+  Use descriptive filenames within the task folder:
+  | Agent | Filename |
+  |-------|----------|
+  | Researcher | `research-[topic].md` |
+  | Code-Researcher | `code-analysis-[topic].md` |
+  | Architect | `architecture-[topic].md` |
+  | Planner | `plan.md` |
+  | Product-Manager | `spec.md`, `story.md` |
+
+  Still write permanent decisions (ADRs) to `.context/decisions/` — but also drop a reference file in the task folder pointing there.
 
 ---
 

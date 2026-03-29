@@ -58,7 +58,7 @@ On every invocation, apply the `context-review` skill (`skills/context-review/SK
 2. **Assess reversibility**: Two-way door (easy to undo) → move quickly, document lightly. One-way door (hard to reverse) → slow down, explore thoroughly.
 3. **Identify affected modules**: Map which components are impacted and what cross-module dependencies exist.
 4. **Evaluate options**: Identify ≥2 viable options. Evaluate against correctness, simplicity, performance, maintainability, team familiarity, reversibility. Prefer the simplest option that meets requirements.
-5. **Decide and document**: Write an ADR to `.context/decisions/ADR-NNN-title.md`. Update the index.
+5. **Decide and document**: Write an ADR to `.context/decisions/ADR-NNN-title.md` and update the index. When a TASK-ID was provided, also write a reference file at `.context/tasks/{TASK-ID}/architecture-[topic].md` that summarizes the decision and links to the ADR — this keeps all task artifacts co-located for the team.
 6. **Produce implementation guidance**: API contracts, schema, ASCII diagrams, patterns to follow/avoid, explicit scope.
 
 ---
