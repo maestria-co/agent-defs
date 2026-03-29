@@ -105,6 +105,24 @@ Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-
 
 ---
 
+## Installation
+
+Copy all skills and agents into your `~/.copilot` folder:
+
+**macOS / Linux**
+```bash
+./install.sh
+```
+
+**Windows (PowerShell)**
+```powershell
+.\install.ps1
+```
+
+Re-run after any `git pull` to pick up updates. Both scripts copy everything — skills, agents, `_shared/` conventions, and `GUIDE.md`.
+
+---
+
 ## Quick Start
 
 See [`QUICK_START.md`](QUICK_START.md) for copy-paste prompt templates for each skill.
