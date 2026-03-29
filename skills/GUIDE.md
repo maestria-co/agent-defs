@@ -31,7 +31,9 @@ Quick reference for selecting and composing skills in `skills/`.
 | Promoting patterns to reusable skills              | `knowledge-graduation`         |
 | Composing 3+ patterns for a complex workflow       | `coordinating-work`            |
 | Evaluating a SKILL.md file                         | `evaluate-skill`               |
-| Writing a Jira user story with acceptance criteria | `jira-story`                   |
+| Formatting a spec as a Jira user story             | `jira-story`                   |
+| Formatting a spec as an Asana task                 | `asana-story`                  |
+| Formatting a spec as a Linear issue                | `linear-story`                 |
 | Defining and structuring sprint goals              | `sprint-goals`                 |
 | Writing or improving an RFC document               | `rfc-format`                   |
 | Refactoring an existing RFC for clarity            | `rfc-refactor`                 |
@@ -269,6 +271,8 @@ planning-tasks
 | "What breaks if I change X?"                 | `impact-assessor`                                                             |
 | "Find the tech debt in this codebase"        | `workaround-detector`                                                         |
 | "Write a Jira story for this feature"        | `jira-story`                                                                  |
+| "Write an Asana task for this feature"       | `asana-story`                                                                 |
+| "Write a Linear issue for this feature"      | `linear-story`                                                                |
 | "Write an RFC for this proposal"             | `rfc-format`                                                                  |
 | "Is our `.context/` up to date?"             | `context-review`                                                              |
 | "Review this SKILL.md file"                  | `evaluate-skill`                                                              |
@@ -319,7 +323,9 @@ All skills follow the conventions in `skills/_shared/conventions.md`:
 | `context-review`               | `.context/` documentation files                              |
 | `common-constraints`           | Nothing (behavioral constraints, always active)              |
 | `testing-discipline`           | Nothing (quality standards, referenced during testing)       |
-| `jira-story`                   | Jira ticket content (in chat or file)                        |
+| `jira-story`                   | Jira story markdown (`.context/tasks/[ID]/story.md`)         |
+| `asana-story`                  | Asana task markdown (`.context/tasks/[ID]/story.md`)         |
+| `linear-story`                 | Linear issue markdown (`.context/tasks/[ID]/story.md`)       |
 | `sprint-goals`                 | Sprint planning doc (in chat or file)                        |
 | `rfc-format`                   | RFC document (in chat or file)                               |
 | `rfc-refactor`                 | Updated RFC document                                         |
