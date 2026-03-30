@@ -51,7 +51,7 @@ Has .context/?
 ```
 
 Each project must be initialized in isolation — don't let one project's context
-influence another's. Each gets its own `.context/overview.md`, `.context/standards/`, etc.
+influence another's. Each gets its own `.context/overview.md`, `.context/standards.md`, `.context/architecture.md`, etc.
 
 ---
 

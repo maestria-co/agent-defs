@@ -160,13 +160,11 @@ cd [repo-name]
 - How to version and release
 ```
 
-### Root `.context/architecture/dependency-graph.md`
+### Root `.context/architecture.md` (Monorepo section)
 
-Document the dependency relationships discovered in Phase 2, with a diagram if helpful.
+Add a "Package Structure" section to the root `architecture.md` documenting the dependency relationships discovered in Phase 2, with a diagram if helpful.
 
 ### Root `.context/workflows/monorepo-workflow.md`
-
-Template:
 
 ```markdown
 # Monorepo Workflow
@@ -264,7 +262,7 @@ Template addition:
 This is a monorepo containing [N] packages. Context documentation is organized as:
 
 - **Root context** (`.context/` at repo root): Monorepo-wide architecture, workflows, decisions
-- **Package context** (`packages/[name]/.context/`): Package-specific details
+- **Package context** (`packages/[name]/.context/`): Package-specific details — uses the same flat-file structure (`overview.md`, `standards.md`, `testing.md`, `architecture.md`)
 
 When working on a specific package, consult both the root context and the package-specific context.
 
@@ -289,7 +287,7 @@ Only add per-package instructions if the package has unique conventions that ove
 ### Checklist
 
 - [ ] Root `.context/overview.md` exists and lists all packages
-- [ ] Root `.context/architecture/dependency-graph.md` documents package relationships
+- [ ] Root `.context/architecture.md` has a "Package Structure" section documenting package relationships
 - [ ] Root `.context/workflows/monorepo-workflow.md` explains build/test/release
 - [ ] Each non-generated package has `.context/overview.md`
 - [ ] Root `CLAUDE.md` or `.github/copilot-instructions.md` points to context directories
@@ -317,7 +315,7 @@ ls -la packages/*/.context/ 2>/dev/null
 
 ### Root Context
 - `.context/overview.md` — [N] packages documented
-- `.context/architecture/dependency-graph.md` — [N] dependencies mapped
+- `.context/architecture.md` — package relationships and dependency graph documented
 - `.context/workflows/monorepo-workflow.md` — build/test/release documented
 
 ### Package Context
@@ -332,7 +330,7 @@ ls -la packages/*/.context/ 2>/dev/null
 ### Next Steps
 1. Review generated context for accuracy
 2. Fill in any [TODO] placeholders
-3. Add domain-specific documentation to `.context/domains/` as needed
+3. Add domain-specific documentation to `.context/domains/` as needed (optional — only for complex domains)
 4. Commit context documentation to version control
 ```
 
