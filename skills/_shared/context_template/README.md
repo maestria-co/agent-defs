@@ -10,38 +10,24 @@ Running the setup prompt generates this structure in your project:
 
 ```
 .context/
-├── META.md                          # How to maintain this directory
-├── overview.md                      # Project overview, tech stack, team conventions
+├── META.md                    # How to maintain this directory
+├── overview.md                # Project purpose, tech stack, current phase
+├── architecture.md            # System structure: layers, data flow, integrations
+├── standards.md               # Code style, naming, error handling, patterns
+├── testing.md                 # Test framework, file conventions, mocking
 ├── decisions/
-│   ├── index.md                     # ADR index (all decisions at a glance)
-│   └── ADR-NNN-title.md             # Individual Architectural Decision Records
+│   ├── index.md               # ADR index (all decisions at a glance)
+│   └── ADR-NNN-title.md       # Individual Architectural Decision Records
 ├── retrospectives/
-│   ├── README.md                    # Format guide for retrospective files
-│   └── YYYY-MM-DD-TASK-ID.md        # Individual retrospective per task
-├── standards/
-│   ├── code-style.md                # File organization, imports, comments, formatting
-│   ├── naming-conventions.md        # File, variable, function, class, test naming
-│   └── error-handling.md            # Error types, logging, validation patterns
-├── architecture/
-│   ├── patterns-template.md         # Structural patterns to follow
-│   └── migration-guide-template.md  # DB/API migration documentation
-├── testing/
-│   ├── unit-testing.md              # Framework, mocking strategy, test structure
-│   └── integration-testing.md       # What to integration test and how
-├── domains/
-│   ├── entities.md                  # Core domain models and business rules
-│   └── glossary.md                  # Project-specific terminology
-├── styling/                         # Frontend only — skip for backend/CLI projects
-│   └── style-guide-template.md      # UI/CSS conventions
-├── workflows/
-│   ├── task-workflow-template.md    # Pattern-based task execution workflow
-│   ├── branching.md                 # Git branching strategy
-│   └── ci-cd.md                     # CI/CD pipeline documentation
-└── tasks/                           # Per-task artifacts (brief, plan, retro)
-    └── TASK-ID/
-        ├── plan.md
-        ├── spec.md / story.md
-        └── research-*.md / code-analysis-*.md / architecture-*.md
+│   ├── README.md              # Format guide for retrospective files
+│   └── YYYY-MM-DD-TASK-ID.md  # Individual retrospective per task
+├── tasks/                     # Per-task artifacts written by agents
+│   └── TASK-ID/
+│       ├── plan.md
+│       ├── spec.md / story.md
+│       └── research-*.md / code-analysis-*.md / architecture-*.md
+├── workflows/                 # Optional: branching, CI/CD (if non-obvious)
+└── domains/                   # Optional: entities + glossary (if domain-rich)
 ```
 
 It also creates or updates `CLAUDE.md` and `.github/copilot-instructions.md` so your AI tools load this context automatically.

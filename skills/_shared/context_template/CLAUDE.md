@@ -5,11 +5,10 @@
 ## Project Context
 
 See @.context/overview.md for project overview, tech stack, and current development phase.
-See @.context/standards/ for coding standards and conventions.
-See @.context/architecture/ for architectural patterns.
+See @.context/architecture.md for system structure, layers, and integration points.
+See @.context/standards.md for coding conventions, naming, and patterns.
+See @.context/testing.md for test framework, file conventions, and mocking patterns.
 See @.context/decisions/ for architectural decisions (ADRs).
-See @.context/domains/ for domain entities and business terminology.
-See @.context/workflows/ for task workflow, branching strategy, and CI/CD.
 
 ## Pattern System
 

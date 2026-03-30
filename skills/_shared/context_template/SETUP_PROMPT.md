@@ -39,24 +39,16 @@ From this scan, identify:
 ## Step 2 — Create Directory Structure
 
 Create the following directories if they don't exist:
-```
 
+```
 .context/
-.context/standards/
-.context/architecture/
 .context/decisions/
-.context/testing/
-.context/domains/
-.context/workflows/
 .context/retrospectives/
 .context/tasks/
-
 ```
 
-If the project has a **frontend** (React, Vue, Angular, Svelte, etc.), also create:
-```
-.context/styling/
-```
+If the project has workflows that aren't obvious (complex branching, multi-step CI, etc.), also create `.context/workflows/`.
+If the project has a rich domain with many entities, also create `.context/domains/`.
 
 ## Step 3 — Copy Universal Files Verbatim
 
@@ -66,30 +58,20 @@ These files are universal (not project-specific). Copy them from the installed s
 - Copy `~/.copilot/skills/_shared/context_template/context/decisions/index.md` → `.context/decisions/index.md`
 - Copy `~/.copilot/skills/_shared/context_template/context/decisions/ADR-001-example-decision.md` → `.context/decisions/ADR-001-example-decision.md`
 - Copy `~/.copilot/skills/_shared/context_template/context/retrospectives/README.md` → `.context/retrospectives/README.md`
-- Copy `~/.copilot/skills/_shared/context_template/context/workflows/task-workflow-template.md` → `.context/workflows/task-workflow-template.md`
 
 > Claude Code users: replace `~/.copilot` with `~/.claude` in the paths above.
 
 ## Step 4 — Generate Project-Specific Files
 
-For each file below, generate project-specific content based on Step 1. Replace every [PLACEHOLDER] with actual content. Use real file paths from this codebase as examples — never generic ones.
+For each file below, generate project-specific content based on Step 1. Replace every placeholder with actual content. Use real file paths from this codebase as examples — never generic ones.
 
-| File | How to fill it |
-|---|---|
-| `.context/overview.md` | Infer from package.json + directory structure. Leave a `<!-- TODO: [reason] -->` note for anything you cannot determine. |
-| `.context/decisions/ADR-001-example-decision.md` | Replace the example with 1–2 real architectural choices already visible in the codebase (monorepo structure, framework choice, specific patterns). Keep the format exactly. |
-| `.context/standards/code-style.md` | Infer from reading 3+ source files: file organization, import order, comment style. |
-| `.context/standards/naming-conventions.md` | Infer from actual file names and code read in Step 1. Use real file names as examples. |
-| `.context/standards/error-handling.md` | Find error handling in existing code. Document the actual pattern. Note inconsistencies if present. |
-| `.context/architecture/patterns-template.md` | Identify 1–2 recurring patterns (e.g., data access structure). Document with real code file paths. |
-| `.context/architecture/migration-guide-template.md` | If a `migrations/` folder exists, document the most recent migration as example. Otherwise keep the placeholder. |
-| `.context/testing/unit-testing.md` | Read 2–3 test files. Document actual framework, file naming, mocking approach. Use real test paths. |
-| `.context/testing/integration-testing.md` | If integration tests exist, document how they're structured. If not, fill with unit test framework as baseline suggestion. |
-| `.context/domains/entities.md` | Find main data models (schema files, TypeScript interfaces, ORM models). Document 2–3 key entities with business rules you can infer. |
-| `.context/domains/glossary.md` | Infer terms from model names, function names, README, and comments. Add any word with a project-specific meaning. |
-| `.context/workflows/branching.md` | Check `.github/`, `git branch -a`, or CONTRIBUTING.md. Document what you find; use sensible defaults if nothing exists. |
-| `.context/workflows/ci-cd.md` | Check `.github/workflows/` or other CI config. Document what's there; fall back to local commands if no CI exists. |
-| `.context/styling/style-guide-template.md` | **Frontend only** — if the project has a frontend (React, Vue, etc.), scan component files for CSS approach (Tailwind, CSS Modules, etc.), color tokens, and component patterns. Skip entirely for backend-only or CLI projects. |
+| File | What to put in it | Don't duplicate |
+|---|---|---|
+| `.context/overview.md` | Project purpose, tech stack, key dependencies, current phase. Leave `<!-- TODO: [reason] -->` for anything you cannot determine. | — |
+| `.context/architecture.md` | System structure: layers, data flow, key integrations, where things run. Keep it structural — not decisions, not code style. | Don't repeat the tech stack from `overview.md` |
+| `.context/standards.md` | Code style, naming conventions, error handling, structural patterns. Read 3+ source files to infer real patterns. Use real file names as examples. | Don't describe what the code does — that's `architecture.md` |
+| `.context/testing.md` | Test framework, how to run tests, file naming, mocking approach. Read 2–3 real test files. | Don't duplicate test file paths already in `standards.md` |
+| `.context/decisions/ADR-001-example-decision.md` | Replace the example with 1–2 real architectural choices already visible in the codebase. Keep the ADR format exactly. | Don't re-document patterns already in `standards.md` or structure already in `architecture.md` |
 
 ## Step 5 — Update AI Configuration Files
 
@@ -105,11 +87,10 @@ If `CLAUDE.md` **already exists**, add the following block at the top (do not re
 ## Project Context
 
 See @.context/overview.md for project overview and tech stack.
-See @.context/standards/ for coding standards and conventions.
-See @.context/architecture/ for architectural patterns.
+See @.context/architecture.md for system structure, layers, and integrations.
+See @.context/standards.md for coding conventions and patterns.
+See @.context/testing.md for test framework and patterns.
 See @.context/decisions/ for architectural decision records (ADRs).
-See @.context/domains/ for domain entities and terminology.
-See @.context/workflows/ for task workflow and branching strategy.
 ```
 
 **For VS Code GitHub Copilot — create or update `.github/copilot-instructions.md`:**
@@ -118,11 +99,10 @@ Create `.github/` if it doesn't exist. Create or update `.github/copilot-instruc
 ## Project Context
 
 Read `.context/overview.md` for project overview and tech stack before starting any task.
-Read `.context/standards/` files for coding conventions.
-Read `.context/architecture/` files for structural patterns.
+Read `.context/architecture.md` for system structure and integration points.
+Read `.context/standards.md` for coding conventions and patterns.
+Read `.context/testing.md` for test framework and patterns.
 Read `.context/decisions/index.md` for architectural decision records.
-Read `.context/domains/entities.md` for domain model and business rules.
-Read `.context/workflows/task-workflow-template.md` for how tasks should be executed.
 
 Reference specific context files in your prompts with `#` (e.g., `#.context/overview.md`).
 ```

@@ -16,8 +16,14 @@ Without it, every agent starts from zero. With it, every agent starts informed.
 
 | File | Role | Characteristics |
 |---|---|---|
-| `CLAUDE.md` / `copilot-instructions.md` | Big picture, short, project-wide rules | Under 100 lines. Changes rarely. Agent reads on every task. |
-| `.context/` | Detailed, area-specific, evolving knowledge | Multiple files. Changes often. Agent reads relevant sections per task. |
+| `CLAUDE.md` / `copilot-instructions.md` | Entry point — project facts + context imports | Under 80 lines. Changes rarely. Agent reads on every task. |
+| `.context/overview.md` | What the project is | Tech stack, purpose, current phase. |
+| `.context/architecture.md` | How the system is structured | Layers, data flow, integrations. Not decisions, not code style. |
+| `.context/standards.md` | How to write code here | Style, naming, error handling, patterns. |
+| `.context/testing.md` | How to test here | Framework, file conventions, mocking. |
+| `.context/decisions/` | Why key choices were made | Individual ADR files. Grows over time. |
+| `.context/retrospectives/` | Lessons learned per task | Individual dated files. Grows over time. |
+| `.context/tasks/` | Per-task work artifacts | Created by agents during tasks. |
 
 Keep `CLAUDE.md` short by keeping detail here. If `CLAUDE.md` grows past 80 lines, promote content to `.context/`.
 
@@ -72,7 +78,8 @@ When resuming after a context reset, follow these steps in order:
 1. Read `overview.md` — get oriented to the project
 2. Run `git log --oneline -10` — see what's been done recently
 3. Read the latest file in `retrospectives/` — see what the last task uncovered
-4. Read any in-progress task files in `tasks/[TASK-ID]/` — see what was being worked on
+4. Read `architecture.md` and `standards.md` — refresh on how code is structured
+5. Read any in-progress task files in `tasks/[TASK-ID]/` — see what was being worked on
 
 Do not start implementing until you've completed all 4 steps.
 
