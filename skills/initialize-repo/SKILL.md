@@ -33,7 +33,7 @@ Look for `.context/overview.md` in the current working directory.
 - If it exists and has content beyond placeholders → **Abort.** Report: "`.context/` already exists. Use `context-review` to update it."
 - If it does not exist, or contains only `[PLACEHOLDER]` markers → proceed.
 
-**Check 2 — Locate the agent-defs template**
+**Check 2 — Locate the skill kit template**
 
 Find the `context_template/` directory. Check these locations in order:
 

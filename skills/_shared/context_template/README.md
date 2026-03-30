@@ -52,11 +52,7 @@ Both tools read the same `.context/` files — write once, works in both.
 
 ## Quick Start
 
-1. **Clone or install agent-defs** somewhere on your machine:
-
-   ```bash
-   git clone https://github.com/[org]/agent-defs ~/tools/agent-defs
-   ```
+1. **Install the skill kit** using `install.sh` (macOS/Linux) or `install.ps1` (Windows) from the repo root. This places `context_template/` at the known path automatically.
 
 2. **Navigate to your project:**
 
@@ -66,10 +62,11 @@ Both tools read the same `.context/` files — write once, works in both.
 
 3. **Paste `SETUP_PROMPT.md` into Claude Code or VS Code Copilot agent mode:**
    ```bash
-   cat ~/tools/agent-defs/context_template/SETUP_PROMPT.md | pbcopy
+   cat ~/.copilot/skills/_shared/context_template/SETUP_PROMPT.md | pbcopy
+   # Claude Code users:
+   cat ~/.claude/skills/_shared/context_template/SETUP_PROMPT.md | pbcopy
    # Then paste into Claude Code or Copilot chat
    ```
-   Update `[AGENT_DEFS_PATH]` in the prompt to the actual path before running.
 
 ---
 
@@ -97,10 +94,10 @@ Both tools read the same `.context/` files — write once, works in both.
 
 ## Template vs Generated Content
 
-| Location                       | What it is                                                      |
-| ------------------------------ | --------------------------------------------------------------- |
-| `agent-defs/context_template/` | Generic templates — this repository. Not project-specific.      |
-| `your-project/.context/`       | Generated, project-specific, living documentation. Commit this. |
+| Location                              | What it is                                                      |
+| ------------------------------------- | --------------------------------------------------------------- |
+| `~/.copilot/skills/_shared/context_template/` | Installed templates — skill kit. Not project-specific. |
+| `your-project/.context/`              | Generated, project-specific, living documentation. Commit this. |
 
 The templates in `context_template/` are the starting point. The generated `.context/` in your project is the real artifact — it should evolve with your project.
 

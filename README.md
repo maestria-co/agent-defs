@@ -1,4 +1,4 @@
-# agent-defs
+# AI Skill Kit
 
 Reusable agents, skills, and prompts for AI-assisted software development. Structured as a `.copilot`-compatible customization kit.
 

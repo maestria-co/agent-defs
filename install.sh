@@ -21,7 +21,7 @@ else
   INSTALL_DIR="${COPILOT_DIR:-$HOME/.copilot}"
 fi
 
-echo "Installing agent-defs → $INSTALL_DIR"
+echo "Installing skill kit → $INSTALL_DIR"
 $CLAUDE_MODE && echo "Mode: Claude Code" || echo "Mode: GitHub Copilot"
 echo ""
 
@@ -71,8 +71,8 @@ echo ""
 
 if $CLAUDE_MODE; then
   CLAUDE_MD="$INSTALL_DIR/CLAUDE.md"
-  MARKER_START="<!-- agent-defs:skills:start -->"
-  MARKER_END="<!-- agent-defs:skills:end -->"
+  MARKER_START="<!-- skills:start -->"
+  MARKER_END="<!-- skills:end -->"
 
   # Build skills table
   SKILLS_BLOCK="$MARKER_START

@@ -4,9 +4,9 @@
 
 ## Before You Run
 
-- [ ] You are in the root directory of your project (not `agent-defs`)
+- [ ] You are in the root directory of your project (not the skill kit repo)
 - [ ] The project has at least some existing source files to scan
-- [ ] You know the path where `agent-defs` is cloned (needed in Step 3)
+- [ ] The skill kit is installed (`install.sh` or `install.ps1` has been run)
 - [ ] You have write access to the repository
 
 ## How to Use
@@ -54,13 +54,13 @@ Create the following directories if they don't exist:
 
 ## Step 3 — Copy Universal Files Verbatim
 
-These files are universal (not project-specific). Copy them exactly from the agent-defs template.
+These files are universal (not project-specific). Copy them from the installed skill kit template:
 
-Replace `[AGENT_DEFS_PATH]` with the actual path to the agent-defs repo on this machine:
+- Copy `~/.copilot/skills/_shared/context_template/context/META.md` → `.context/META.md`
+- Copy `~/.copilot/skills/_shared/context_template/context/retrospectives.md` → `.context/retrospectives.md`
+- Copy `~/.copilot/skills/_shared/context_template/context/workflows/task-workflow-template.md` → `.context/workflows/task-workflow-template.md`
 
-- Copy `[AGENT_DEFS_PATH]/context_template/context/META.md` → `.context/META.md`
-- Copy `[AGENT_DEFS_PATH]/context_template/context/retrospectives.md` → `.context/retrospectives.md`
-- Copy `[AGENT_DEFS_PATH]/context_template/context/workflows/task-workflow-template.md` → `.context/workflows/task-workflow-template.md`
+> Claude Code users: replace `~/.copilot` with `~/.claude` in the paths above.
 
 ## Step 4 — Generate Project-Specific Files
 
@@ -117,7 +117,7 @@ Reference specific context files in your prompts with `#` (e.g., `#.context/over
 
 ```
 
-**If agent-defs patterns are available**, also add to both files:
+**If the skill kit is installed**, also add to both files:
 ```
 
 ## Pattern System

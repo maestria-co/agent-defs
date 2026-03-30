@@ -15,11 +15,11 @@ $RepoDir = $PSScriptRoot
 
 if ($Claude) {
     $InstallDir = if ($env:CLAUDE_DIR) { $env:CLAUDE_DIR } else { Join-Path $env:USERPROFILE ".claude" }
-    Write-Host "Installing agent-defs -> $InstallDir"
+    Write-Host "Installing skill kit -> $InstallDir"
     Write-Host "Mode: Claude Code"
 } else {
     $InstallDir = if ($env:COPILOT_DIR) { $env:COPILOT_DIR } else { Join-Path $env:USERPROFILE ".copilot" }
-    Write-Host "Installing agent-defs -> $InstallDir"
+    Write-Host "Installing skill kit -> $InstallDir"
     Write-Host "Mode: GitHub Copilot"
 }
 Write-Host ""
@@ -69,8 +69,8 @@ Write-Host ""
 
 if ($Claude) {
     $ClaudeMd = Join-Path $InstallDir "CLAUDE.md"
-    $MarkerStart = "<!-- agent-defs:skills:start -->"
-    $MarkerEnd   = "<!-- agent-defs:skills:end -->"
+    $MarkerStart = "<!-- skills:start -->"
+    $MarkerEnd   = "<!-- skills:end -->"
 
     # Build skills table
     $rows = Get-ChildItem (Join-Path $InstallDir "skills") -Directory |

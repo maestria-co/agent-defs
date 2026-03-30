@@ -11,7 +11,7 @@ Quick reference for selecting and composing skills in `skills/`.
 | Setting up `.context/` for a new project           | `initialize-repo`              |
 | Setting up `.context/` for a monorepo              | `initialize-monorepo`          |
 | Bootstrapping all projects in a VS Code workspace  | `initialize-workspace`         |
-| Locating the agent-defs context_template           | `find-context-template`        |
+| Locating the context_template                       | `find-context-template`        |
 | Loading project context at task start              | `context-loader`               |
 | Updating `.context/` after a task                  | `context-maintenance`          |
 | Writing or reviewing `.context/` docs for quality  | `context-document-guidelines`  |
