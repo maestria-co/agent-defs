@@ -44,12 +44,18 @@ Create the following directories if they don't exist:
 .context/
 .context/standards/
 .context/architecture/
+.context/decisions/
 .context/testing/
 .context/domains/
-.context/styling/
 .context/workflows/
+.context/retrospectives/
 .context/tasks/
 
+```
+
+If the project has a **frontend** (React, Vue, Angular, Svelte, etc.), also create:
+```
+.context/styling/
 ```
 
 ## Step 3 — Copy Universal Files Verbatim
@@ -57,7 +63,9 @@ Create the following directories if they don't exist:
 These files are universal (not project-specific). Copy them from the installed skill kit template:
 
 - Copy `~/.copilot/skills/_shared/context_template/context/META.md` → `.context/META.md`
-- Copy `~/.copilot/skills/_shared/context_template/context/retrospectives.md` → `.context/retrospectives.md`
+- Copy `~/.copilot/skills/_shared/context_template/context/decisions/index.md` → `.context/decisions/index.md`
+- Copy `~/.copilot/skills/_shared/context_template/context/decisions/ADR-001-example-decision.md` → `.context/decisions/ADR-001-example-decision.md`
+- Copy `~/.copilot/skills/_shared/context_template/context/retrospectives/README.md` → `.context/retrospectives/README.md`
 - Copy `~/.copilot/skills/_shared/context_template/context/workflows/task-workflow-template.md` → `.context/workflows/task-workflow-template.md`
 
 > Claude Code users: replace `~/.copilot` with `~/.claude` in the paths above.
@@ -69,7 +77,7 @@ For each file below, generate project-specific content based on Step 1. Replace 
 | File | How to fill it |
 |---|---|
 | `.context/overview.md` | Infer from package.json + directory structure. Leave a `<!-- TODO: [reason] -->` note for anything you cannot determine. |
-| `.context/decisions.md` | Document 1–2 visible architectural choices as ADR entries (monorepo structure, framework choice, specific patterns). |
+| `.context/decisions/ADR-001-example-decision.md` | Replace the example with 1–2 real architectural choices already visible in the codebase (monorepo structure, framework choice, specific patterns). Keep the format exactly. |
 | `.context/standards/code-style.md` | Infer from reading 3+ source files: file organization, import order, comment style. |
 | `.context/standards/naming-conventions.md` | Infer from actual file names and code read in Step 1. Use real file names as examples. |
 | `.context/standards/error-handling.md` | Find error handling in existing code. Document the actual pattern. Note inconsistencies if present. |
@@ -81,48 +89,49 @@ For each file below, generate project-specific content based on Step 1. Replace 
 | `.context/domains/glossary.md` | Infer terms from model names, function names, README, and comments. Add any word with a project-specific meaning. |
 | `.context/workflows/branching.md` | Check `.github/`, `git branch -a`, or CONTRIBUTING.md. Document what you find; use sensible defaults if nothing exists. |
 | `.context/workflows/ci-cd.md` | Check `.github/workflows/` or other CI config. Document what's there; fall back to local commands if no CI exists. |
-| `.context/styling/style-guide-template.md` | If the project has a frontend (React, Vue, etc.), scan component files for CSS approach (Tailwind, CSS Modules, etc.), color tokens, and component patterns. If backend-only or CLI, skip this file. |
+| `.context/styling/style-guide-template.md` | **Frontend only** — if the project has a frontend (React, Vue, etc.), scan component files for CSS approach (Tailwind, CSS Modules, etc.), color tokens, and component patterns. Skip entirely for backend-only or CLI projects. |
 
 ## Step 5 — Update AI Configuration Files
 
 **For Claude Code — create or update `CLAUDE.md`:**
-If `CLAUDE.md` exists, add the following block at the top (do not remove existing content):
+If `CLAUDE.md` does **not** exist, copy it from the template:
 ```
+~/.claude/skills/_shared/context_template/CLAUDE.md → CLAUDE.md
+```
+Then update the `[Project Name]` placeholder with the actual project name and the brief description.
 
+If `CLAUDE.md` **already exists**, add the following block at the top (do not remove existing content):
+```
 ## Project Context
 
 See @.context/overview.md for project overview and tech stack.
 See @.context/standards/ for coding standards and conventions.
-See @.context/architecture/ for architectural patterns and decisions.
+See @.context/architecture/ for architectural patterns.
+See @.context/decisions/ for architectural decision records (ADRs).
 See @.context/domains/ for domain entities and terminology.
 See @.context/workflows/ for task workflow and branching strategy.
-
 ```
-
-If `CLAUDE.md` does not exist, create it at the project root with the block above.
 
 **For VS Code GitHub Copilot — create or update `.github/copilot-instructions.md`:**
 Create `.github/` if it doesn't exist. Create or update `.github/copilot-instructions.md`:
 ```
-
 ## Project Context
 
 Read `.context/overview.md` for project overview and tech stack before starting any task.
 Read `.context/standards/` files for coding conventions.
 Read `.context/architecture/` files for structural patterns.
+Read `.context/decisions/index.md` for architectural decision records.
 Read `.context/domains/entities.md` for domain model and business rules.
 Read `.context/workflows/task-workflow-template.md` for how tasks should be executed.
 
 Reference specific context files in your prompts with `#` (e.g., `#.context/overview.md`).
-
 ```
 
 **If the skill kit is installed**, also add to both files:
 ```
-
 ## Pattern System
 
-Agentless task patterns are in `skills/`. Select a pattern by task type:
+Reusable task patterns are in `skills/`. Select a pattern by task type:
 
 - planning-tasks: break a goal into ordered steps
 - researching-options: evaluate libraries or approaches
@@ -131,7 +140,6 @@ Agentless task patterns are in `skills/`. Select a pattern by task type:
 - writing-tests: write and run tests
 - coordinating-work: orchestrate multi-pattern workflows
   See `skills/GUIDE.md` for the full selection guide.
-
 ```
 
 ## Step 6 — Final Review Request

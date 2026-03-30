@@ -55,14 +55,13 @@ Update `.context/` when any of the following happens:
 
 ## 5. Retrospective Promotion
 
-`retrospectives.md` is a rolling log. Lessons in it should be promoted to the appropriate subdirectory file during weekly review.
+`retrospectives/` holds individual files per task (`YYYY-MM-DD-TASK-ID.md`). Lessons in them should be promoted to the appropriate subdirectory file during weekly review.
 
 **Process:**
-1. Open `retrospectives.md`
-2. Find entries with unchecked `[ ]` promotion items
-3. Copy the lesson into the referenced file (e.g., `standards/error-handling.md`)
-4. Check the box: `[x]`
-5. Entries older than 4 weeks with all items checked can be archived or deleted
+1. Open any file in `retrospectives/` with unchecked `[ ]` promotion items
+2. Copy the lesson into the referenced file (e.g., `standards/error-handling.md`)
+3. Check the box: `[x]`
+4. Files older than 4 weeks with all items checked can be archived or deleted
 
 ---
 
@@ -72,7 +71,7 @@ When resuming after a context reset, follow these steps in order:
 
 1. Read `overview.md` — get oriented to the project
 2. Run `git log --oneline -10` — see what's been done recently
-3. Read the latest entry in `retrospectives.md` — see what the last task uncovered
+3. Read the latest file in `retrospectives/` — see what the last task uncovered
 4. Read any in-progress task files in `tasks/[TASK-ID]/` — see what was being worked on
 
 Do not start implementing until you've completed all 4 steps.
