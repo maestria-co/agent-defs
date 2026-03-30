@@ -32,10 +32,10 @@ Apply the `context-loader` skill strategy. For **simple tasks** (single-file fix
 2. `.context/overview.md`
 
 For **medium/complex tasks**, additionally load based on task type:
-- Feature → `domains/`, `architecture.md`, `standards.md`
-- Bug fix → `domains/` (affected area), `testing.md`, `standards.md`
-- Refactor → `architecture.md`, `standards.md`
-- Architecture decision → `architecture.md`, `decisions/index.md`, all relevant `domains/`
+- Feature → `.context/domains/`, `.context/architecture.md`, `.context/standards.md`
+- Bug fix → `.context/domains/` (affected area), `.context/testing.md`, `.context/standards.md`
+- Refactor → `.context/architecture.md`, `.context/standards.md`
+- Architecture decision → `.context/architecture.md`, `.context/decisions/index.md`, all relevant `.context/domains/`
 
 If `.context/` is absent, infer project details from manifest files (`package.json`, `pom.xml`, `pyproject.toml`, `*.csproj`, etc.).
 

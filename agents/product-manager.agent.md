@@ -160,8 +160,12 @@ So that [measurable benefit]
 
 ## Step 6 — Format and Save Using the Story Skill
 
-Invoke the story skill identified in Step 2, passing the assembled spec as input.
-The skill handles all formatting — do not format the story yourself.
+Apply the story skill identified in Step 2. Read the skill's `SKILL.md` file and follow its instructions, passing the enriched spec from Step 5 as the input. The skill defines the output format — do not format the story yourself.
+
+Story skill locations (after install):
+- Jira → `~/.copilot/skills/jira-story/SKILL.md` (or `~/.claude/skills/jira-story/SKILL.md`)
+- Asana → `~/.copilot/skills/asana-story/SKILL.md`
+- Linear → `~/.copilot/skills/linear-story/SKILL.md`
 
 Save the output to:
 ```
@@ -197,6 +201,8 @@ Sub-agents used: [list of what was delegated]
 
 Recommended next step: Team grooming session — PO to confirm inferred ACs
 and answer open questions.
+
+Route to: User
 ```
 
 ---
