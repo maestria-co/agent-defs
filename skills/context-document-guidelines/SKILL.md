@@ -27,6 +27,7 @@ not generic advice that adds noise without reducing uncertainty.
 ## Quality Checklist
 
 **Good context doc (all must be true):**
+
 - [ ] Specific to this project (not generic advice applicable to any codebase)
 - [ ] Contains real file paths and function names from the actual codebase
 - [ ] Explains rationale behind patterns, not just the pattern itself
@@ -34,6 +35,7 @@ not generic advice that adds noise without reducing uncertainty.
 - [ ] Identifies common mistakes or pitfalls specific to this codebase
 
 **Bad context doc (rewrite or delete):**
+
 - Generic advice applicable to any project
 - No examples or references to actual code
 - Only describes "what" without "why"
@@ -46,30 +48,35 @@ not generic advice that adds noise without reducing uncertainty.
 # [Topic]
 
 ## Purpose
+
 [What does this document help agents do? 1 sentence.]
 
 ## Key Concepts
+
 [2-5 core concepts with THIS project's terminology]
 
 ## Patterns
+
 [How things are done in this project — with real file path examples]
 
 ## Examples
+
 [Actual code patterns from the codebase with file:line references]
 
 ## Pitfalls
+
 [Common mistakes in THIS codebase and how to avoid them]
 ```
 
 ## File Placement
 
-| Directory | Content |
-|---|---|
-| `domains/` | Business and technical domain knowledge |
-| `standards.md` | Coding conventions and project-specific patterns |
-| `testing.md` | Test strategies, mock patterns, test data setup |
-| `architecture.md` | System design, ADRs, structural patterns |
-| `workflows/` | CI/CD, branching, deployment, release process |
+| Directory         | Content                                          |
+| ----------------- | ------------------------------------------------ |
+| `domains/`        | Business and technical domain knowledge          |
+| `standards.md`    | Coding conventions and project-specific patterns |
+| `testing.md`      | Test strategies, mock patterns, test data setup  |
+| `architecture.md` | System design, ADRs, structural patterns         |
+| `workflows/`      | CI/CD, branching, deployment, release process    |
 
 ## Maintenance Triggers
 

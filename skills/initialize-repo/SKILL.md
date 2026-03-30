@@ -93,22 +93,24 @@ If the project has a rich domain with many entities or project-specific terminol
 
 **Project-specific files (generate from Step 1 scan):**
 
-| File | Generation approach | Don't duplicate |
-| --- | --- | --- |
-| `overview.md` | Infer from manifest + directory structure. Leave `<!-- TODO -->` for unknowable fields (business goals, compliance). | — |
-| `architecture.md` | System structure: layers, data flow, key integrations, where it runs. Structural — not code style, not decisions. | Don't repeat tech stack from `overview.md` |
-| `standards.md` | Code style, naming conventions, error handling, structural patterns. Read 3+ source files. Use real file names as examples. | Don't describe what the code does — that's `architecture.md` |
-| `testing.md` | Test framework, how to run tests, file naming, mocking approach. Read 2–3 real test files. | Don't duplicate file paths already in `standards.md` |
-| `decisions/ADR-001-example-decision.md` | Replace the example with 1–2 real architectural choices visible in the codebase. Keep the ADR format exactly. | Don't re-document patterns in `standards.md` or structure in `architecture.md` |
+| File                                    | Generation approach                                                                                                         | Don't duplicate                                                                |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `overview.md`                           | Infer from manifest + directory structure. Leave `<!-- TODO -->` for unknowable fields (business goals, compliance).        | —                                                                              |
+| `architecture.md`                       | System structure: layers, data flow, key integrations, where it runs. Structural — not code style, not decisions.           | Don't repeat tech stack from `overview.md`                                     |
+| `standards.md`                          | Code style, naming conventions, error handling, structural patterns. Read 3+ source files. Use real file names as examples. | Don't describe what the code does — that's `architecture.md`                   |
+| `testing.md`                            | Test framework, how to run tests, file naming, mocking approach. Read 2–3 real test files.                                  | Don't duplicate file paths already in `standards.md`                           |
+| `decisions/ADR-001-example-decision.md` | Replace the example with 1–2 real architectural choices visible in the codebase. Keep the ADR format exactly.               | Don't re-document patterns in `standards.md` or structure in `architecture.md` |
 
 ### Step 4 — Configure AI Tool Integration
 
 **For Claude Code — create or update `CLAUDE.md`:**
 
 If `CLAUDE.md` does not exist, copy it from the template:
+
 ```
 ~/.copilot/skills/_shared/context_template/CLAUDE.md → CLAUDE.md
 ```
+
 Then fill in the `[Project Name]` and brief description placeholders.
 
 If `CLAUDE.md` already exists, add at the top (preserve existing content):

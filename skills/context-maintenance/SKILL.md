@@ -40,15 +40,15 @@ the retrospective from becoming an unread graveyard.
 
 ### Promotion Decision
 
-| Lesson type                    | Promote to                                                    |
-| ------------------------------ | ------------------------------------------------------------- |
-| Coding pattern or anti-pattern | `standards.md` or `standards.md`    |
-| Naming discovery               | `standards.md`                             |
-| Test strategy or mock pattern  | `testing.md` or `testing.md` |
-| Architecture insight           | `architecture.md`                           |
-| Domain knowledge               | `domains/entities.md` or `domains/glossary.md`                |
-| Process improvement            | `workflows/` appropriate file                                 |
-| Decision rationale             | `decisions/index.md` (as a new ADR)                                 |
+| Lesson type                    | Promote to                                     |
+| ------------------------------ | ---------------------------------------------- |
+| Coding pattern or anti-pattern | `standards.md` or `standards.md`               |
+| Naming discovery               | `standards.md`                                 |
+| Test strategy or mock pattern  | `testing.md` or `testing.md`                   |
+| Architecture insight           | `architecture.md`                              |
+| Domain knowledge               | `domains/entities.md` or `domains/glossary.md` |
+| Process improvement            | `workflows/` appropriate file                  |
+| Decision rationale             | `decisions/index.md` (as a new ADR)            |
 
 ---
 

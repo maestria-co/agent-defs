@@ -31,6 +31,7 @@ Try each location in order — stop at the first match:
 ## Verification
 
 A valid `context_template/` must contain all three:
+
 - `overview.md` (or `overview.md.template`)
 - `standards.md` directory
 - `domains/` directory
@@ -40,6 +41,7 @@ If a path exists but fails verification, continue searching.
 ## Output
 
 **Found:** Return the absolute path. Example:
+
 ```
 /Users/alice/.copilot/skills/_shared/context_template
 ```

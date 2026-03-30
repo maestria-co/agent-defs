@@ -28,10 +28,12 @@ If it is, use the provided paths and task description — do not re-ask the user
 ### 2. Load Project Context
 
 Apply the `context-loader` skill strategy. For **simple tasks** (single-file fix, one-step change), load only:
+
 1. `.github/copilot-instructions.md` (or `CLAUDE.md` at repo root)
 2. `.context/overview.md`
 
 For **medium/complex tasks**, additionally load based on task type:
+
 - Feature → `.context/domains/`, `.context/architecture.md`, `.context/standards.md`
 - Bug fix → `.context/domains/` (affected area), `.context/testing.md`, `.context/standards.md`
 - Refactor → `.context/architecture.md`, `.context/standards.md`
@@ -76,8 +78,6 @@ Apply the `context-loader` skill for full context-loading rules. Key principles:
 
 - For monorepos: locate `.context/` in the relevant project subdirectory, not just the repo root.
 - Always pass relevant context to specialists so they don't need to re-discover it: tech stack, standards, applicable ADRs, and central file paths.
-
-
 
 ## Workflow Orchestration
 

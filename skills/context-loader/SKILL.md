@@ -32,16 +32,16 @@ Always read in this order. Stop as soon as you have enough context for the task.
 
 ### Level 2 — Read Based on Task Type
 
-| Task type              | Read these `.context/` files                                                                      |
-| ---------------------- | ------------------------------------------------------------------------------------------------- |
-| Feature implementation | `domains/` (relevant entity), `architecture.md`, `standards.md`      |
-| Bug fix                | `domains/` (affected area), `testing.md`, `standards.md`              |
-| Refactoring            | `architecture.md`, `standards.md`, `standards.md` |
-| Test writing           | `testing.md`, `testing.md`, `standards.md`    |
-| Architecture decision  | `architecture.md`, `decisions/index.md`, all relevant `domains/` files                                    |
-| New domain work        | `domains/entities.md`, `domains/glossary.md`, `architecture.md`                 |
-| CI/CD changes          | `workflows/ci-cd.md`, `workflows/branching.md`                                                    |
-| UI/styling work        | `styling.md` (if frontend project), `standards.md`                                      |
+| Task type              | Read these `.context/` files                                           |
+| ---------------------- | ---------------------------------------------------------------------- |
+| Feature implementation | `domains/` (relevant entity), `architecture.md`, `standards.md`        |
+| Bug fix                | `domains/` (affected area), `testing.md`, `standards.md`               |
+| Refactoring            | `architecture.md`, `standards.md`, `standards.md`                      |
+| Test writing           | `testing.md`, `testing.md`, `standards.md`                             |
+| Architecture decision  | `architecture.md`, `decisions/index.md`, all relevant `domains/` files |
+| New domain work        | `domains/entities.md`, `domains/glossary.md`, `architecture.md`        |
+| CI/CD changes          | `workflows/ci-cd.md`, `workflows/branching.md`                         |
+| UI/styling work        | `styling.md` (if frontend project), `standards.md`                     |
 
 ### Level 3 — Read When Resuming
 
@@ -83,12 +83,12 @@ After loading context, note the key facts in your working memory:
 
 During or after a task, create new `.context/` files when:
 
-| Situation                              | Action                                                        |
-| -------------------------------------- | ------------------------------------------------------------- |
-| Working in an undocumented domain area | Create `domains/[area-name].md`                               |
-| Discovering a non-obvious pattern      | Add to `architecture.md`                    |
-| Finding inconsistent error handling    | Document the correct pattern in `standards.md` |
-| Making an architecture decision        | Create `decisions/ADR-NNN-title.md` via `designing-systems`   |
+| Situation                              | Action                                                      |
+| -------------------------------------- | ----------------------------------------------------------- |
+| Working in an undocumented domain area | Create `domains/[area-name].md`                             |
+| Discovering a non-obvious pattern      | Add to `architecture.md`                                    |
+| Finding inconsistent error handling    | Document the correct pattern in `standards.md`              |
+| Making an architecture decision        | Create `decisions/ADR-NNN-title.md` via `designing-systems` |
 | Learning a lesson worth preserving     | Add entry to `retrospectives/`                              |
 
 ---

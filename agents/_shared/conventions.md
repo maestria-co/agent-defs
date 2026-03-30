@@ -26,12 +26,12 @@ The most important principle. Before adding complexity: _does this demonstrably 
 
 ### Response length
 
-| Request type | Target |
-|---|---|
-| Simple question / clarification | 1–3 sentences |
-| Task with 1–3 steps | Short paragraphs, no headers |
-| Complex plan or design | Headers, as long as needed |
-| Code output | Just the code + minimal explanation |
+| Request type                    | Target                              |
+| ------------------------------- | ----------------------------------- |
+| Simple question / clarification | 1–3 sentences                       |
+| Task with 1–3 steps             | Short paragraphs, no headers        |
+| Complex plan or design          | Headers, as long as needed          |
+| Code output                     | Just the code + minimal explanation |
 
 ### Structured content — use XML tags
 

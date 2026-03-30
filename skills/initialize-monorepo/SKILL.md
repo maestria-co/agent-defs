@@ -14,9 +14,9 @@ user-invocable: true
 
 ## Purpose
 
-Bootstrap `.context/` for a monorepo by creating both a root-level overview and per-package 
-context directories. This skill extends `initialize-repo` to handle repositories with multiple 
-packages or services that need coordinated but separate documentation. Prevents the common 
+Bootstrap `.context/` for a monorepo by creating both a root-level overview and per-package
+context directories. This skill extends `initialize-repo` to handle repositories with multiple
+packages or services that need coordinated but separate documentation. Prevents the common
 mistake of merging all package context into a single jumbled document.
 
 ---
@@ -38,14 +38,14 @@ Run these checks from the `initialize-repo` skill first:
 
 ### Detection Strategies by Tool
 
-| Build Tool | Detection Method | Output |
-|------------|------------------|--------|
-| npm/yarn/pnpm workspaces | Read `workspaces` field in root `package.json` | List of glob patterns |
-| Nx | Read `nx.json` and `project.json` files | List of project paths |
-| Turborepo | Read `turbo.json` and workspace config | List of package paths |
-| Lerna | Read `lerna.json` packages field | List of glob patterns |
-| Maven | Read parent `pom.xml` modules | List of module directories |
-| Gradle | Read `settings.gradle` include statements | List of project paths |
+| Build Tool               | Detection Method                               | Output                     |
+| ------------------------ | ---------------------------------------------- | -------------------------- |
+| npm/yarn/pnpm workspaces | Read `workspaces` field in root `package.json` | List of glob patterns      |
+| Nx                       | Read `nx.json` and `project.json` files        | List of project paths      |
+| Turborepo                | Read `turbo.json` and workspace config         | List of package paths      |
+| Lerna                    | Read `lerna.json` packages field               | List of glob patterns      |
+| Maven                    | Read parent `pom.xml` modules                  | List of module directories |
+| Gradle                   | Read `settings.gradle` include statements      | List of project paths      |
 
 ### Steps
 
@@ -65,11 +65,11 @@ Run these checks from the `initialize-repo` skill first:
 Tool: [npm workspaces / Nx / Maven / etc.]
 Packages found: [N]
 
-| Package Path | Name | Purpose |
-|--------------|------|---------|
-| packages/ui-lib | @acme/ui | Shared UI components |
-| packages/api | @acme/api | REST API service |
-| apps/web | @acme/web | Main web application |
+| Package Path    | Name      | Purpose              |
+| --------------- | --------- | -------------------- |
+| packages/ui-lib | @acme/ui  | Shared UI components |
+| packages/api    | @acme/api | REST API service     |
+| apps/web        | @acme/web | Main web application |
 ```
 
 ---
@@ -82,12 +82,12 @@ Understand which packages depend on which others to document relationships and b
 
 ### Detection Methods
 
-| Language | Method | Command |
-|----------|--------|---------|
-| JavaScript/TypeScript | Read `dependencies` in package.json | `npm list --all --json` or parse files |
-| Java (Maven) | Read `<dependencies>` in pom.xml | `mvn dependency:tree` |
-| Java (Gradle) | Read `dependencies` block | `gradle dependencies` |
-| Python | Read `requirements.txt` or `pyproject.toml` | Parse dependencies |
+| Language              | Method                                      | Command                                |
+| --------------------- | ------------------------------------------- | -------------------------------------- |
+| JavaScript/TypeScript | Read `dependencies` in package.json         | `npm list --all --json` or parse files |
+| Java (Maven)          | Read `<dependencies>` in pom.xml            | `mvn dependency:tree`                  |
+| Java (Gradle)         | Read `dependencies` block                   | `gradle dependencies`                  |
+| Python                | Read `requirements.txt` or `pyproject.toml` | Parse dependencies                     |
 
 ### Steps
 
@@ -102,11 +102,13 @@ Understand which packages depend on which others to document relationships and b
 ## Package Dependencies
 
 ### Dependency Graph
+
 [package-a] → [shared-lib]
 [package-b] → [shared-lib]
 [app] → [package-a], [package-b]
 
 ### Build Order
+
 1. [shared-lib]
 2. [package-a], [package-b] (parallel)
 3. [app]
@@ -120,27 +122,32 @@ Understand which packages depend on which others to document relationships and b
 
 Template:
 
-```markdown
+````markdown
 # [Monorepo Name] Overview
 
 ## Repository Type
+
 Monorepo containing [N] packages/services
 
 ## Build Tool
+
 [npm workspaces / Nx / Maven / etc.]
 
 ## Package Directory
-| Package | Purpose | Consumers |
-|---------|---------|-----------|
-| [name] | [what it does] | [who uses it] |
+
+| Package | Purpose        | Consumers     |
+| ------- | -------------- | ------------- |
+| [name]  | [what it does] | [who uses it] |
 
 ## Tech Stack
+
 - [Language/framework for each type of package]
 - [Build tool]
 - [Testing frameworks]
 - [CI/CD platform]
 
 ## Getting Started
+
 ```bash
 # Clone and install
 git clone [repo-url]
@@ -153,12 +160,15 @@ cd [repo-name]
 # Run tests
 [test command]
 ```
+````
 
 ## Cross-Package Development
+
 - How to link packages locally
 - How to test changes across multiple packages
 - How to version and release
-```
+
+````
 
 ### Root `.context/architecture.md` (Monorepo section)
 
@@ -188,7 +198,7 @@ Add a "Package Structure" section to the root `architecture.md` documenting the 
 - Adding a new package: [steps]
 - Moving code between packages: [steps]
 - Deprecating a package: [steps]
-```
+````
 
 ---
 
@@ -200,22 +210,26 @@ For each package/service:
 
 Template:
 
-```markdown
+````markdown
 # [Package Name]
 
 ## Purpose
+
 [What this package does, why it exists]
 
 ## Public Interface
+
 - Entry point: [main file or module]
 - Exports: [key functions/classes/components]
 - API surface: [list or link to API docs]
 
 ## Consumers
+
 - [Other packages that depend on this one]
 - [External systems if a service]
 
 ## Development
+
 ```bash
 # Run package tests
 [command]
@@ -226,19 +240,23 @@ Template:
 # Build package
 [command]
 ```
+````
 
 ## Dependencies
+
 - Internal: [other packages in this repo]
 - External: [key external dependencies]
 
 ## Special Considerations
+
 [Any package-specific quirks, performance notes, security considerations]
-```
+
+````
 
 ### Package `.context/domains/` (optional)
 
-Create domain documents only if this package has significant domain knowledge not shared 
-across the monorepo. If domain knowledge applies to multiple packages, put it in the root 
+Create domain documents only if this package has significant domain knowledge not shared
+across the monorepo. If domain knowledge applies to multiple packages, put it in the root
 `.context/domains/` instead.
 
 ### Skip Generated Packages
@@ -273,11 +291,11 @@ When working on a specific package, consult both the root context and the packag
 - Build all: `[command]`
 - Test all: `[command]`
 - Build single package: `[command]`
-```
+````
 
 ### Per-Package Instructions (Optional)
 
-Package-level `CLAUDE.md` files are optional — root instructions are the primary entry point. 
+Package-level `CLAUDE.md` files are optional — root instructions are the primary entry point.
 Only add per-package instructions if the package has unique conventions that override root conventions.
 
 ---
@@ -314,20 +332,25 @@ ls -la packages/*/.context/ 2>/dev/null
 ## Monorepo Initialization Complete
 
 ### Root Context
+
 - `.context/overview.md` — [N] packages documented
 - `.context/architecture.md` — package relationships and dependency graph documented
 - `.context/workflows/monorepo-workflow.md` — build/test/release documented
 
 ### Package Context
+
 - `packages/[name]/.context/overview.md` — [repeated for each package]
 
 ### AI Tool Configuration
+
 - `CLAUDE.md` — configured with monorepo structure
 
 ### Build Order
+
 [shared-lib] → [package-a] → [app]
 
 ### Next Steps
+
 1. Review generated context for accuracy
 2. Fill in any [TODO] placeholders
 3. Add domain-specific documentation to `.context/domains/` as needed (optional — only for complex domains)
@@ -338,10 +361,10 @@ ls -la packages/*/.context/ 2>/dev/null
 
 ## Constraints
 
-- **Never merge multiple packages' domain knowledge into a single .context/ file** — keep them 
+- **Never merge multiple packages' domain knowledge into a single .context/ file** — keep them
   separate. Root overview describes relationships; package overviews describe the package itself.
 - **Do not generate context for packages containing only generated code** — these add noise.
-- **Root context is the source of truth for relationships** — package context describes only 
+- **Root context is the source of truth for relationships** — package context describes only
   that package, not its relationships.
 - **Follow all constraints from initialize-repo skill** — this skill extends it.
 - **Do not create circular references** — if package A depends on package B, B cannot depend on A.
