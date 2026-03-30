@@ -99,7 +99,7 @@ For decisions that affect the project long-term:
 
 When the triage says "implement directly":
 
-1. **Check conventions** — read `.context/standards/` and existing code patterns
+1. **Check conventions** — read `.context/standards.md` and existing code patterns
 2. **Implement** — use `implementing-features`
 3. **Test** — use `writing-tests`
 4. **Verify** — use `verification-checklist`

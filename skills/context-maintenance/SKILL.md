@@ -25,30 +25,30 @@ after individual tasks.
 
 ## Retrospective Promotion Workflow
 
-Lessons logged in `retrospectives.md` should graduate to permanent docs. This prevents
+Lessons logged in `.context/retrospectives/` should graduate to permanent docs. This prevents
 the retrospective from becoming an unread graveyard.
 
 ### Process
 
-1. Open `retrospectives.md`
+1. Open `retrospectives/`
 2. Find entries with unchecked `[ ]` promotion items
 3. For each unchecked item:
-   - Read the target file (e.g., `standards/error-handling.md`)
+   - Read the target file (e.g., `standards.md`)
    - Add the lesson in the appropriate section — don't just append; integrate it
    - Check the box: `[x]`
 4. Entries older than 4 weeks with all items checked → archive or delete
 
 ### Promotion Decision
 
-| Lesson type                    | Promote to                                                    |
-| ------------------------------ | ------------------------------------------------------------- |
-| Coding pattern or anti-pattern | `standards/code-style.md` or `standards/error-handling.md`    |
-| Naming discovery               | `standards/naming-conventions.md`                             |
-| Test strategy or mock pattern  | `testing/unit-testing.md` or `testing/integration-testing.md` |
-| Architecture insight           | `architecture/patterns-template.md`                           |
-| Domain knowledge               | `domains/entities.md` or `domains/glossary.md`                |
-| Process improvement            | `workflows/` appropriate file                                 |
-| Decision rationale             | `decisions.md` (as a new ADR)                                 |
+| Lesson type                    | Promote to                                     |
+| ------------------------------ | ---------------------------------------------- |
+| Coding pattern or anti-pattern | `standards.md` or `standards.md`               |
+| Naming discovery               | `standards.md`                                 |
+| Test strategy or mock pattern  | `testing.md` or `testing.md`                   |
+| Architecture insight           | `architecture.md`                              |
+| Domain knowledge               | `domains/entities.md` or `domains/glossary.md` |
+| Process improvement            | `workflows/` appropriate file                  |
+| Decision rationale             | `decisions/index.md` (as a new ADR)            |
 
 ---
 
@@ -100,7 +100,7 @@ Run these periodically (or after every 3–5 tasks):
 ### Check 1 — Staleness
 
 - Read `overview.md` — does the tech stack still match manifest files?
-- Read `standards/` — do conventions match recently-written code?
+- Read `standards.md` — do conventions match recently-written code?
 - If stale → update the specific sections
 
 ### Check 2 — Duplication
@@ -110,13 +110,13 @@ Run these periodically (or after every 3–5 tasks):
 
 ### Check 3 — Drift
 
-- Read `architecture/patterns-template.md` — do documented patterns match actual code?
+- Read `architecture.md` — do documented patterns match actual code?
 - If code has diverged → either update the doc (if the code is correct) or flag the code (if the doc is correct)
 
 ### Check 4 — Bloat
 
 - `.context/` files should be concise. If any file exceeds 300 lines, consider splitting.
-- `retrospectives.md` should have 10–15 entries max. Prune or archive older ones.
+- `retrospectives/` should have 10–15 entries max. Prune or archive older ones.
 
 ---
 

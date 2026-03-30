@@ -21,7 +21,7 @@ else
   INSTALL_DIR="${COPILOT_DIR:-$HOME/.copilot}"
 fi
 
-echo "Installing agent-defs → $INSTALL_DIR"
+echo "Installing skill kit → $INSTALL_DIR"
 $CLAUDE_MODE && echo "Mode: Claude Code" || echo "Mode: GitHub Copilot"
 echo ""
 
@@ -29,11 +29,9 @@ echo ""
 
 mkdir -p "$INSTALL_DIR/skills/_shared"
 
-# _shared conventions (loaded by every skill)
-for f in "$REPO_DIR/skills/_shared/"*.md; do
-  cp "$f" "$INSTALL_DIR/skills/_shared/$(basename "$f")"
-  echo "  skills/_shared/$(basename "$f")"
-done
+# _shared conventions and shared resources (context_template, etc.)
+cp -r "$REPO_DIR/skills/_shared/" "$INSTALL_DIR/skills/_shared/"
+echo "  skills/_shared/ ($(find "$REPO_DIR/skills/_shared" -type f | wc -l | tr -d ' ') files)"
 
 # GUIDE.md (skill selection reference)
 cp "$REPO_DIR/skills/GUIDE.md" "$INSTALL_DIR/skills/GUIDE.md"
@@ -73,8 +71,8 @@ echo ""
 
 if $CLAUDE_MODE; then
   CLAUDE_MD="$INSTALL_DIR/CLAUDE.md"
-  MARKER_START="<!-- agent-defs:skills:start -->"
-  MARKER_END="<!-- agent-defs:skills:end -->"
+  MARKER_START="<!-- skills:start -->"
+  MARKER_END="<!-- skills:end -->"
 
   # Build skills table
   SKILLS_BLOCK="$MARKER_START

@@ -33,7 +33,7 @@ A good retrospective takes 5 minutes and prevents hours of repeated mistakes.
 
 ## Retrospective Structure
 
-Write the retrospective in `.context/retrospectives.md` using this format:
+Write the retrospective in `.context/retrospectives/` using this format:
 
 ```markdown
 ## [Date] — [Task ID or short title]
@@ -67,7 +67,7 @@ Don't skip this. Reinforcing what works is as important as fixing what doesn't.
 
 ```
 BAD:  "Implementation went smoothly"
-GOOD: "Using the repository pattern from .context/architecture/ meant
+GOOD: "Using the repository pattern from .context/architecture.md meant
        the database swap only required changes in one file"
 ```
 
@@ -101,8 +101,8 @@ The `context-maintenance` skill handles the actual promotion.
 ```markdown
 ### Promotion Items
 
-- [ ] Payment gateway error handling → promote to standards/error-handling.md
-- [ ] Repository pattern for data access → promote to architecture/patterns-template.md
+- [ ] Payment gateway error handling → promote to .context/standards.md
+- [ ] Repository pattern for data access → promote to .context/architecture.md
 - [x] Already promoted: naming convention for API routes
 ```
 
@@ -161,7 +161,7 @@ When something went wrong, dig deeper than the surface:
 ### Promotion Items
 
 - [ ] Email service rate limits → promote to domains/glossary.md
-- [ ] Email testing requirements → promote to testing/integration-testing.md
+- [ ] Email testing requirements → promote to .context/testing.md
 ```
 
 ### Bad Retrospective
@@ -191,4 +191,4 @@ When something went wrong, dig deeper than the surface:
 - Include at least one promotion item if lessons were learned
 - Don't turn it into a blame log — focus on process, not people
 - Keep each retrospective under 30 lines — brevity forces clarity
-- The retrospective goes in `.context/retrospectives.md`, not the task folder
+- The retrospective goes in `.context/retrospectives/`, not the task folder

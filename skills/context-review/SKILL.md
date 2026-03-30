@@ -61,17 +61,17 @@ Target: all `*.md` files in `.context/domains/`
   - Mark entities as `Implemented` vs `Planned` based on whether source files exist
 - `glossary.md` — add new terms introduced in code; update definitions if usage has evolved
 
-### Step 3 — `.context/architecture/`
+### Step 3 — `.context/architecture.md`
 
-Target: all `*.md` files in `.context/architecture/`
+Target: all `*.md` files in `.context/architecture.md`
 
 - Document patterns consistently applied across the codebase but not yet captured
 - Update existing pattern descriptions if the implementation has diverged from what's documented
 - Add entries for new layers, abstractions, or structural decisions introduced since last run
 
-### Step 4 — `.context/standards/`
+### Step 4 — `.context/standards.md`
 
-Target: all `*.md` files in `.context/standards/`
+Target: all `*.md` files in `.context/standards.md`
 
 - `code-style.md` — note new conventions observed in recently added code
 - `naming-conventions.md` — update if naming patterns have evolved
@@ -91,7 +91,7 @@ triggered_by: architect-agent
 
 ## Summary
 
-- **Reviewed:** `overview.md`, `domains/`, `architecture/`, `standards/`
+- **Reviewed:** `overview.md`, `domains/`, `architecture.md`, `standards.md`
 - **Changes made:** yes / no
 - **Files updated:**
   - [list files that were changed, or "none"]

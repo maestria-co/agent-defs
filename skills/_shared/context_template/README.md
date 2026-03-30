@@ -10,30 +10,24 @@ Running the setup prompt generates this structure in your project:
 
 ```
 .context/
-├── META.md                          # How to maintain this directory
-├── overview.md                      # Project overview, tech stack, team conventions
-├── decisions.md                     # Architectural Decision Records (ADRs)
-├── retrospectives.md                # Rolling lessons-learned log
-├── standards/
-│   ├── code-style.md                # File organization, imports, comments, formatting
-│   ├── naming-conventions.md        # File, variable, function, class, test naming
-│   └── error-handling.md            # Error types, logging, validation patterns
-├── architecture/
-│   ├── patterns-template.md         # Structural patterns to follow
-│   └── migration-guide-template.md  # DB/API migration documentation
-├── testing/
-│   ├── unit-testing.md              # Framework, mocking strategy, test structure
-│   └── integration-testing.md       # What to integration test and how
-├── domains/
-│   ├── entities.md                  # Core domain models and business rules
-│   └── glossary.md                  # Project-specific terminology
-├── styling/
-│   └── style-guide-template.md     # UI/CSS conventions (optional — skip for backend-only)
-├── workflows/
-│   ├── task-workflow-template.md    # Pattern-based task execution workflow
-│   ├── branching.md                 # Git branching strategy
-│   └── ci-cd.md                     # CI/CD pipeline documentation
-└── tasks/                           # Per-task artifacts (brief, plan, retro)
+├── META.md                    # How to maintain this directory
+├── overview.md                # Project purpose, tech stack, current phase
+├── architecture.md            # System structure: layers, data flow, integrations
+├── standards.md               # Code style, naming, error handling, patterns
+├── testing.md                 # Test framework, file conventions, mocking
+├── decisions/
+│   ├── index.md               # ADR index (all decisions at a glance)
+│   └── ADR-NNN-title.md       # Individual Architectural Decision Records
+├── retrospectives/
+│   ├── README.md              # Format guide for retrospective files
+│   └── YYYY-MM-DD-TASK-ID.md  # Individual retrospective per task
+├── tasks/                     # Per-task artifacts written by agents
+│   └── TASK-ID/
+│       ├── plan.md
+│       ├── spec.md / story.md
+│       └── research-*.md / code-analysis-*.md / architecture-*.md
+├── workflows/                 # Optional: branching, CI/CD (if non-obvious)
+└── domains/                   # Optional: entities + glossary (if domain-rich)
 ```
 
 It also creates or updates `CLAUDE.md` and `.github/copilot-instructions.md` so your AI tools load this context automatically.
@@ -52,11 +46,7 @@ Both tools read the same `.context/` files — write once, works in both.
 
 ## Quick Start
 
-1. **Clone or install agent-defs** somewhere on your machine:
-
-   ```bash
-   git clone https://github.com/[org]/agent-defs ~/tools/agent-defs
-   ```
+1. **Install the skill kit** using `install.sh` (macOS/Linux) or `install.ps1` (Windows) from the repo root. This places `context_template/` at the known path automatically.
 
 2. **Navigate to your project:**
 
@@ -66,10 +56,11 @@ Both tools read the same `.context/` files — write once, works in both.
 
 3. **Paste `SETUP_PROMPT.md` into Claude Code or VS Code Copilot agent mode:**
    ```bash
-   cat ~/tools/agent-defs/context_template/SETUP_PROMPT.md | pbcopy
+   cat ~/.copilot/skills/_shared/context_template/SETUP_PROMPT.md | pbcopy
+   # Claude Code users:
+   cat ~/.claude/skills/_shared/context_template/SETUP_PROMPT.md | pbcopy
    # Then paste into Claude Code or Copilot chat
    ```
-   Update `[AGENT_DEFS_PATH]` in the prompt to the actual path before running.
 
 ---
 
@@ -97,10 +88,10 @@ Both tools read the same `.context/` files — write once, works in both.
 
 ## Template vs Generated Content
 
-| Location                       | What it is                                                      |
-| ------------------------------ | --------------------------------------------------------------- |
-| `agent-defs/context_template/` | Generic templates — this repository. Not project-specific.      |
-| `your-project/.context/`       | Generated, project-specific, living documentation. Commit this. |
+| Location                              | What it is                                                      |
+| ------------------------------------- | --------------------------------------------------------------- |
+| `~/.copilot/skills/_shared/context_template/` | Installed templates — skill kit. Not project-specific. |
+| `your-project/.context/`              | Generated, project-specific, living documentation. Commit this. |
 
 The templates in `context_template/` are the starting point. The generated `.context/` in your project is the real artifact — it should evolve with your project.
 
@@ -110,6 +101,7 @@ The templates in `context_template/` are the starting point. The generated `.con
 
 See `.context/META.md` for the full maintenance guide. Short version:
 
-- After each task: add a retrospective entry
-- Weekly: promote lessons from retrospectives to subdirectory files
+- After each task: create a new `YYYY-MM-DD-TASK-ID.md` in `.context/retrospectives/`
+- When making an architecture decision: create a new `ADR-NNN-title.md` in `.context/decisions/` and add a row to `index.md`
+- Weekly: promote lessons from retrospectives to the relevant subdirectory files
 - Monthly: prune anything that no longer reflects how the project works

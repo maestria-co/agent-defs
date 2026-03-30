@@ -27,8 +27,8 @@ When @manager invokes this agent, it provides:
 
 - **What to test** — files changed, feature implemented, or bug fixed
 - **Acceptance criteria** — from the task spec or plan
-- **Test context** — testing frameworks, patterns from `.context/testing/`
-- **Project standards** — relevant conventions from `.context/standards/`
+- **Test context** — testing frameworks, patterns from `.context/testing.md`
+- **Project standards** — relevant conventions from `.context/standards.md`
 - **Implementation details** — what @coder built and key design decisions
 
 ## When to Invoke
@@ -47,7 +47,7 @@ When @manager invokes this agent, it provides:
 ## Process
 
 1. **Think first**: Read the spec and implementation. Identify what it should do and all the ways it can fail. Tests written without this step miss cases.
-2. **Read test patterns**: Check `.context/testing/` for test conventions, existing test files for patterns (folder structure, describe/it style, mocking approach).
+2. **Read test patterns**: Check `.context/testing.md` for test conventions, existing test files for patterns (folder structure, describe/it style, mocking approach).
 3. **Write across categories**: Happy path, edge cases (null, empty, boundaries), error cases, state transitions. Add security cases (SQL injection, malformed tokens, oversized inputs) for auth or external input code.
 4. **Test the contract, not internals**: Verify observable behavior. Tests coupled to implementation details break on refactors.
 5. **Apply appropriate mocking**: Mock external dependencies, not the code under test. Follow project mocking patterns.
@@ -67,11 +67,11 @@ When @manager invokes this agent, it provides:
 
 ## Coverage Targets
 
-| Scenario | Target |
-| --------- | ----------------------------------------- |
-| New code | ≥90% |
-| Bug fixes | Must reproduce the bug + validate the fix |
-| Refactors | Coverage must not decrease |
+| Scenario                         | Target                                      |
+| -------------------------------- | ------------------------------------------- |
+| New code                         | ≥90%                                        |
+| Bug fixes                        | Must reproduce the bug + validate the fix   |
+| Refactors                        | Coverage must not decrease                  |
 | Legacy code (adding first tests) | ≥60% initial; document a plan to reach ≥80% |
 
 ---

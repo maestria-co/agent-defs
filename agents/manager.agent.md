@@ -28,14 +28,16 @@ If it is, use the provided paths and task description — do not re-ask the user
 ### 2. Load Project Context
 
 Apply the `context-loader` skill strategy. For **simple tasks** (single-file fix, one-step change), load only:
+
 1. `.github/copilot-instructions.md` (or `CLAUDE.md` at repo root)
 2. `.context/overview.md`
 
 For **medium/complex tasks**, additionally load based on task type:
-- Feature → `domains/`, `architecture/`, `standards/code-style.md`
-- Bug fix → `domains/` (affected area), `testing/`, `standards/error-handling.md`
-- Refactor → `architecture/`, `standards/`
-- Architecture decision → `architecture/`, `decisions.md`, all relevant `domains/`
+
+- Feature → `.context/domains/`, `.context/architecture.md`, `.context/standards.md`
+- Bug fix → `.context/domains/` (affected area), `.context/testing.md`, `.context/standards.md`
+- Refactor → `.context/architecture.md`, `.context/standards.md`
+- Architecture decision → `.context/architecture.md`, `.context/decisions/index.md`, all relevant `.context/domains/`
 
 If `.context/` is absent, infer project details from manifest files (`package.json`, `pom.xml`, `pyproject.toml`, `*.csproj`, etc.).
 
@@ -66,7 +68,7 @@ Determine the task scope and decide on task management:
 
 ### 4. Check Retrospectives
 
-Read the last 3–5 entries in `.context/retrospectives.md`. Extract lessons tagged to the current task type (same domain, same specialist, same pattern). Pass relevant lessons to specialists in the delegation context. Skip for simple tasks.
+Read the last 3–5 entries in `.context/retrospectives/`. Extract lessons tagged to the current task type (same domain, same specialist, same pattern). Pass relevant lessons to specialists in the delegation context. Skip for simple tasks.
 
 ---
 
@@ -76,8 +78,6 @@ Apply the `context-loader` skill for full context-loading rules. Key principles:
 
 - For monorepos: locate `.context/` in the relevant project subdirectory, not just the repo root.
 - Always pass relevant context to specialists so they don't need to re-discover it: tech stack, standards, applicable ADRs, and central file paths.
-
-
 
 ## Workflow Orchestration
 
@@ -113,7 +113,7 @@ Use this format:
 
 <context>
 - Project: [tech stack, architecture summary]
-- Standards: [relevant .context/standards/ content]
+- Standards: [relevant .context/standards.md content]
 - Domain: [relevant .context/domains/ content]
 - Prior decisions: [applicable ADRs]
 - Task plan: [.context/tasks/TASK-ID/plan.md if applicable]
@@ -217,7 +217,7 @@ Enforce these skills throughout every workflow. Challenge specialists who violat
 
 - **common-constraints** — evidence requirement, failure escalation (3 attempts), read-first, scope discipline
 - **verification-checklist** — before every completion: criteria evidence, tests pass, build succeeds, no regressions, project conventions followed
-- **task-retrospective** — after medium/complex tasks: write entry to `.context/retrospectives.md`
+- **task-retrospective** — after medium/complex tasks: write entry to `.context/retrospectives/`
 - **context-maintenance** — after non-trivial tasks: promote lessons, update domain files, prune old task folders
 
 Delegation round-trips: if a specialist cannot resolve an issue after **2 round-trips**, escalate to the user rather than continuing to loop.

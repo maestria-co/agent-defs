@@ -113,7 +113,7 @@ Before proceeding, confirm:
 
 - [ ] Fixes the root cause, not just the symptom
 - [ ] Doesn't introduce new issues (check surrounding code)
-- [ ] Follows project conventions (check `.context/standards/`)
+- [ ] Follows project conventions (check `.context/standards.md`)
 - [ ] Handles related edge cases the original code missed
 - [ ] Minimal change — don't refactor during a bug fix
 
@@ -156,7 +156,7 @@ After fixing, consider:
 
 - Should this type of bug be caught by a linter rule?
 - Should input validation be added to prevent similar issues?
-- Should documentation be updated (`.context/standards/` or API docs)?
+- Should documentation be updated (`.context/standards.md` or API docs)?
 - Should this be a retrospective lesson?
 
 ---

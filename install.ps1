@@ -15,11 +15,11 @@ $RepoDir = $PSScriptRoot
 
 if ($Claude) {
     $InstallDir = if ($env:CLAUDE_DIR) { $env:CLAUDE_DIR } else { Join-Path $env:USERPROFILE ".claude" }
-    Write-Host "Installing agent-defs -> $InstallDir"
+    Write-Host "Installing skill kit -> $InstallDir"
     Write-Host "Mode: Claude Code"
 } else {
     $InstallDir = if ($env:COPILOT_DIR) { $env:COPILOT_DIR } else { Join-Path $env:USERPROFILE ".copilot" }
-    Write-Host "Installing agent-defs -> $InstallDir"
+    Write-Host "Installing skill kit -> $InstallDir"
     Write-Host "Mode: GitHub Copilot"
 }
 Write-Host ""
@@ -28,11 +28,10 @@ Write-Host ""
 
 New-Item -ItemType Directory -Force -Path (Join-Path $InstallDir "skills\_shared") | Out-Null
 
-# _shared conventions (loaded by every skill)
-Get-ChildItem (Join-Path $RepoDir "skills\_shared\*.md") | ForEach-Object {
-    Copy-Item $_.FullName -Destination (Join-Path $InstallDir "skills\_shared\$($_.Name)") -Force
-    Write-Host "  skills\_shared\$($_.Name)"
-}
+# _shared conventions and shared resources (context_template, etc.)
+Copy-Item "$RepoDir\skills\_shared" -Destination "$InstallDir\skills\_shared" -Recurse -Force
+$sharedCount = (Get-ChildItem "$RepoDir\skills\_shared" -Recurse -File).Count
+Write-Host "  skills\_shared\ ($sharedCount files)"
 
 # GUIDE.md (skill selection reference)
 Copy-Item (Join-Path $RepoDir "skills\GUIDE.md") -Destination (Join-Path $InstallDir "skills\GUIDE.md") -Force
@@ -70,8 +69,8 @@ Write-Host ""
 
 if ($Claude) {
     $ClaudeMd = Join-Path $InstallDir "CLAUDE.md"
-    $MarkerStart = "<!-- agent-defs:skills:start -->"
-    $MarkerEnd   = "<!-- agent-defs:skills:end -->"
+    $MarkerStart = "<!-- skills:start -->"
+    $MarkerEnd   = "<!-- skills:end -->"
 
     # Build skills table
     $rows = Get-ChildItem (Join-Path $InstallDir "skills") -Directory |

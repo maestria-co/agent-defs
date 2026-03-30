@@ -92,7 +92,7 @@ fixing blind changes costs hours.
 
 1. Read the file (at least the relevant section + 20 lines above and below)
 2. Read related files (imports, callers, tests)
-3. Check `.context/standards/` for project-specific patterns
+3. Check `.context/standards.md` for project-specific patterns
 4. Only then make changes
 
 ### Before Modifying Configuration
@@ -124,9 +124,9 @@ load low.
 
 ### Lookup Order
 
-1. `.context/standards/code-style.md` — formatting, structure, imports
-2. `.context/standards/naming-conventions.md` — how things are named
-3. `.context/standards/error-handling.md` — how errors are handled
+1. `.context/standards.md` — formatting, structure, imports
+2. `.context/standards.md` — how things are named
+3. `.context/standards.md` — how errors are handled
 4. Existing code in the same module — match the local style
 5. Language/framework defaults — only if no project conventions exist
 

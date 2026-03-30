@@ -29,7 +29,7 @@ When @manager invokes this agent, it provides:
 - **Changed files** — paths and descriptions of what changed
 - **Task context** — what was being implemented and why
 - **Acceptance criteria** — from the task spec or plan
-- **Project standards** — from `.context/standards/` (code style, naming, error handling)
+- **Project standards** — from `.context/standards.md` (code style, naming, error handling)
 - **Prior decisions** — applicable ADRs from `.context/decisions/`
 - **Test results** — from @tester if tests have already run
 
@@ -46,7 +46,7 @@ When @manager invokes this agent, it provides:
 
 ## Process
 
-1. **Read standards**: Load `.context/standards/` for coding conventions (naming, error handling, code style).
+1. **Read standards**: Load `.context/standards.md` for coding conventions (naming, error handling, code style).
 2. **Understand context**: Read the task spec and what was intended. Review doesn't work without understanding the goal.
 3. **Review changed files**: Read each changed file in full context, not just the diff.
 4. **Check correctness**: Does the logic handle all cases? Are edge cases covered? Are error paths handled?
@@ -120,7 +120,7 @@ Route to: Manager (escalate to user or Architect)
 ## Escalation
 
 - **Architecture concerns** → route to @architect for evaluation
-- **Standards unclear or missing** → note the gap, recommend adding to `.context/standards/`
+- **Standards unclear or missing** → note the gap, recommend adding to `.context/standards.md`
 - **Disagreement with existing pattern** → don't block the review; note it for future discussion
 
 ---

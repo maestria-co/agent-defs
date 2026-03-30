@@ -1,4 +1,4 @@
-# agent-defs
+# AI Skill Kit
 
 Reusable agents, skills, and prompts for AI-assisted software development. Structured as a `.copilot`-compatible customization kit.
 
@@ -11,6 +11,7 @@ Works with **GitHub Copilot**, **Claude Code**, and any AI assistant that accept
 ```
 agents/           # Agent definitions (*.agent.md)
 skills/           # Composable skills (SKILL.md per folder)
+                  #   _shared/context_template/ — .context/ template used by initialize-* skills
 prompts/          # Reusable prompt files (*.prompt.md)
 .context/         # Project context (decisions, retrospectives)
 context_template/ # Template for generating .context/ in other projects
@@ -94,11 +95,10 @@ The **Manager** is the primary entry point for all multi-step development tasks.
 
 ### Specialized Support Agents
 
-| Agent              | File                                 | Description                     |
-| ------------------ | ------------------------------------ | ------------------------------- |
-| Dev-Support-Triage | `agents/dev-support-triage.agent.md` | Bug report and support triage   |
-| Product-Manager    | `agents/product-manager.agent.md`    | Requirements and specifications |
-| Code-Researcher    | `agents/code-researcher.agent.md`    | Deep codebase analysis          |
+| Agent           | File                              | Description                     |
+| --------------- | --------------------------------- | ------------------------------- |
+| Product-Manager | `agents/product-manager.agent.md` | Requirements and specifications |
+| Code-Researcher | `agents/code-researcher.agent.md` | Deep codebase analysis          |
 
 All agents follow: [`agents/_shared/conventions.md`](agents/_shared/conventions.md)
 Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-protocol.md)
@@ -110,21 +110,25 @@ Handoff protocol: [`agents/_shared/handoff-protocol.md`](agents/_shared/handoff-
 Copy all skills and agents into your AI tool's config folder:
 
 **macOS / Linux — GitHub Copilot**
+
 ```bash
 ./install.sh
 ```
 
 **macOS / Linux — Claude Code**
+
 ```bash
 ./install.sh --claude
 ```
 
 **Windows — GitHub Copilot**
+
 ```powershell
 .\install.ps1
 ```
 
 **Windows — Claude Code**
+
 ```powershell
 .\install.ps1 -Claude
 ```
@@ -162,22 +166,6 @@ End-to-end examples for common development tasks:
 | Multi-file feature           | `planning-tasks` + `implementing-features` + `writing-tests` | `recipes/complex-task.md`     |
 | Architecture decision        | `researching-options` + `designing-systems`                  | `recipes/design-task.md`      |
 | Full feature (OAuth example) | All 5 core skills                                            | `recipes/feature-workflow.md` |
-
----
-
-## Context System
-
-`context_template/` contains a setup system that generates a `.context/` directory in any project — giving AI tools persistent knowledge about your codebase (standards, decisions, domain entities, workflows).
-
-**One-time setup:**
-
-```bash
-# From your target project directory:
-cat ~/tools/agent-defs/context_template/SETUP_PROMPT.md | pbcopy
-# Paste into Claude Code or Copilot agent mode
-```
-
-Full documentation: [`context_template/README.md`](context_template/README.md)
 
 ---
 

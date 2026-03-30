@@ -26,12 +26,12 @@ The most important principle. Before adding complexity: _does this demonstrably 
 
 ### Response length
 
-| Request type | Target |
-|---|---|
-| Simple question / clarification | 1–3 sentences |
-| Task with 1–3 steps | Short paragraphs, no headers |
-| Complex plan or design | Headers, as long as needed |
-| Code output | Just the code + minimal explanation |
+| Request type                    | Target                              |
+| ------------------------------- | ----------------------------------- |
+| Simple question / clarification | 1–3 sentences                       |
+| Task with 1–3 steps             | Short paragraphs, no headers        |
+| Complex plan or design          | Headers, as long as needed          |
+| Code output                     | Just the code + minimal explanation |
 
 ### Structured content — use XML tags
 
@@ -98,14 +98,14 @@ Do not signal completion based on belief. Verify it.
 - Read only what you need. Targeted searches over full-file reads for large files.
 - When context is low: finish the current task first, then write state to `.context/` before stopping.
 - Use git as a checkpoint — commit completed work before a context boundary.
-- When resuming after a context reset: read `.context/project-overview.md`, run `git log --oneline -10`, check in-progress state files.
+- When resuming after a context reset: read `.context/overview.md`, run `git log --oneline -10`, check in-progress state files.
 
 ---
 
 ## Context Management
 
-- **Reading:** At the start of any non-trivial task, check `.context/project-overview.md`, `.context/decisions/`, and relevant retrospective entries.
-- **Writing:** Write to `.context/` when you make a significant decision (→ `decisions/`), complete a task with learnings (→ `retrospectives/`), or discover undocumented project facts (→ `project-overview.md`).
+- **Reading:** At the start of any non-trivial task, check `.context/overview.md`, `.context/decisions/`, and relevant retrospective entries.
+- **Writing:** Write to `.context/` when you make a significant decision (→ `decisions/`), complete a task with learnings (→ `retrospectives/`), or discover undocumented project facts (→ `overview.md`).
 - **Task-scoped writing:** When a TASK-ID or STORY-ID was provided (i.e., you are working in the context of a named task), write **all** output artifacts under `.context/tasks/{TASK-ID}/` — not the generic folders. This co-locates every finding, analysis, and decision so the team (and future agents) can reconstruct what happened without hunting across the context tree.
 
   Use descriptive filenames within the task folder:

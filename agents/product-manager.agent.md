@@ -52,14 +52,14 @@ Ask the user exactly one question before proceeding:
 
 Map the answer to a story skill:
 
-| Tool | Skill to use |
-|------|-------------|
-| Jira | `jira-story` |
-| Asana | `asana-story` |
-| Linear | `linear-story` |
-| GitHub Issues | `github-issue-story` |
-| Shortcut (Clubhouse) | `shortcut-story` |
-| Other / Unknown | `jira-story` (generic format, note the tool) |
+| Tool                 | Skill to use                                 |
+| -------------------- | -------------------------------------------- |
+| Jira                 | `jira-story`                                 |
+| Asana                | `asana-story`                                |
+| Linear               | `linear-story`                               |
+| GitHub Issues        | `github-issue-story`                         |
+| Shortcut (Clubhouse) | `shortcut-story`                             |
+| Other / Unknown      | `jira-story` (generic format, note the tool) |
 
 Remember the chosen skill — it will be invoked in Step 6 only.
 
@@ -81,27 +81,36 @@ Focus on: Who benefits? What outcome? What edge cases are obviously in/out?
 Spawn sub-agent tasks to gather depth. Run these in parallel where possible:
 
 ### 4a. Code Research (always)
+
 Delegate to `@code-researcher`:
+
 > "Analyse the codebase and identify all components, services, files, and data
 > models that would be affected by: [feature description]. Return: affected files,
 > current relevant patterns, and any existing similar functionality."
 
 ### 4b. Technical Assessment (for non-trivial features)
+
 Delegate to `@architect`:
+
 > "Given this feature: [description] and these affected components: [from 4a],
 > identify: technical risks, recommended approach, data model changes needed,
 > API contract changes, and any cross-cutting concerns (auth, caching, events)."
 
 ### 4c. Scope & Complexity (for features with multiple moving parts)
+
 Delegate to `@planner`:
+
 > "Given this feature spec: [description] and technical notes: [from 4a + 4b],
 > estimate relative complexity (S/M/L/XL) and identify if this should be split
 > into multiple stories. Return: recommended split (if any) and rationale."
 
 ### 4d. Background Research (when domain context is thin)
+
 Delegate to `@researcher`:
+
 > "Research: [specific unknown — e.g., 'best practices for X', 'common patterns
-> for Y in our stack']. Return a concise summary relevant to our implementation."
+>
+> > for Y in our stack']. Return a concise summary relevant to our implementation."
 
 Collect all results before moving to Step 5.
 
@@ -115,43 +124,56 @@ skill in Step 6.
 
 ```markdown
 ## Story Seed
+
 [Original request or existing story content]
 
 ## Problem Statement
+
 [What problem this solves. Who has it. Why it matters now.]
 
 ## User Story
+
 As a [specific persona],
 I want [goal],
 So that [measurable benefit]
 
 ## Acceptance Criteria (Draft)
+
 [3-8 ACs in Given/When/Then — shaped by domain knowledge and research]
 [Mark any AC as (inferred) if not explicitly stated by the user]
 
 ## Technical Detail Notes
+
 ### Affected Components
+
 [From code-researcher — real file paths, service names]
 
 ### Recommended Approach
+
 [From architect — not implementation steps, but technical shape]
 
 ### Data Model Changes
+
 [Tables, fields, migrations — from architect]
 
 ### API Changes
+
 [New or modified endpoints — from architect]
 
 ### Cross-Cutting Concerns
+
 [Auth, permissions, caching, events, rate limits — from architect]
 
 ### Complexity
+
 [S/M/L/XL — from planner, with split recommendation if XL]
 
 ## Dependencies
+
 [Blocking stories, required infra, team approvals]
 
 ## Open Questions
+
 [ALL assumptions that were not explicitly confirmed by the user go here]
 [Format: "Q: [question] — [who should answer] — assumed: [what was assumed]"]
 ```
@@ -160,10 +182,16 @@ So that [measurable benefit]
 
 ## Step 6 — Format and Save Using the Story Skill
 
-Invoke the story skill identified in Step 2, passing the assembled spec as input.
-The skill handles all formatting — do not format the story yourself.
+Apply the story skill identified in Step 2. Read the skill's `SKILL.md` file and follow its instructions, passing the enriched spec from Step 5 as the input. The skill defines the output format — do not format the story yourself.
+
+Story skill locations (after install):
+
+- Jira → `~/.copilot/skills/jira-story/SKILL.md` (or `~/.claude/skills/jira-story/SKILL.md`)
+- Asana → `~/.copilot/skills/asana-story/SKILL.md`
+- Linear → `~/.copilot/skills/linear-story/SKILL.md`
 
 Save the output to:
+
 ```
 .context/tasks/[STORY-ID]/story.md
 ```
@@ -172,6 +200,7 @@ Where `[STORY-ID]` is either the existing ticket ID (if grooming an existing
 story) or a slugified name (e.g., `user-login-flow`).
 
 Also save the full enriched spec (from Step 5) alongside it:
+
 ```
 .context/tasks/[STORY-ID]/spec.md
 ```
@@ -197,6 +226,8 @@ Sub-agents used: [list of what was delegated]
 
 Recommended next step: Team grooming session — PO to confirm inferred ACs
 and answer open questions.
+
+Route to: User
 ```
 
 ---
@@ -211,4 +242,3 @@ and answer open questions.
 - Keep ACs user-value-focused in the story; put implementation detail in Technical Notes
 - If the feature is XL complexity, recommend a split before writing the story
 - Always save to `.context/tasks/[STORY-ID]/` — never output-only to chat
-

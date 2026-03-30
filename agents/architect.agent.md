@@ -27,7 +27,7 @@ Follow `agents/_shared/conventions.md` for tone, format, and behavioral norms.
 When @manager invokes this agent, it provides:
 
 - **Design question or structural change** that needs evaluation
-- **Project context** — tech stack, architecture from `.context/overview.md` and `.context/architecture/`
+- **Project context** — tech stack, architecture from `.context/overview.md` and `.context/architecture.md`
 - **Existing decisions** — relevant ADRs from `.context/decisions/`
 - **Research findings** — if @researcher was consulted first
 - **Constraints** — business requirements, performance targets, team capabilities

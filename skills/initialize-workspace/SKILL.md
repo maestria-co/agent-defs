@@ -26,6 +26,7 @@ Find the `.code-workspace` file (search current dir and one level up) and parse
 its `folders` array to get project paths.
 
 For each folder, classify as:
+
 - **Project** — has source code (`src/`, `lib/`, `package.json`, etc.) → initialize context
 - **Resource** — docs, config, or shared assets only → document in overview, skip init
 - **Submodule** — git submodule → initialize independently
@@ -51,7 +52,7 @@ Has .context/?
 ```
 
 Each project must be initialized in isolation — don't let one project's context
-influence another's. Each gets its own `.context/overview.md`, `.context/standards/`, etc.
+influence another's. Each gets its own `.context/overview.md`, `.context/standards.md`, `.context/architecture.md`, etc.
 
 ---
 
@@ -68,14 +69,15 @@ any project folder). This is the entry point for the workspace-manager agent.
 
 ## Projects
 
-| Name | Tech Stack | Purpose | Entry Point |
-|------|-----------|---------|-------------|
-| [project-1] | [Node.js, React] | [Frontend] | `src/index.tsx` |
-| [project-2] | [Python, FastAPI] | [Backend API] | `app/main.py` |
+| Name        | Tech Stack        | Purpose       | Entry Point     |
+| ----------- | ----------------- | ------------- | --------------- |
+| [project-1] | [Node.js, React]  | [Frontend]    | `src/index.tsx` |
+| [project-2] | [Python, FastAPI] | [Backend API] | `app/main.py`   |
 
 ## Cross-Project Dependencies
 
 ### [project-1] → [project-2]
+
 - **Type:** API contract
 - **Interface:** REST HTTP
 - **Files:** `frontend/src/api/` → `backend/app/routes/`
@@ -104,13 +106,13 @@ Update this file when projects are added, dependencies change, or workflows chan
 
 Discover relationships by scanning imports, API calls, and shared configs:
 
-| Type | Description |
-|------|-------------|
-| Shared Library | One project imports code from another |
-| API Contract | Projects communicate via HTTP/RPC |
-| Event Bus | Projects communicate via message queue |
-| Shared Config | Common ESLint, TypeScript, Docker config |
-| Build Dependency | One project must build before another |
+| Type             | Description                              |
+| ---------------- | ---------------------------------------- |
+| Shared Library   | One project imports code from another    |
+| API Contract     | Projects communicate via HTTP/RPC        |
+| Event Bus        | Projects communicate via message queue   |
+| Shared Config    | Common ESLint, TypeScript, Docker config |
+| Build Dependency | One project must build before another    |
 
 For each discovered relationship, document: type, direction, interface, and specific files.
 
@@ -119,15 +121,18 @@ For each discovered relationship, document: type, direction, interface, and spec
 ## Checklist
 
 **Pre-init:**
+
 - [ ] Workspace file found and parsed
 - [ ] Each folder classified (project vs. resource)
 
 **Per project:**
+
 - [ ] Branch guard applied if on protected branch
 - [ ] `.context/` initialized or upgraded
 - [ ] No cross-contamination between projects
 
 **Workspace-level:**
+
 - [ ] `workspace-overview.md` created at workspace root
 - [ ] All projects listed with tech stacks
 - [ ] Cross-project dependencies documented
@@ -141,15 +146,16 @@ For each discovered relationship, document: type, direction, interface, and spec
 
 ## Workspace: [workspace-name]
 
-| Project | Status | Branch |
-|---------|--------|--------|
-| [project-1] | ✅ Initialized | context-bootstrap-[date] |
-| [project-2] | ✅ Upgraded | context-bootstrap-[date] |
-| [docs] | ⏭️ Skipped (resource folder) | — |
+| Project     | Status                       | Branch                   |
+| ----------- | ---------------------------- | ------------------------ |
+| [project-1] | ✅ Initialized               | context-bootstrap-[date] |
+| [project-2] | ✅ Upgraded                  | context-bootstrap-[date] |
+| [docs]      | ⏭️ Skipped (resource folder) | —                        |
 
 **Workspace overview:** `.context/workspace-overview.md`
 
 **Next steps:**
+
 1. Review and commit context changes in each project
 2. Use `@workspace-manager` for cross-project tasks
 ```
@@ -163,4 +169,3 @@ For each discovered relationship, document: type, direction, interface, and spec
 - Never commit directly to main/master — always use a branch
 - Only document relationships that can be verified in actual code
 - Skip resource folders (docs, assets) — only source projects get `.context/`
-
