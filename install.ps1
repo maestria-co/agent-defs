@@ -28,11 +28,10 @@ Write-Host ""
 
 New-Item -ItemType Directory -Force -Path (Join-Path $InstallDir "skills\_shared") | Out-Null
 
-# _shared conventions (loaded by every skill)
-Get-ChildItem (Join-Path $RepoDir "skills\_shared\*.md") | ForEach-Object {
-    Copy-Item $_.FullName -Destination (Join-Path $InstallDir "skills\_shared\$($_.Name)") -Force
-    Write-Host "  skills\_shared\$($_.Name)"
-}
+# _shared conventions and shared resources (context_template, etc.)
+Copy-Item "$RepoDir\skills\_shared" -Destination "$InstallDir\skills\_shared" -Recurse -Force
+$sharedCount = (Get-ChildItem "$RepoDir\skills\_shared" -Recurse -File).Count
+Write-Host "  skills\_shared\ ($sharedCount files)"
 
 # GUIDE.md (skill selection reference)
 Copy-Item (Join-Path $RepoDir "skills\GUIDE.md") -Destination (Join-Path $InstallDir "skills\GUIDE.md") -Force

@@ -37,10 +37,9 @@ Look for `.context/overview.md` in the current working directory.
 
 Find the `context_template/` directory. Check these locations in order:
 
-1. `../agent-defs/context_template/` (sibling directory)
-2. `~/tools/agent-defs/context_template/`
-3. `~/.copilot/context_template/`
-4. Ask the user for the path
+1. `~/.copilot/skills/_shared/context_template/` (Copilot install)
+2. `~/.claude/skills/_shared/context_template/` (Claude Code install)
+3. Ask the user for the path
 
 - If found → note the path.
 - If not found → **fall back** to generating files from scratch using the structure in Step 2.

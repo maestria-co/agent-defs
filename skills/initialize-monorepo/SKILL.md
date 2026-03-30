@@ -26,7 +26,7 @@ mistake of merging all package context into a single jumbled document.
 Run these checks from the `initialize-repo` skill first:
 
 - [ ] Check for existing `.context/` directory (warn if exists, don't overwrite)
-- [ ] Locate context_template directory (check standard locations)
+- [ ] Locate context_template directory (`~/.copilot/skills/_shared/context_template/` or `~/.claude/skills/_shared/context_template/`)
 - [ ] Verify git repository root
 - [ ] Confirm write permissions
 

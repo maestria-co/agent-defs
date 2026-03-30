@@ -11,6 +11,7 @@ Works with **GitHub Copilot**, **Claude Code**, and any AI assistant that accept
 ```
 agents/           # Agent definitions (*.agent.md)
 skills/           # Composable skills (SKILL.md per folder)
+                  #   _shared/context_template/ — .context/ template used by initialize-* skills
 prompts/          # Reusable prompt files (*.prompt.md)
 .context/         # Project context (decisions, retrospectives)
 context_template/ # Template for generating .context/ in other projects
@@ -167,17 +168,17 @@ End-to-end examples for common development tasks:
 
 ## Context System
 
-`context_template/` contains a setup system that generates a `.context/` directory in any project — giving AI tools persistent knowledge about your codebase (standards, decisions, domain entities, workflows).
+`skills/_shared/context_template/` contains a setup system that generates a `.context/` directory in any project — giving AI tools persistent knowledge about your codebase (standards, decisions, domain entities, workflows).
 
 **One-time setup:**
 
 ```bash
 # From your target project directory:
-cat ~/tools/agent-defs/context_template/SETUP_PROMPT.md | pbcopy
+cat ~/.copilot/skills/_shared/context_template/SETUP_PROMPT.md | pbcopy
 # Paste into Claude Code or Copilot agent mode
 ```
 
-Full documentation: [`context_template/README.md`](context_template/README.md)
+Full documentation: [`skills/_shared/context_template/README.md`](skills/_shared/context_template/README.md)
 
 ---
 
