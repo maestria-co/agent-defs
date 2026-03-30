@@ -66,9 +66,9 @@ not generic advice that adds noise without reducing uncertainty.
 | Directory | Content |
 |---|---|
 | `domains/` | Business and technical domain knowledge |
-| `standards/` | Coding conventions and project-specific patterns |
-| `testing/` | Test strategies, mock patterns, test data setup |
-| `architecture/` | System design, ADRs, structural patterns |
+| `standards.md` | Coding conventions and project-specific patterns |
+| `testing.md` | Test strategies, mock patterns, test data setup |
+| `architecture.md` | System design, ADRs, structural patterns |
 | `workflows/` | CI/CD, branching, deployment, release process |
 
 ## Maintenance Triggers

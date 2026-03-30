@@ -36,10 +36,10 @@ Does the implementation actually work?
 
 Does the code follow project conventions?
 
-- [ ] **Code style** — matches `.context/standards/code-style.md`
-- [ ] **Naming** — matches `.context/standards/naming-conventions.md`
-- [ ] **Error handling** — matches `.context/standards/error-handling.md`
-- [ ] **Architecture patterns** — consistent with `.context/architecture/`
+- [ ] **Code style** — matches `.context/standards.md`
+- [ ] **Naming** — matches `.context/standards.md`
+- [ ] **Error handling** — matches `.context/standards.md`
+- [ ] **Architecture patterns** — consistent with `.context/architecture.md`
 - [ ] **No new patterns** — didn't introduce conventions that conflict with existing ones
 
 **Evidence format:** Reference the specific standard and show your code follows it.

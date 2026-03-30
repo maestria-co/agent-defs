@@ -230,7 +230,7 @@ planning-tasks
 ### `task-retrospective`
 
 - **Input:** Completed task
-- **Output:** Entry in `.context/retrospectives.md` with promotion items
+- **Output:** Entry in `.context/retrospectives/` with promotion items
 - **When NOT to use:** Trivial one-line changes
 - **Degree of freedom:** Medium
 

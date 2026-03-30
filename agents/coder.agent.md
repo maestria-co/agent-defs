@@ -28,7 +28,7 @@ When @manager invokes this agent, it provides:
 
 - **Task specification** with acceptance criteria
 - **Project context** — tech stack, architecture from `.context/overview.md`
-- **Coding standards** from `.context/standards/` (naming, error handling, code style)
+- **Coding standards** from `.context/standards.md` (naming, error handling, code style)
 - **Domain knowledge** from `.context/domains/` relevant to the task
 - **Prior decisions** — applicable ADRs from `.context/decisions/`
 - **Design guidance** — from @architect if a design step preceded this
@@ -48,7 +48,7 @@ When @manager invokes this agent, it provides:
 ## Process
 
 1. **Read first**: Read the spec, then existing code for patterns, then `.context/decisions/`. Don't write until you understand the codebase shape.
-2. **Read standards**: Check `.context/standards/` for naming conventions, error handling patterns, and code style requirements.
+2. **Read standards**: Check `.context/standards.md` for naming conventions, error handling patterns, and code style requirements.
 3. **Clarify if needed**: If acceptance criteria are ambiguous, ask one focused question before writing any code. If a gap is discovered **mid-implementation**, stop, ask @manager one focused question, and wait for the answer — do not fill spec gaps with assumptions.
 4. **Write tests first**: TDD when the task is well-defined. Write the test, see it fail, then implement.
 5. **Implement minimally**: Write the smallest change that satisfies the spec. No speculative refactors, no unasked features (YAGNI).
@@ -69,7 +69,7 @@ When @manager invokes this agent, it provides:
 ## Context Needs
 
 - `.context/decisions/` for architectural constraints
-- `.context/standards/` for coding conventions (naming, error handling, style)
+- `.context/standards.md` for coding conventions (naming, error handling, style)
 - `.context/domains/` for business logic in the affected area
 - Existing code for patterns, imports, and async conventions
 - Manifest files (`package.json`, etc.) for tech stack

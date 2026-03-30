@@ -78,9 +78,9 @@ better as a documentation section rather than a skill.
 
 Review these sources for graduation candidates:
 
-- `.context/retrospectives.md` — recurring lessons that keep coming up
-- `.context/standards/` — patterns that go beyond formatting conventions
-- `.context/architecture/` — patterns that are reusable beyond this project
+- `.context/retrospectives/` — recurring lessons that keep coming up
+- `.context/standards.md` — patterns that go beyond formatting conventions
+- `.context/architecture.md` — patterns that are reusable beyond this project
 - `.context/decisions/` — decisions with implementation patterns that recur
 
 ### Step 2: Evaluate Against Criteria
@@ -149,7 +149,7 @@ Don't graduate continuously. Review for candidates:
 - After every 10 completed tasks
 - During quarterly planning
 - When onboarding a new team member (their questions reveal what knowledge is missing)
-- When `retrospectives.md` has more than 15 entries
+- When `retrospectives/` has more than 15 entries
 
 ---
 

@@ -32,7 +32,7 @@ Try each location in order — stop at the first match:
 
 A valid `context_template/` must contain all three:
 - `overview.md` (or `overview.md.template`)
-- `standards/` directory
+- `standards.md` directory
 - `domains/` directory
 
 If a path exists but fails verification, continue searching.
