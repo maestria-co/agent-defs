@@ -105,6 +105,18 @@ planning-tasks → implementing-features → writing-tests
 
 **Rule:** Only chain when output A is input B. Independent tasks run separately.
 
+### Context Initialization Chain
+
+When initializing `.context/` for any project type, always follow with graph building:
+
+```
+initialize-repo → context-graph-linker
+initialize-workspace → context-graph-linker (per project)
+initialize-monorepo → context-graph-linker (root + per package)
+```
+
+**Rule:** Graph indexing happens after context creation and verification is complete. Graph failures are non-blocking warnings — context is usable without graphs.
+
 ### Research Fork
 
 When planning reveals unknowns, fork into research before continuing.
@@ -134,6 +146,9 @@ designing-systems (must complete first)
 Setup and context management. Typically run once or periodically.
 
 - `initialize-repo` — set up `.context/` for a new project
+- `initialize-monorepo` — set up `.context/` for a monorepo
+- `initialize-workspace` — set up `.context/` for all projects in a workspace
+- `context-graph-linker` — build knowledge graph after context initialization
 - `context-loader` — how to read `.context/` efficiently
 - `context-maintenance` — keep `.context/` accurate
 - `context-review` — full codebase scan to sync docs
