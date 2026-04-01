@@ -11,6 +11,7 @@ Quick reference for selecting and composing skills in `skills/`.
 | Setting up `.context/` for a new project          | `initialize-repo`             |
 | Setting up `.context/` for a monorepo             | `initialize-monorepo`         |
 | Bootstrapping all projects in a VS Code workspace | `initialize-workspace`        |
+| Building knowledge graph for `.context/`          | `context-graph-linker`        |
 | Locating the context_template                     | `find-context-template`       |
 | Loading project context at task start             | `context-loader`              |
 | Updating `.context/` after a task                 | `context-maintenance`         |
@@ -97,6 +98,16 @@ implementing-features   →   writing-tests
 
 The most common composition. Use after every non-trivial implementation.
 
+### Initialize → Graph
+
+```
+initialize-repo         →   context-graph-linker
+initialize-workspace    →   context-graph-linker (per project)
+initialize-monorepo     →   context-graph-linker (root + per package)
+```
+
+Always build knowledge graph after context creation. Graph failures are non-blocking — context is usable even if indexing fails.
+
 ### Plan → Implement → Test
 
 ```
@@ -135,6 +146,14 @@ planning-tasks
 - **Output:** Populated `.context/` directory with project-specific details
 - **When NOT to use:** `.context/` already exists
 - **Degree of freedom:** Medium
+- **Follow with:** `context-graph-linker` to build navigation graph
+
+### `context-graph-linker`
+
+- **Input:** Populated `.context/` directory with markdown files
+- **Output:** `.context/graph/` with INDEX.md, ORPHANS.md, BROKEN.md, CYCLES.md, DRIFT.md
+- **When NOT to use:** `.context/` doesn't exist yet, or graph already built
+- **Degree of freedom:** Low
 
 ### `context-loader`
 
@@ -254,9 +273,9 @@ planning-tasks
 
 | Task type                                   | Recommended pattern(s)                                                        |
 | ------------------------------------------- | ----------------------------------------------------------------------------- |
-| "Set up this new repo for AI agents"        | `initialize-repo`                                                             |
-| "Set up our monorepo for AI agents"         | `initialize-monorepo`                                                         |
-| "Set up all projects in this workspace"     | `initialize-workspace`                                                        |
+| "Set up this new repo for AI agents"        | `initialize-repo` → `context-graph-linker`                                    |
+| "Set up our monorepo for AI agents"         | `initialize-monorepo` → `context-graph-linker`                                |
+| "Set up all projects in this workspace"     | `initialize-workspace` → `context-graph-linker`                               |
 | "Build this feature" (simple)               | `implementing-features` → `writing-tests`                                     |
 | "Build this feature" (complex)              | `planning-tasks` → `implementing-features` × N → `writing-tests` × N          |
 | "Fix this bug"                              | `systematic-debugging` → `writing-tests` (add regression test)                |
@@ -302,6 +321,7 @@ All skills follow the conventions in `skills/_shared/conventions.md`:
 | `initialize-repo`             | `.context/` directory (full setup)                           |
 | `initialize-monorepo`         | `.context/` root + `packages/[name]/.context/`               |
 | `initialize-workspace`        | `.context/` per project + workspace-level overview           |
+| `context-graph-linker`        | `.context/graph/` with 5 navigation/validation files         |
 | `find-context-template`       | Nothing (search and report only)                             |
 | `context-loader`              | Nothing (read-only)                                          |
 | `context-maintenance`         | `.context/` documentation files                              |
