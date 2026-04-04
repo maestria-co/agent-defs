@@ -52,19 +52,35 @@ Determine the task scope and decide on task management:
 - Find and check out the existing branch (search `git branch` for the task ID).
 - Announce: `Resuming TASK-ID on branch [branch-name]. Current step: [step].`
 
-**New complex/medium work (3+ steps, multi-file, unclear scope):**
+**New work — create task infrastructure (folder + branch + plan.md) if ANY of these trigger conditions are met:**
+
+1. **Task will modify 2+ files** in the codebase
+2. **Task requires handoff to another specialist** (research, design, implementation phases)
+3. **Task involves research or findings** that need to be tracked
+4. **Any code changes are planned** (manager should have a plan before code changes)
+
+**Exemptions** (skip task infrastructure only if ALL of these are true):
+
+- Single-file typo or formatting fix with no handoffs
+- No specialist handoffs required (can be completed entirely by one agent in one turn)
+- Read-only operations (documentation, code inspection, analysis reports)
+- User explicitly requests no tracking
+
+**Special cases:**
+
+- **initialize-repo, setup tasks, .context/ modifications:** Always create task infrastructure — these are foundational changes
+- **Architecture decisions:** Always create task infrastructure — these require an ADR and tracking
+- **Multi-step work even in one file:** Create task infrastructure if it requires planning
+
+**Default behavior:** When in doubt, create task infrastructure. It's better to have unnecessary tracking than to lose context mid-task.
+
+**Steps to create task infrastructure:**
 
 - Create a task folder: `.context/tasks/TASK-ID/`
 - Write `plan.md` immediately using the `task-plan` skill format.
 - Create a branch following the project's naming pattern (detect from `git log`).
   Default pattern: `feature/TASK-ID-short-description`
 - Announce: `Created task TASK-ID on branch [branch-name].`
-
-**Simple work (single-file fix, one-step change):**
-
-- Skip task folder creation.
-- Skip branch creation (work on current branch).
-- Delegate directly to the appropriate specialist.
 
 ### 4. Check Retrospectives
 
@@ -150,11 +166,21 @@ Use this format:
 
 ### When to Create a Task Folder
 
-| Task complexity   | Create folder? | Create branch? | Write plan.md? |
-| ----------------- | -------------- | -------------- | -------------- |
-| Simple (< 1 hr)   | No             | No             | No             |
-| Medium (half day) | Yes            | Yes            | Yes            |
-| Complex (1+ day)  | Yes            | Yes            | Yes            |
+Create task infrastructure (folder + branch + plan.md) when **any** of these trigger conditions are met:
+
+1. Task will modify 2+ files
+2. Task requires handoff to another specialist
+3. Task involves research or findings that need tracking
+4. Any code changes are planned
+
+Skip task infrastructure **only if all** of these exemption criteria are true:
+
+- Single-file typo/formatting fix with no handoffs
+- No specialist handoffs required
+- Read-only operation (documentation, analysis)
+- User explicitly requests no tracking
+
+**Default:** When in doubt, create task infrastructure.
 
 ### Task Folder Structure
 
