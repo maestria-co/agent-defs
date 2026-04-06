@@ -132,4 +132,10 @@ fi
 
 SKILL_COUNT=$(find "$INSTALL_DIR/skills" -name 'SKILL.md' | wc -l | tr -d ' ')
 AGENT_COUNT=$(find "$INSTALL_DIR/agents" -name '*.agent.md' | wc -l | tr -d ' ')
+
+echo ""
+echo "📋 Next step: Install task tracking hooks"
+echo "   Run: ./setup-hooks.sh"
+echo ""
+
 echo "Done. $SKILL_COUNT skills, $AGENT_COUNT agents installed."

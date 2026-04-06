@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [{
+      "type": "command",
+      "bash": "./scripts/hooks/session-start.sh",
+      "powershell": "./scripts/hooks/session-start.ps1",
+      "cwd": ".",
+      "timeoutSec": 5
+    }],
+    "sessionEnd": [{
+      "type": "command",
+      "bash": "./scripts/hooks/session-end.sh",
+      "powershell": "./scripts/hooks/session-end.ps1",
+      "cwd": ".",
+      "timeoutSec": 10
+    }],
+    "postToolUse": [{
+      "type": "command",
+      "bash": "./scripts/hooks/post-tool-use.sh",
+      "powershell": "./scripts/hooks/post-tool-use.ps1",
+      "cwd": ".",
+      "timeoutSec": 5
+    }]
+  }
+}

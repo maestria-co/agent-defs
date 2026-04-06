@@ -137,6 +137,45 @@ Re-run after any `git pull` to pick up updates. The `--claude` / `-Claude` flag 
 
 ---
 
+## Task Tracking with Hooks
+
+Agent-defs now includes **global task tracking** using a hybrid architecture.
+
+### Setup
+
+Run once to install hooks:
+
+```bash
+./setup-hooks.sh    # Linux/macOS
+```
+
+```powershell
+.\setup-hooks.ps1   # Windows
+```
+
+### How It Works
+
+1. **Manager reads state:** Step 0 loads `~/.copilot/active-tasks.json` and checks for task ID mentions
+2. **Hooks write state:** Update timestamps on session start/end, auto-register new tasks, auto-archive old tasks
+3. **Mention task ID anywhere:** Manager auto-resumes that task
+4. **No interruptions:** Manager never blocks your workflow unless you explicitly ask
+5. **Auto-cleanup:** Tasks inactive for 7+ days automatically archive via sessionEnd hook
+
+### Task Lifecycle
+
+- **Create:** `@manager [request]` → Manager creates task folder + registers globally
+- **Update:** Every plan.md update → `last_active` timestamp refreshed
+- **Complete:** `@manager wrap up` → Task archived + retrospective written
+- **Resume:** Mention task ID in any request → Auto-checkout + load plan.md
+
+### Commands
+
+- `@manager show active` — List active tasks
+- `@manager complete TASK-ID` — Mark done without resuming
+- `@manager wrap up` — Complete current task
+
+---
+
 ## Quick Start
 
 See [`QUICK_START.md`](QUICK_START.md) for copy-paste prompt templates for each skill.

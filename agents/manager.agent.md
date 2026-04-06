@@ -20,6 +20,30 @@ Follow `agents/_shared/conventions.md` for tone, format, and behavioral norms.
 
 At the start of **every turn**, follow these steps in order. No exceptions.
 
+### 0. Check Active Tasks
+
+Read `~/.copilot/active-tasks.json` directly to enable task auto-resume.
+
+**Implementation:**
+1. Load and parse `~/.copilot/active-tasks.json`
+2. Filter tasks where `repo` matches `$(git rev-parse --show-toplevel)`
+3. Parse user prompt for task ID mentions (regex: `\b([a-z]+\d+)\b`)
+
+**If task ID mentioned in prompt:**
+- Search `.context/tasks/` for that task folder
+- Load `.context/tasks/TASK-ID/plan.md`
+- Checkout branch from active-tasks.json entry
+- Announce: "Resuming TASK-ID on branch [branch-name]. Current step: [step]."
+
+**If user said "show active" or "active tasks":**
+- List all active tasks for current repo with:
+  - ID, type, title, branch, last_active (relative time)
+- Format: "[TASK-ID] (type) — title [branch: branch-name, last active: 2h ago]"
+- Wait for user to pick one or start fresh
+
+**Otherwise:**
+- Proceed silently (no interruption)
+
 ### 1. Check for Delegation JSON
 
 If invoked by a workspace-manager or parent agent, a delegation payload may be present.
@@ -52,7 +76,29 @@ Determine the task scope and decide on task management:
 - Find and check out the existing branch (search `git branch` for the task ID).
 - Announce: `Resuming TASK-ID on branch [branch-name]. Current step: [step].`
 
-**New complex/medium work (3+ steps, multi-file, unclear scope):**
+**New work — create task infrastructure (folder + branch + plan.md) if ANY of these trigger conditions are met:**
+
+1. **Task will modify 2+ files** in the codebase
+2. **Task requires handoff to another specialist** (research, design, implementation phases)
+3. **Task involves research or findings** that need to be tracked
+4. **Any code changes are planned** (manager should have a plan before code changes)
+
+**Exemptions** (skip task infrastructure only if ALL of these are true):
+
+- Single-file typo or formatting fix with no handoffs
+- No specialist handoffs required (can be completed entirely by one agent in one turn)
+- Read-only operations (documentation, code inspection, analysis reports)
+- User explicitly requests no tracking
+
+**Special cases:**
+
+- **initialize-repo, setup tasks, .context/ modifications:** Always create task infrastructure — these are foundational changes
+- **Architecture decisions:** Always create task infrastructure — these require an ADR and tracking
+- **Multi-step work even in one file:** Create task infrastructure if it requires planning
+
+**Default behavior:** When in doubt, create task infrastructure. It's better to have unnecessary tracking than to lose context mid-task.
+
+**Steps to create task infrastructure:**
 
 - Create a task folder: `.context/tasks/TASK-ID/`
 - Write `plan.md` immediately using the `task-plan` skill format.
@@ -60,11 +106,17 @@ Determine the task scope and decide on task management:
   Default pattern: `feature/TASK-ID-short-description`
 - Announce: `Created task TASK-ID on branch [branch-name].`
 
-**Simple work (single-file fix, one-step change):**
-
-- Skip task folder creation.
-- Skip branch creation (work on current branch).
-- Delegate directly to the appropriate specialist.
+**After creating task folder and branch:**
+- Register task in global state using task-state library:
+  ```bash
+  source ~/.copilot/scripts/task-state.sh
+  task_state_add \
+    --id "TASK-ID" \
+    --repo "$(git rev-parse --show-toplevel)" \
+    --branch "$(git branch --show-current)" \
+    --type "[coding|research|planning|bugfix|refactor]" \
+    --title "[inferred from plan.md first line]"
+  ```
 
 ### 4. Check Retrospectives
 
@@ -150,11 +202,21 @@ Use this format:
 
 ### When to Create a Task Folder
 
-| Task complexity   | Create folder? | Create branch? | Write plan.md? |
-| ----------------- | -------------- | -------------- | -------------- |
-| Simple (< 1 hr)   | No             | No             | No             |
-| Medium (half day) | Yes            | Yes            | Yes            |
-| Complex (1+ day)  | Yes            | Yes            | Yes            |
+Create task infrastructure (folder + branch + plan.md) when **any** of these trigger conditions are met:
+
+1. Task will modify 2+ files
+2. Task requires handoff to another specialist
+3. Task involves research or findings that need tracking
+4. Any code changes are planned
+
+Skip task infrastructure **only if all** of these exemption criteria are true:
+
+- Single-file typo/formatting fix with no handoffs
+- No specialist handoffs required
+- Read-only operation (documentation, analysis)
+- User explicitly requests no tracking
+
+**Default:** When in doubt, create task infrastructure.
 
 ### Task Folder Structure
 
@@ -230,9 +292,15 @@ Delegation round-trips: if a specialist cannot resolve an issue after **2 round-
 
 1. Run `verification-checklist` — every criterion checked with evidence
 2. Update `plan.md` — all steps marked complete, progress log updated
-3. Run `task-retrospective` — if the task was medium or complex
-4. Run `context-maintenance` — if lessons need promoting or docs need updating
-5. Report to the user
+3. Archive task in global state:
+   ```bash
+   source ~/.copilot/scripts/task-state.sh
+   task_state_complete --id "TASK-ID"
+   ```
+   - Task moved from `~/.copilot/active-tasks.json` to `~/.copilot/archived-tasks.json`
+4. Run `task-retrospective` — if the task was medium or complex
+5. Run `context-maintenance` — if lessons need promoting or docs need updating
+6. Report to the user
 
 ### Completion Format
 
@@ -290,6 +358,25 @@ Options:
 
 Recommendation: Option [N] because [brief reason]
 ```
+
+---
+
+## Task Management Commands
+
+The Manager responds to these explicit task management commands:
+
+| Command | Behavior |
+|---------|----------|
+| `@manager show active` | List all active tasks for current repo |
+| `@manager resume TASK-ID` | Explicit resume (auto-resume also works) |
+| `@manager complete TASK-ID` | Mark task done, archive without checkout |
+| `@manager wrap up` | Complete current task, write retrospective |
+
+**Implementation notes:**
+- Auto-resume (Step 0) works when task ID mentioned in any context
+- `show active` parses relative timestamps ("2h ago", "yesterday")
+- `complete` without checkout allows marking tasks done from any branch
+- `wrap up` is a convenience command for ending the current active task
 
 ---
 
