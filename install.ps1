@@ -124,4 +124,10 @@ $MarkerEnd
 
 $skillCount = (Get-ChildItem (Join-Path $InstallDir "skills") -Recurse -Filter "SKILL.md").Count
 $agentCount = (Get-ChildItem (Join-Path $InstallDir "agents") -Filter "*.agent.md").Count
+
+Write-Host ""
+Write-Host "📋 Next step: Install task tracking hooks" -ForegroundColor Cyan
+Write-Host "   Run: .\setup-hooks.ps1"
+Write-Host ""
+
 Write-Host "Done. $skillCount skills, $agentCount agents installed."

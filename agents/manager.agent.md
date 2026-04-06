@@ -20,6 +20,30 @@ Follow `agents/_shared/conventions.md` for tone, format, and behavioral norms.
 
 At the start of **every turn**, follow these steps in order. No exceptions.
 
+### 0. Check Active Tasks
+
+Read `~/.copilot/active-tasks.json` directly to enable task auto-resume.
+
+**Implementation:**
+1. Load and parse `~/.copilot/active-tasks.json`
+2. Filter tasks where `repo` matches `$(git rev-parse --show-toplevel)`
+3. Parse user prompt for task ID mentions (regex: `\b([a-z]+\d+)\b`)
+
+**If task ID mentioned in prompt:**
+- Search `.context/tasks/` for that task folder
+- Load `.context/tasks/TASK-ID/plan.md`
+- Checkout branch from active-tasks.json entry
+- Announce: "Resuming TASK-ID on branch [branch-name]. Current step: [step]."
+
+**If user said "show active" or "active tasks":**
+- List all active tasks for current repo with:
+  - ID, type, title, branch, last_active (relative time)
+- Format: "[TASK-ID] (type) — title [branch: branch-name, last active: 2h ago]"
+- Wait for user to pick one or start fresh
+
+**Otherwise:**
+- Proceed silently (no interruption)
+
 ### 1. Check for Delegation JSON
 
 If invoked by a workspace-manager or parent agent, a delegation payload may be present.
@@ -81,6 +105,18 @@ Determine the task scope and decide on task management:
 - Create a branch following the project's naming pattern (detect from `git log`).
   Default pattern: `feature/TASK-ID-short-description`
 - Announce: `Created task TASK-ID on branch [branch-name].`
+
+**After creating task folder and branch:**
+- Register task in global state using task-state library:
+  ```bash
+  source ~/.copilot/scripts/task-state.sh
+  task_state_add \
+    --id "TASK-ID" \
+    --repo "$(git rev-parse --show-toplevel)" \
+    --branch "$(git branch --show-current)" \
+    --type "[coding|research|planning|bugfix|refactor]" \
+    --title "[inferred from plan.md first line]"
+  ```
 
 ### 4. Check Retrospectives
 
@@ -256,9 +292,15 @@ Delegation round-trips: if a specialist cannot resolve an issue after **2 round-
 
 1. Run `verification-checklist` — every criterion checked with evidence
 2. Update `plan.md` — all steps marked complete, progress log updated
-3. Run `task-retrospective` — if the task was medium or complex
-4. Run `context-maintenance` — if lessons need promoting or docs need updating
-5. Report to the user
+3. Archive task in global state:
+   ```bash
+   source ~/.copilot/scripts/task-state.sh
+   task_state_complete --id "TASK-ID"
+   ```
+   - Task moved from `~/.copilot/active-tasks.json` to `~/.copilot/archived-tasks.json`
+4. Run `task-retrospective` — if the task was medium or complex
+5. Run `context-maintenance` — if lessons need promoting or docs need updating
+6. Report to the user
 
 ### Completion Format
 
@@ -316,6 +358,25 @@ Options:
 
 Recommendation: Option [N] because [brief reason]
 ```
+
+---
+
+## Task Management Commands
+
+The Manager responds to these explicit task management commands:
+
+| Command | Behavior |
+|---------|----------|
+| `@manager show active` | List all active tasks for current repo |
+| `@manager resume TASK-ID` | Explicit resume (auto-resume also works) |
+| `@manager complete TASK-ID` | Mark task done, archive without checkout |
+| `@manager wrap up` | Complete current task, write retrospective |
+
+**Implementation notes:**
+- Auto-resume (Step 0) works when task ID mentioned in any context
+- `show active` parses relative timestamps ("2h ago", "yesterday")
+- `complete` without checkout allows marking tasks done from any branch
+- `wrap up` is a convenience command for ending the current active task
 
 ---
 
