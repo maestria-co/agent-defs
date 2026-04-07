@@ -120,6 +120,48 @@ Run these periodically (or after every 3–5 tasks):
 
 ---
 
+## Graph Sync
+
+After any task that creates or modifies a `.context/` file, sync the knowledge graph:
+
+```bash
+bash scripts/graph-link.sh
+```
+
+This rebuilds `.context/graph/INDEX.md` and refreshes `ORPHANS.md`, `BROKEN.md`, and `DRIFT.md`.
+
+### When to sync
+
+| Situation | Action |
+| --------- | ------ |
+| New `.context/` file created | Run `graph-link.sh` |
+| Existing `.context/` file updated | Run `graph-link.sh` |
+| Auditing stale or orphaned nodes | Run `graph-link.sh --validate-only` |
+| `.context/graph/` doesn't exist yet | Run `graph-link.sh` to initialize |
+
+### After syncing
+
+1. Review `ORPHANS.md` — link any disconnected nodes via their `related:` frontmatter
+2. Review `DRIFT.md` — resolve contradictions before starting new work
+3. If any file shows `description: TODO`, fill in the one-sentence description so INDEX entries are useful
+
+### Frontmatter requirement
+
+Every `.context/` file must have a `description:` field — one sentence an agent can read from INDEX.md to decide whether to open the file:
+
+```yaml
+---
+id: auth-decisions
+type: decision
+title: Authentication Decisions
+description: Documents the choice of JWT over sessions and the rationale for refresh token rotation.
+status: active
+related: []
+---
+```
+
+---
+
 ## Constraints
 
 - Do not touch source code during maintenance — only `.context/` files
