@@ -5,6 +5,7 @@
 ## Project Context
 
 See @.context/overview.md for project overview, tech stack, and current development phase.
+See @.context/graph/INDEX.md for a navigable index of all context files organized by type.
 See @.context/architecture.md for system structure, layers, and integration points.
 See @.context/standards.md for coding conventions, naming, and patterns.
 See @.context/testing.md for test framework, file conventions, and mocking patterns.

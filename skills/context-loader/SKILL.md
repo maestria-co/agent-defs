@@ -29,6 +29,7 @@ Always read in this order. Stop as soon as you have enough context for the task.
 
 1. `CLAUDE.md` or `.github/copilot-instructions.md` — big picture, key commands
 2. `.context/overview.md` — tech stack, architecture, current state
+3. `.context/graph/INDEX.md` — navigable index of all context files (if present)
 
 ### Level 2 — Read Based on Task Type
 
