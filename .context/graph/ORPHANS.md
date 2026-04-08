@@ -1,10 +1,11 @@
-# Orphaned Nodes
+# Orphaned Files
 
-> Nodes with no relationships. Consider linking them or removing them.
+> Files with no inbound or outbound links and no frontmatter `related:` entries.
+> These are not discoverable from any other context file.
 
-- readme (.context/decisions/README.md)
-- project-overview (.context/project-overview.md)
-- readme (.context/README.md)
-- 2025-01-13 (.context/retrospectives/2025-01-13.md)
-- readme (.context/retrospectives/README.md)
-- template (.context/retrospectives/template.md)
+- `decisions/README.md`
+- `project-overview.md`
+- `README.md`
+- `retrospectives/2025-01-13.md`
+- `retrospectives/README.md`
+- `retrospectives/template.md`

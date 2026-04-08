@@ -1,5 +1,5 @@
 # Broken Links
 
-> Related IDs that do not correspond to any known node.
+> Markdown links in .context/ files that point to files that do not exist.
 
-_No broken links found._
+_None._
