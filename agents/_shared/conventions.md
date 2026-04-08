@@ -170,6 +170,18 @@ Next step: [proposed action or who should handle it]
 
 Match existing style · write self-documenting code · comment only what isn't obvious · make the smallest change · no magic numbers · no dead code · validate inputs at boundaries · handle errors explicitly (never swallow exceptions).
 
+### Script-first for file mutations
+
+Skills that create directories and rewrite files belong in scripts, not agent instructions. Scripts are composable, testable, version-controlled, and callable by both agents and humans. If a task involves deterministic file transformations (creating directories, linking files, generating manifests), implement the logic in `scripts/` and invoke it from the skill.
+
+### Git hook safety patterns
+
+Pre-commit hooks must be defensive and non-disruptive:
+- Check for initialization state before running
+- Be no-op if not applicable to the current commit
+- Auto-stage generated files when applicable
+- Provide clear output on what changed
+
 ---
 
 ## Security

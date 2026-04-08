@@ -221,6 +221,10 @@ Next step: [proposed action]
 - **Validate inputs** at system boundaries.
 - **Handle errors explicitly** — never silently swallow exceptions.
 
+### Thin skill stub pattern
+
+For skills that invoke deterministic scripts (e.g., file transformations, graph operations), keep the skill file minimal (~100 lines). The stub should explain *when* to invoke the script and *what* it does, while the procedural *how* lives in the script itself. This maintains discoverability without duplicating implementation logic.
+
 ---
 
 ## Security
