@@ -25,9 +25,29 @@ At the start of **every turn**, follow these steps in order. No exceptions.
 Read `~/.copilot/active-tasks.json` directly to enable task auto-resume.
 
 **Implementation:**
-1. Load and parse `~/.copilot/active-tasks.json`
-2. Filter tasks where `repo` matches `$(git rev-parse --show-toplevel)`
+1. Load and parse `~/.copilot/active-tasks.json` using jq (safe pattern below)
+2. Filter tasks where `repo` matches current repository path
 3. Parse user prompt for task ID mentions (regex: `\b([a-z]+\d+)\b`)
+
+**Safe JSON parsing pattern:**
+```bash
+# Pre-assign variable to avoid nested command substitution
+current_repo=$(git rev-parse --show-toplevel)
+
+# Use jq with pre-assigned variable
+jq -r --arg repo "$current_repo" '
+  .tasks[]? 
+  | select(.repo == $repo) 
+  | "\(.id)|\(.type)|\(.title)|\(.branch)|\(.last_active)"
+' ~/.copilot/active-tasks.json | while IFS='|' read -r id type title branch last_active; do
+  # Calculate relative time (simple approach)
+  echo "[$id] ($type) — $title [branch: $branch, last active: $last_active]"
+done
+```
+- ✅ Pre-assign `current_repo` before jq command (no nested substitution)
+- ✅ Use jq `--arg` to pass variables safely
+- ✅ Pipe-delimited output for easy parsing
+- ❌ Never use: heredoc with `$()`, nested `$(...)`, `${var@P}`
 
 **If task ID mentioned in prompt:**
 - Search `.context/tasks/` for that task folder
@@ -374,9 +394,17 @@ The Manager responds to these explicit task management commands:
 
 **Implementation notes:**
 - Auto-resume (Step 0) works when task ID mentioned in any context
-- `show active` parses relative timestamps ("2h ago", "yesterday")
+- `show active` uses jq for JSON parsing with pre-assigned variables (see Step 0)
+- Relative timestamps: use ISO format from JSON if bash date calculation is complex
 - `complete` without checkout allows marking tasks done from any branch
 - `wrap up` is a convenience command for ending the current active task
+
+**Safe shell patterns (required):**
+- Pre-assign variables before using in jq or complex commands
+- Never use heredoc with command substitution: `cat << EOF ... $(command) ... EOF`
+- Never use nested command substitution: `$(cmd1 $(cmd2))`
+- Never use parameter transformation: `${var@P}`
+- See `skills/find-context-template/SKILL.md` for additional safe patterns
 
 ---
 
