@@ -28,6 +28,50 @@ Try each location in order — stop at the first match:
 3. `find ~/ -maxdepth 4 -type d -name "context_template"` — home dir search
 4. Ask the user for the path
 
+## Detection Logic
+
+Use this safe command pattern that avoids nested command substitution:
+
+```bash
+# Method 1: Simple expansion (recommended for most cases)
+template_dir=""
+if [ -d ~/.copilot/skills/_shared/context_template/ ]; then
+  template_dir=~/.copilot/skills/_shared/context_template
+  echo "Found at: $template_dir"
+elif [ -d ~/.claude/skills/_shared/context_template/ ]; then
+  template_dir=~/.claude/skills/_shared/context_template
+  echo "Found at: $template_dir"
+else
+  echo "NOT_FOUND"
+fi
+```
+
+**Why this is safe:**
+- No nested command substitution `$(...)` 
+- Tilde expansion happens naturally in the conditional test
+- Path is already absolute after tilde expansion
+- No external commands needed for simple path detection
+
+**If absolute path normalization is required:**
+
+```bash
+# Method 2: Using cd and pwd (POSIX-compliant)
+if [ -d ~/.copilot/skills/_shared/context_template/ ]; then
+  template_dir=$(cd ~/.copilot/skills/_shared/context_template && pwd)
+  echo "Found at: $template_dir"
+elif [ -d ~/.claude/skills/_shared/context_template/ ]; then
+  template_dir=$(cd ~/.claude/skills/_shared/context_template && pwd)
+  echo "Found at: $template_dir"
+else
+  echo "NOT_FOUND"
+fi
+```
+
+**Never use:**
+- ❌ `$(realpath $(echo ~/.copilot/...))` — nested substitution blocked
+- ❌ `${var@P}` — parameter transformation blocked
+- ❌ Chained variable assignments building commands
+
 ## Verification
 
 A valid `context_template/` must contain all three:
