@@ -30,6 +30,10 @@ Quick reference for selecting and composing skills in `skills/`.
 | Reflecting after completing a task                | `task-retrospective`          |
 | Promoting patterns to reusable skills             | `knowledge-graduation`        |
 | Evaluating a SKILL.md file                        | `evaluate-skill`              |
+| Creating or editing a skill definition            | `writing-skills`              |
+| Evaluating an agent system for design issues      | `agent-evaluation`            |
+| Reviewing code against quality standards          | `code-quality-rules`          |
+| Resolving context root for a monorepo/workspace   | `resolve-repo-context`        |
 | Formatting a spec as a Jira user story            | `jira-story`                  |
 | Formatting a spec as an Asana task                | `asana-story`                 |
 | Formatting a spec as a Linear issue               | `linear-story`                |
@@ -73,6 +77,19 @@ Quick reference for selecting and composing skills in `skills/`.
 **Rule of thumb:** If the next step after this work requires the full output to be in
 your context (e.g., reading a report before making a decision), use a skill. If the
 sub-task is fire-and-verify (you check results, not process them inline), use an agent.
+
+### Internal Skills (not user-invocable)
+
+These skills are loaded by agents on demand. Do not invoke them directly.
+
+| If your task involves…                                       | Internal skill                        |
+| ------------------------------------------------------------ | ------------------------------------- |
+| Investigating scope (unclear task, unknown approach)         | `task-plan-phase-investigation`       |
+| Making architectural decisions as primary task work          | `task-plan-phase-architecture`        |
+| Writing code when plan is ready                              | `task-plan-phase-implementation`      |
+| Running tests as primary task concern                        | `task-plan-phase-testing`             |
+| Closing a task (review, context updates, retro)              | `task-plan-phase-completion`          |
+| Detecting tree position + initializing branch/root `.context/` | `context-specialist-impl`          |
 
 ---
 
@@ -356,3 +373,13 @@ All skills follow the conventions in `skills/_shared/conventions.md`:
 | `ecological-impact`           | Impact report (in chat)                                      |
 | `log-query`                   | Findings summary (in chat)                                   |
 | `code-analysis`               | Analysis report (in chat or `.context/`)                     |
+| `writing-skills`              | `skills/[new-skill]/SKILL.md` (guidance; actual write is manual) |
+| `agent-evaluation`            | Evaluation report (in chat)                                  |
+| `code-quality-rules`          | Nothing (quality standards reference — loaded by reviewer)   |
+| `resolve-repo-context`        | Nothing (returns structured JSON; run as explore sub-agent)  |
+| `task-plan-phase-investigation` | `plan.md` (investigation checklist + two-step seed)        |
+| `task-plan-phase-architecture` | `plan.md` Decisions section                                 |
+| `task-plan-phase-implementation` | Source code (via @coder); updates `plan.md` progress      |
+| `task-plan-phase-testing`     | Test files (via @tester); updates `plan.md` progress         |
+| `task-plan-phase-completion`  | `.context/retrospectives/` + context updates (via retro)     |
+| `context-specialist-impl`     | `.context/` directory (branch or root initialization)        |
