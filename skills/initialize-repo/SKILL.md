@@ -164,6 +164,11 @@ for f in .context/META.md .context/overview.md .context/architecture.md \
 done
 ```
 
+**Quality bar:** Before finishing, apply the **context-document-guidelines** skill to each
+generated file. Each file must pass the quality checklist (specific to this project, contains
+real file paths, explains rationale, not generic boilerplate). Files that only contain
+placeholder text should be flagged for human completion rather than left as misleading stubs.
+
 ---
 
 ## Output Format

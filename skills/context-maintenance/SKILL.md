@@ -78,6 +78,14 @@ Task folders in `.context/tasks/[TASK-ID]/` are ephemeral by default.
 3. **Completed tasks (2–4 weeks):** Promote remaining lessons, then delete the folder
 4. **Completed tasks (> 4 weeks):** Delete unless the task contains a reference design
 
+### Pruning Triggers
+
+Delete or archive a task folder when **any** of these are true:
+
+- **Age:** Completed task folder older than 4 weeks
+- **Scope drift:** Folder content no longer reflects what the task actually became (scope changed significantly mid-task and the plan was never updated)
+- **Orphaned:** Task was abandoned with no retrospective and no active branch
+
 ### Pruning Process
 
 ```bash
@@ -85,7 +93,7 @@ Task folders in `.context/tasks/[TASK-ID]/` are ephemeral by default.
 find .context/tasks/ -name "plan.md" -mtime +28 -exec dirname {} \;
 ```
 
-For each old folder:
+For each old or drifted folder:
 
 1. Check if retrospective was written and lessons promoted
 2. If yes → delete the folder
@@ -112,6 +120,7 @@ Run these periodically (or after every 3–5 tasks):
 
 - Read `architecture.md` — do documented patterns match actual code?
 - If code has diverged → either update the doc (if the code is correct) or flag the code (if the doc is correct)
+- If a `.context/tasks/` folder has scope-drifted (plan describes a different task than what was built) → apply pruning trigger above
 
 ### Check 4 — Bloat
 

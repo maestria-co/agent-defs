@@ -57,6 +57,25 @@ Quick reference for selecting and composing skills in `skills/`.
 
 ---
 
+## Skills vs. Agents: When to Use Each
+
+**Skills** run in the current context window — no new window, no delegation:
+- Use when the work is simple enough to complete within the current session
+- Use when you need the output immediately as input to the next step
+- Invoked by reading the SKILL.md and following it directly
+
+**Agents** run in a separate context window via the task tool — full isolation:
+- Use when the work is complex enough to benefit from a dedicated context (implementation, testing, deep research)
+- Use when you want to keep the manager's context clean (long-running sub-tasks)
+- Use when the sub-task has its own plan, files, and decisions
+- Invoked via the `task` tool with `agent_type: "[AgentName]"`
+
+**Rule of thumb:** If the next step after this work requires the full output to be in
+your context (e.g., reading a report before making a decision), use a skill. If the
+sub-task is fire-and-verify (you check results, not process them inline), use an agent.
+
+---
+
 ## When to Use One Pattern vs. Compose Multiple
 
 **Use a single pattern directly** for most tasks. The overhead of composing multiple

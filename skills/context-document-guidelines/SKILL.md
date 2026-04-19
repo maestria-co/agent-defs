@@ -89,3 +89,12 @@ not generic advice that adds noise without reducing uncertainty.
 - Never write a context doc that applies to every project equally — if it could be copy-pasted into any codebase unchanged, it doesn't belong here.
 - Every doc must have at least one real file path or code reference from the actual codebase.
 - Do not duplicate content from `.github/copilot-instructions.md` or README.
+
+## Invocation
+
+This skill is invoked at two points in the agent workflow:
+
+- **`initialize-repo`** — calls this skill at Step 5 (Verification) to apply the quality bar
+  to each generated `.context/` file before the initialization is considered complete
+- **Manager agent** — calls this skill when creating or reviewing any `.context/` documentation
+  as part of a task, to ensure documentation meets the quality bar before committing

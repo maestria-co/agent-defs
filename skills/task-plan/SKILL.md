@@ -151,6 +151,23 @@ Update the plan whenever:
 
 ---
 
+## Freshness Gate
+
+Before continuing work on any step, verify the plan reflects current reality:
+
+1. Read the **Task Breakdown** — does the current step match what you're about to do?
+2. Read the **Progress Log** — does it accurately reflect what's been done?
+3. Read **Decisions** — were any decisions made that aren't recorded?
+
+**If the plan is stale** (e.g., steps were skipped, scope changed, a decision was made without recording it):
+- Update the plan first — mark completed steps `[x]`, add decisions, update `← CURRENT`
+- Only then proceed with the next step
+
+**Rule:** A plan that doesn't match current state is worse than no plan — it actively misleads
+the next agent. Fix it before using it.
+
+---
+
 ## Cold Resume Protocol
 
 When resuming a task from a plan:
