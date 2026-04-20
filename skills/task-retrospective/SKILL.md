@@ -192,3 +192,11 @@ When something went wrong, dig deeper than the surface:
 - Don't turn it into a blame log — focus on process, not people
 - Keep each retrospective under 30 lines — brevity forces clarity
 - The retrospective goes in `.context/retrospectives/`, not the task folder
+
+## Delegation Boundaries
+
+| What you're doing | Use |
+|---|---|
+| Updating `.context/retrospectives/` (this skill's output) | Write directly |
+| Promoting lessons to permanent `.context/` docs | Invoke `context-maintenance` |
+| Initializing or reorganizing a `.context/` directory | Delegate to `@context-specialist` |
