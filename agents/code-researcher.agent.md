@@ -61,8 +61,7 @@ When @manager invokes this agent, it provides:
 
 ## Skills to Apply
 
-- **code-analysis** — use the appropriate analysis template (code path trace, pattern analysis, usage analysis) from `skills/code-analysis/SKILL.md`
-- **context-loader** — read `.context/` to orient the investigation
+- **context-loader** — read `.context/` to orient the investigation before searching source
 - **common-constraints** — evidence-based findings, cite specific files/lines
 
 ---
