@@ -4,6 +4,7 @@ description: >
   hierarchy — individual projects (leaf), grouping directories (branch), and
   monorepo/workspace roots (root). Invoked by initialize-repo, initialize-monorepo,
   and initialize-workspace. Cannot further delegate to sub-agents.
+name: Context-Specialist
 model: 'claude-sonnet-4.6'
 user-invocable: false
 ---
