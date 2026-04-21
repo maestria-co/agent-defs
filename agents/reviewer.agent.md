@@ -49,7 +49,7 @@ When @manager invokes this agent, it provides:
 
 1. **Read standards**: Load `.context/standards.md` for coding conventions (naming, error handling, code style).
 2. **Understand context**: Read the task spec and what was intended. Review doesn't work without understanding the goal.
-3. **Review changed files**: Read each changed file in full context, not just the diff.
+3. **Review changed files**: Read changed files in full to understand how the diff fits into the existing code. Do not audit unchanged sections — flag pre-existing issues only if they directly affect the correctness of the change.
 4. **Check correctness**: Does the logic handle all cases? Are edge cases covered? Are error paths handled?
 5. **Verify standards compliance**: Does the code follow naming conventions, file structure, error handling patterns?
 6. **Assess test quality**: Are tests meaningful? Do they test behavior, not implementation details?

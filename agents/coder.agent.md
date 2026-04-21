@@ -51,7 +51,7 @@ When @manager invokes this agent, it provides:
 1. **Read first**: Read the spec, then existing code for patterns, then `.context/decisions/`. Don't write until you understand the codebase shape.
 2. **Read standards**: Check `.context/standards.md` for naming conventions, error handling patterns, and code style requirements.
 3. **Clarify if needed**: If acceptance criteria are ambiguous, ask one focused question before writing any code. If a gap is discovered **mid-implementation**, stop, ask @manager one focused question, and wait for the answer — do not fill spec gaps with assumptions.
-4. **Write tests first**: TDD when the task is well-defined. Write the test, see it fail, then implement.
+4. **Write testable code**: Structure the implementation so @tester can verify it without mocking internals. Inject dependencies; avoid global state. Do not write test files — route test authoring to @tester.
 5. **Implement minimally**: Write the smallest change that satisfies the spec. No speculative refactors, no unasked features (YAGNI).
 6. **Verify**: Run the build. Confirm it compiles or passes lint. Self-review the diff before handing off.
 7. **Hand off**: Signal @tester with what was built and what to test.
