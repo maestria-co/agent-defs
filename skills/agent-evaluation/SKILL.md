@@ -8,71 +8,71 @@ user-invocable: true
 
 ## Overview
 
-**Clean separation is the difference between a system that scales and one that decays.** Each problem has one owner; each skill does one thing; the orchestrator is the only routing intelligence.
+**Crisp boundaries distinguish scalable architectures from deteriorating ones.** Every problem belongs to exactly one resolver; every skill executes exactly one operation; routing intelligence resides solely in the orchestrator.
 
-## When to Use
+## Application Scenarios
 
-- Designing a new agent system from scratch
-- Reviewing existing agent definitions for overlap or creep
-- Debugging unexpected agent behavior that may be a structural problem
-- Before sharing or publishing an agent system
-
----
-
-Evaluate the provided agent system against these 5 rules:
-
-RULE 1 — PROMPT vs SKILL SEPARATION
-- Decision logic, reasoning rules, and "when to do X" → must live in agent system prompts
-- Output formatting, templates, API calls → must live in skill definitions
-- Flag any rules or logic found inside skill definitions that should be in a prompt
-- Flag any formatting or templates found in system prompts that should be in a skill
-
-RULE 2 — SINGLE SOURCE OF TRUTH
-- Each rule or constraint must exist in exactly ONE place
-- Flag any rule, guideline, or constraint that appears in more than one place
-- Flag any behaviour that could be governed by two different instructions simultaneously
-
-RULE 3 — SUB-AGENT JOB CLARITY
-- Each sub-agent must have ONE clearly defined job expressed as a question it answers
-- Its output must directly serve the orchestrator before the skill is called
-- Flag any sub-agent whose job overlaps with another sub-agent
-- Flag any sub-agent whose output goes directly to a skill instead of back to the orchestrator
-- Flag any sub-agent whose job is vague or could be interpreted multiple ways
-
-RULE 4 — SKILL RESPONSIBILITY
-- A skill must do ONE thing (format/call/return)
-- A skill must not contain reasoning, decision logic, or conditional behaviour
-- A skill must have a clear, structured return schema
-- Flag any skill that is making decisions rather than executing them
-- Flag any skill whose rules change depending on what the agent is trying to do
-
-RULE 5 — ORCHESTRATOR CLARITY
-- The orchestrator must own all routing decisions
-- The orchestrator must be the only agent that calls the final skill
-- The orchestrator must assemble all sub-agent outputs before calling the skill
-- Flag any routing logic that lives outside the orchestrator
-- Flag any case where a sub-agent could trigger the final skill directly
+- Architecting a fresh agent framework
+- Auditing deployed agent specifications for overlap or drift
+- Investigating anomalous agent conduct potentially rooted in structural flaws
+- Pre-publication validation of agent frameworks
 
 ---
 
-For each rule, respond in this format:
+Assess the presented agent architecture against these 5 principles:
 
-RULE [N] — [PASS / WARNING / FAIL]
-Finding: [what you found]
-Problem: [why it matters]
-Fix: [specific change to make]
+PRINCIPLE 1 — PROMPT vs SKILL DEMARCATION
+- Decision-making, reasoning mechanisms, and conditional triggers → reside in agent prompts
+- Output schemas, API invocations, transformation templates → reside in skill specifications
+- Flag reasoning embedded in skills that should migrate to prompts
+- Flag templates embedded in prompts that should migrate to skills
+
+PRINCIPLE 2 — INFORMATION SINGULARITY
+- Every constraint or rule must occupy exactly ONE location
+- Flag duplicated rules appearing across multiple definitions
+- Flag behaviors potentially governed by competing directives
+
+PRINCIPLE 3 — SUB-AGENT ROLE PRECISION
+- Every sub-agent must possess ONE unambiguous responsibility articulable as an answerable question
+- Its product must flow to the orchestrator prior to skill invocation
+- Flag sub-agents with overlapping jurisdictions
+- Flag sub-agents bypassing orchestrator to communicate directly with skills
+- Flag sub-agents with vague or multiply-interpretable mandates
+
+PRINCIPLE 4 — SKILL OPERATIONAL SCOPE
+- Skills must execute ONE action (format/invoke/return)
+- Skills must exclude reasoning, conditionals, or decision trees
+- Skills must specify clear, structured response contracts
+- Flag skills containing decision logic rather than mere execution
+- Flag skills whose behavior varies by calling context
+
+PRINCIPLE 5 — ORCHESTRATOR AUTHORITY
+- Orchestrators must monopolize all routing determinations
+- Orchestrators must exclusively invoke terminal skills
+- Orchestrators must aggregate all sub-agent responses before skill invocation
+- Flag routing intelligence distributed outside orchestrators
+- Flag pathways permitting sub-agents to trigger terminal skills
 
 ---
 
-After evaluating all 5 rules, give:
+Per principle, structure responses as:
+
+PRINCIPLE [N] — [PASS / WARNING / FAIL]
+Finding: [observed pattern]
+Problem: [architectural risk introduced]
+Fix: [concrete remediation]
+
+---
+
+Post-evaluation, synthesize:
 
 OVERALL HEALTH: [CLEAN / NEEDS WORK / RESTRUCTURE REQUIRED]
 
-PRIORITY FIXES: (ordered by what to fix first)
-1. [most critical fix]
-2. [next fix]
+PRIORITY FIXES: (urgency-ordered)
+1. [highest-priority remediation]
+2. [subsequent remediation]
 3. [etc.]
 
-OPEN QUESTIONS: (things to clarify about the system before fixing it)
-1. [question]
+OPEN QUESTIONS: (required clarifications before implementing fixes)
+1. [clarification needed]
 2. [etc.]

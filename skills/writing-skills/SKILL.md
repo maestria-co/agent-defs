@@ -8,44 +8,44 @@ user-invocable: true
 
 ## Overview
 
-**Writing skills is TDD applied to process documentation.** You identify failure modes (what agents get wrong without guidance), write the skill to address those specific failures, and verify agents now comply.
+**Skill authorship mirrors test-driven development for process artifacts.** Spot failure modes (agent missteps absent guidance), craft skills targeting those precise failures, then confirm agent conformance.
 
-**Core principle:** If you haven't seen an agent fail without the skill, you don't know what the skill needs to teach.
+**Foundation:** Without observing agent failure absent the skill, required skill content remains unknown.
 
 ## When to Create a Skill
 
 **Create when:**
-- A technique wasn't intuitively obvious — you or an agent got it wrong first
-- You'd reference this again across projects
-- The pattern applies broadly (not project-specific)
-- Others would benefit from the encoded process
+- Technique proved counterintuitive — initial attempts failed
+- Cross-project consultation anticipated
+- Pattern exhibits broad applicability (transcends single project)
+- Collective benefit from codified workflow
 
-**Don't create for:**
-- One-off solutions to a specific problem
-- Standard practices well-documented elsewhere
-- Project-specific conventions (put in `.context/standards/` instead)
-- Mechanical constraints enforceable with linting/validation — automate those, save skills for judgment calls
+**Defer creation for:**
+- Isolated solutions to singular problems
+- Standard methodologies thoroughly documented externally
+- Project-confined conventions (archive in `.context/standards/`)
+- Mechanically-enforceable constraints via linting/validation — automate those, preserve skills for judgment-requiring scenarios
 
 ## Skill Types
 
-| Type | Description | Examples |
-|------|-------------|---------|
-| **Technique** | Concrete method with steps | `systematic-debugging`, `initialize-repo` |
-| **Discipline** | Rules that prevent known failure modes | `testing-discipline`, `verification-checklist` |
-| **Process** | Workflow with decision points | `task-retrospective`, `design-first` |
-| **Format** | Output templates with structure guidance | `jira-story`, `asana-story` |
+| Type | Characterization | Instances |
+|----------|------------------|-----------|
+| **Technique** | Structured methodology with explicit steps | `systematic-debugging`, `initialize-repo` |
+| **Discipline** | Constraints preventing documented failure modes | `testing-discipline`, `verification-checklist` |
+| **Process** | Workflow embedding decision junctures | `task-retrospective`, `design-first` |
+| **Format** | Schema templates with organizational guidance | `jira-story`, `asana-story` |
 
 ## Directory Structure
 
 ```
 skills/
   skill-name/
-    SKILL.md              # Main reference (required)
-    supporting-file.*     # Only if needed (heavy reference, reusable tools)
+    SKILL.md              # Core reference (required)
+    supporting-file.*     # Conditional inclusion (heavyweight reference, reusable utilities)
 ```
 
-**Keep inline:** Principles, concepts, code patterns under 50 lines, examples.
-**Separate files for:** Heavy reference (100+ lines), reusable scripts/templates.
+**Inline preservation:** Principles, concepts, code snippets under 50 lines, examples.
+**File extraction:** Heavyweight reference (100+ lines), reusable scripts/templates.
 
 ## SKILL.md Structure
 
@@ -54,182 +54,182 @@ skills/
 ```yaml
 ---
 name: skill-name-with-hyphens
-description: Use when [specific triggering conditions and symptoms]
+description: Use when [exact triggering circumstances and indicators]
 ---
 ```
 
-- **`name`**: Letters, numbers, hyphens only. Verb-first gerunds work well (`writing-skills`, `executing-plans`).
-- **`description`**: Third-person. Starts with "Use when..." Describes ONLY triggering conditions — NOT what the skill does or its workflow.
+- **`name`**: Letters, numerals, hyphens exclusively. Verb-initial gerunds excel (`writing-skills`, `executing-plans`).
+- **`description`**: Third-person voice. Opens with "Use when..." Captures EXCLUSIVELY triggering circumstances — NEVER skill accomplishments or workflow.
 
-**Why description must not summarize workflow:** If a description says "dispatches subagent per task with code review between tasks," agents may follow that summary instead of reading the full skill. Descriptions that summarize workflow create shortcuts that bypass the actual process. Describe the PROBLEM or TRIGGER, not the SOLUTION.
+**Rationale for excluding workflow from descriptions:** Descriptions articulating "dispatches subagent per task with code review between tasks" risk agents executing that synopsis rather than reading complete skill. Workflow-encapsulating descriptions generate shortcuts circumventing genuine process. Articulate the PROBLEM or TRIGGER, never the SOLUTION.
 
 ```yaml
-# ❌ BAD: Summarizes workflow — agent may follow this instead of reading skill
+# ❌ BAD: Workflow encapsulation — agent might execute this bypassing skill reading
 description: Use for TDD - write test first, watch it fail, write minimal code, refactor
 
-# ✅ GOOD: Triggering conditions only — agent must read skill for process
+# ✅ GOOD: Triggering circumstances exclusively — agent must read skill for workflow
 description: Use when writing tests, reviewing test quality, or deciding what to mock
 ```
 
-### Body Structure
+### Content Structure
 
 ```markdown
 # Skill Name
 
 ## Overview
-Core principle in 1-2 sentences. What is this and why does it matter?
+Foundational principle in 1-2 sentences. What is this and why does it matter?
 
 ## When to Use
-Bullet list of symptoms and situations.
+Bulleted enumeration of indicators and scenarios.
 When NOT to use.
 
 ## The Process (or Core Pattern)
-The actual technique, steps, or rules.
-Before/after comparisons for techniques.
+Actual technique, steps, or constraints.
+Before/after juxtapositions for techniques.
 
 ## Common Mistakes
-What goes wrong and how to fix it.
+What fails and remediation approach.
 
 ## Rationalization Prevention (for discipline skills)
-Table of excuses agents make and why they're wrong.
+Matrix of agent excuses and counterarguments.
 ```
 
-Not every skill needs every section. Scale to complexity — a simple technique skill might be 40 lines; a discipline skill might be 150.
+Not every skill demands every section. Calibrate to complexity — elementary technique skills might occupy 40 lines; discipline skills might occupy 150.
 
-**Step and Phase heading format** — When a skill defines a numbered process, prefix every step or phase heading with the skill name:
+**Step and Phase heading conventions** — When skills articulate numbered workflows, prefix every step or phase heading with skill identifier:
 
 ```markdown
-## skill-name: Step 1: Do Something       ← correct
-## skill-name: Phase 2: Verify            ← correct
-## Step 1: Do Something                   ← wrong — agent cannot tell which skill this belongs to
+## skill-name: Step 1: Accomplish Something  ← appropriate
+## skill-name: Phase 2: Confirm              ← appropriate
+## Step 1: Accomplish Something              ← inappropriate — agent cannot identify owning skill
 ```
 
-When a skill has sub-processes (stages that contain steps), include both the stage and step identifiers in every heading:
+When skills incorporate nested workflows (stages encapsulating steps), embed both stage and step identifiers in every heading:
 
 ```markdown
-## skill-name: Stage 1: Prepare
-### skill-name: Stage 1: Step 1: Do X     ← correct — full path preserved
-### skill-name: Stage 1: Step 2: Do Y     ← correct
-## skill-name: Stage 2: Execute
-### skill-name: Stage 2: Step 1: Do Z     ← correct
+## skill-name: Stage 1: Preparation
+### skill-name: Stage 1: Step 1: Accomplish X ← appropriate — complete path maintained
+### skill-name: Stage 1: Step 2: Accomplish Y ← appropriate
+## skill-name: Stage 2: Implementation
+### skill-name: Stage 2: Step 1: Accomplish Z ← appropriate
 
-### Stage 1: Step 1: Do X                 ← wrong — missing skill name
-### skill-name: Step 1: Do X              ← wrong — ambiguous which stage
+### Stage 1: Step 1: Accomplish X             ← inappropriate — skill identifier absent
+### skill-name: Step 1: Accomplish X          ← inappropriate — stage ambiguous
 ```
 
-The full path (`skill-name: Stage N: Step N`) ensures an agent reading a heading in isolation can always determine which skill, which stage, and which step it is at — without needing to scroll back for context.
+Complete path (`skill-name: Stage N: Step N`) guarantees agents encountering isolated headings can always ascertain which skill, which stage, and which step — without backward scrolling for context.
 
-## Discoverability
+## Discovery Enhancement
 
-Future agents find your skill through description matching. Optimize for discovery:
+Prospective agents locate your skill via description matching. Enhance for discovery:
 
-**1. Rich description field** — Include symptoms, error patterns, and contexts that would trigger use.
+**1. Description field richness** — Embed indicators, error signatures, and triggering contexts.
 
-**2. Keyword coverage** — Use words agents would search for: error messages, symptoms ("flaky", "timeout", "race condition"), tool names, synonyms.
+**2. Keyword density** — Deploy words agents pursue: error messages, indicators ("flaky", "timeout", "race condition"), tool identifiers, synonyms.
 
-**3. Descriptive naming** — Verb-first, active voice:
+**3. Naming clarity** — Verb-initial, active construction:
 - ✅ `commit-discipline` not `git-commit-guidelines`
 - ✅ `design-first` not `pre-implementation-review`
 - ✅ `context-maintenance` not `context-directory-updates`
 
-**4. Register the skill** — After creating a skill, add it to the routing table in `skills/GUIDE.md` and the skills list in `README.md`. If the skill participates in multi-skill sequences, add it to the common workflows table in `skills/using-skills/SKILL.md`.
+**4. Registration protocol** — Post-creation, append to routing matrix in `skills/GUIDE.md` and skill catalog in `README.md`. For multi-skill sequence contributors, append to common workflow matrix in `skills/using-skills/SKILL.md`.
 
-## Token Efficiency
+## Token Economics
 
-Skills load into context on demand. Every word costs tokens.
+Skills activate on-demand into context. Every word imposes token expense.
 
 **Targets:**
-- Frequently-loaded skills: aim for < 200 words
-- Standard skills: aim for < 500 words
-- Complex discipline skills: can go longer, but earn every line
+- Frequently-activated skills: target < 200 words
+- Standard skills: target < 500 words
+- Sophisticated discipline skills: permissible excess, but validate every line
 
-**Techniques:**
-- Cross-reference other skills instead of repeating their content
-- One excellent example beats three mediocre ones
-- Compress examples — show the pattern, not the novel
-- Eliminate redundancy — don't explain what's obvious from context
+**Optimization techniques:**
+- Cross-reference companion skills rather than content duplication
+- Single exemplary example dominates multiple mediocre ones
+- Compress examples — exhibit the pattern, not the narrative
+- Purge redundancy — bypass explaining the self-evident
 
-## Writing Discipline Skills
+## Discipline Skill Authorship
 
-Discipline skills (rules that prevent failure modes) need extra hardening because agents rationalize away rules under pressure.
+Discipline skills (constraints preventing failure modes) require supplementary hardening because agents rationalize away constraints under duress.
 
-### 1. Close Every Loophole
+### 1. Loophole Elimination
 
-Don't just state the rule — forbid specific workarounds:
+Articulate the constraint and prohibit particular workarounds:
 
 ```markdown
-# ❌ Incomplete
+# ❌ Bad
 Write code before test? Delete it.
 
-# ✅ Bulletproof
-Write code before test? Delete it. Start over.
-**No exceptions:**
-- Don't keep it as "reference"
-- Don't "adapt" it while running tests
+# ✅ Fortified
+Write code before test? Delete it. Restart.
+**Zero exceptions:**
+- Don't preserve it as "reference"
+- Don't "modify" it while executing tests
 - Delete means delete
 ```
 
-### 2. Build a Rationalization Table
+### 2. Rationalization Matrix Construction
 
-Capture the excuses agents make and counter each one:
-
-```markdown
-| Excuse | Reality |
-|--------|---------|
-| "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
-| "I already know it works" | Show the evidence. |
-| "I'll test after" | Tests-after prove nothing about intent. |
-```
-
-### 3. Create Red Flags
-
-Self-check list for recognizing when you're about to violate the rule:
+Capture agent justifications and refute each:
 
 ```markdown
-## Red Flags — STOP
-- "This is different because..."
-- "I'll come back and do this later"
-- "It's about the spirit, not the letter"
-All of these mean: follow the process.
+| Red Flag | Action |
+|----------|--------|
+| "Too elementary to test" | Elementary code fails. Testing requires 30 seconds. |
+| "I already tested it works" | Show the proof. |
+| "I'll test next" | Next-tests prove nothing regarding intent. |
 ```
 
-## Code Examples in Skills
+### 3. Red Flag Establishment
 
-**One excellent example beats many mediocre ones.** Choose the most relevant language for the technique. Don't implement in 5 languages.
+Self-audit catalog for detecting imminent constraint violations:
 
-**Good examples are:**
-- Complete and runnable
-- Commented explaining WHY (not what)
-- From realistic scenarios
-- Ready to adapt
+```markdown
+## Red Flags — HALT
+- "This differs because..."
+- "I'll return to this next"
+- "It concerns the spirit, not the letter"
+All these indicate: execute the workflow.
+```
 
-**Avoid:**
-- Fill-in-the-blank templates
-- Contrived examples that don't match real use
-- Multi-language dilution
+## Code Specimens in Skills
 
-## Quality Checklist
+**Single exemplary specimen dominates multiple mediocre ones.** Choose the most germane language for the technique. Bypass implementing in 5 languages.
 
-Before considering a skill complete:
+**Quality specimens exhibit:**
+- Completeness and executability
+- Commentary explaining WHY (not what)
+- Realistic scenario basis
+- Adaptation readiness
 
-- [ ] Name uses only letters, numbers, hyphens
-- [ ] Description starts with "Use when..." and includes specific triggers
-- [ ] Description does NOT summarize the skill's workflow
-- [ ] Overview states core principle in 1-2 sentences
-- [ ] Content addresses specific failure modes (not hypothetical ones)
-- [ ] Discipline skills have rationalization prevention
-- [ ] Examples are concrete, not generic
-- [ ] Token-efficient — every line earns its place
-- [ ] Added to `skills/GUIDE.md` routing table
-- [ ] Added to `README.md` skills list
-- [ ] Added to `using-skills` common workflows table if the skill participates in multi-skill sequences
+**Bypass:**
+- Template skeletons
+- Artificial specimens misaligning with authentic usage
+- Multi-language dispersion
 
-## Anti-Patterns
+## Quality Validation Catalog
 
-| Anti-Pattern | Why It's Wrong |
-|-------------|---------------|
-| **Narrative storytelling** ("In session X, we found...") | Too specific, not reusable. State the technique. |
-| **Multi-language examples** | Mediocre quality, maintenance burden. One great example. |
-| **Generic labels** (step1, helper2) | Labels should have semantic meaning. |
-| **Copying other skills' content** | Cross-reference instead. Save tokens. |
-| **"Obviously clear" without testing** | Clear to you ≠ clear to agents. Verify. |
+Before declaring skill complete:
+
+- [ ] Name employs exclusively letters, numerals, hyphens
+- [ ] Description opens with "Use when..." and embeds specific triggers
+- [ ] Description EXCLUDES workflow encapsulation
+- [ ] Overview articulates foundational principle in 1-2 sentences
+- [ ] Content targets specific failure modes (not hypothetical ones)
+- [ ] Discipline skills embed rationalization prevention
+- [ ] Examples exhibit concreteness, not abstraction
+- [ ] Token-efficient — every line validates its inclusion
+- [ ] Appended to `skills/GUIDE.md` routing matrix
+- [ ] Appended to `README.md` skill catalog
+- [ ] Appended to `using-skills` common workflow matrix when skill contributes to multi-skill sequences
+
+## Antipatterns
+
+| Antipattern | Avoidance Rationale |
+|-------------|---------------------|
+| **Narrative exposition** ("In session X, we discovered...") | Excessive specificity, non-reusable. Articulate the technique. |
+| **Multi-language specimens** | Mediocre quality, maintenance burden. Single exemplary specimen. |
+| **Abstract labels** (step1, helper2) | Labels should convey semantic content. |
+| **Duplicating companion skill content** | Cross-reference instead. Preserve tokens. |
+| **"Obviously clear" without testing** | Clear to you ≠ clear to agents. Test. |

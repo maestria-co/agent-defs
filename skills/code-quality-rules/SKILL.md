@@ -8,70 +8,70 @@ user-invocable: false
 
 ## Overview
 
-Defines the evaluation criteria, severity levels, and multi-pass methodology for code reviews. Apply these rules when reviewing any code change.
+Specifies assessment standards, issue severity rankings, and a systematic multi-pass inspection methodology. These guidelines govern evaluation of any codebase modification.
 
-## Checklist
+## Assessment Standards
 
-**Code Quality**: No commented-out code. No debug statements. Proper error handling (no swallowed exceptions). No hardcoded secrets. Clear naming. No magic numbers. DRY principle followed.
+**Code Hygiene**: Purge all commented-out code blocks. Strip debug print statements. Never silently swallow exceptions—handle errors explicitly at every failure point. Never commit secrets—use environment variables. Choose descriptive identifiers consistently. Replace magic numbers with named constants. Apply the Don't Repeat Yourself principle rigorously.
 
-**Security**: No sensitive data in logs or error messages. User input validated/sanitized at trust boundaries. No SQL injection (use parameterized queries). No XSS (output encoding applied). No eval() or dynamic code execution. Auth/authz properly checked — verify that authorization is enforced at the service layer, not just the UI. Secrets not hardcoded or committed. New endpoints or data access paths have appropriate access controls. Changes to auth/authz logic get extra scrutiny — verify the change doesn't widen access unintentionally.
+**Security Posture**: Never expose sensitive data through logging or error messages. Validate and sanitize all untrusted input at system boundaries. Prevent SQL injection through parameterized queries exclusively. Apply output encoding to block XSS attacks. Ban eval() and related dynamic execution. Verify auth/authz implementation thoroughly—confirm authorization logic executes at the service tier, never solely in presentation layers. Keep credentials out of repositories. New API endpoints and data paths must enforce access restrictions. Changes touching authentication or authorization warrant heightened scrutiny—verify modifications don't accidentally broaden permissions.
 
-**Performance**: No N+1 query patterns. Resources properly cleaned up (connections, files, streams). Expensive operations not in hot paths.
+**Performance Characteristics**: Eliminate N+1 query antipatterns. Release resources explicitly—close database connections, file handles, network streams. Move computationally expensive operations away from hot execution paths.
 
-**Testing**: Tests exist for new functionality. Assertions are meaningful (test real behavior, not mock existence). Edge cases covered. No test-only methods added to production classes. For changed decision points, check whether the standardized **Coverage Evidence Block** from `testing-discipline` is present and reasonably complete. Treat this as process guidance: note gaps as coaching feedback, not as an automatic blocker.
+**Test Coverage**: New features require corresponding test cases. Assertions must verify genuine behavior, not merely mock presence. Include edge cases and failure scenarios in test suites. Avoid polluting production code with test-only methods. When altering decision logic, verify presence of the standardized **Coverage Evidence Block** from `testing-discipline`. Consider this coaching guidance: flag missing evidence as developmental feedback, not automatic rejection.
 
-**Verification**: Build and test commands were actually run, not just assumed to pass. Output evidence is included or reproducible.
+**Verification Evidence**: Confirm build and test execution actually occurred—demand output artifacts or reproducible steps, never accept assumptions.
 
-**Maintainability**: Methods not excessively long. Reasonable cyclomatic complexity. Clear separation of concerns. No circular dependencies.
+**Maintainability Factors**: Limit method length to reasonable bounds. Manage cyclomatic complexity actively. Preserve clear responsibility boundaries between components. Prevent circular dependency graphs.
 
-## Severity Levels
+## Severity Classifications
 
-**Critical**: Security vulnerabilities, data loss risk, crashes, breaking public API changes, incorrect business logic.
+**Critical Priority**: Security vulnerabilities, data corruption risks, runtime crashes, breaking modifications to public contracts, faulty business logic implementation.
 
-**Moderate**: Performance issues, missing error handling, missing tests for important paths, deviation from established patterns.
+**Moderate Priority**: Performance degradation, absent error handling, missing test coverage for critical paths, departure from established architectural patterns.
 
-**Minor**: Style inconsistencies not caught by linters, documentation improvements, optional refactoring opportunities.
+**Minor Priority**: Style inconsistencies beyond linter scope, documentation enhancement opportunities, discretionary refactoring suggestions.
 
-## Review Passes
+## Focused Review Methodology
 
-For thorough reviews, evaluate changes through multiple focused passes rather than trying to catch everything in a single read. Each pass has a narrow focus that prevents important issues from being overlooked.
+Execute comprehensive reviews through multiple targeted inspection passes rather than attempting omniscient single-pass review. Each pass concentrates on a specific quality dimension to prevent oversight.
 
-### Pass 1: Correctness & Logic
-- Does the code do what the specification requires?
-- Are there off-by-one errors, null/undefined paths, or race conditions?
-- Are error states handled, not just happy paths?
-- Does the control flow match the intended behavior?
+### Pass 1: Logic & Correctness
+- Does implementation fulfill stated requirements?
+- Are boundary errors, null scenarios, or timing hazards present?
+- Do error paths receive handling equal to success paths?
+- Does execution flow align with intended semantics?
 
-### Pass 2: Security & Trust Boundaries
-- Is user input validated before use?
-- Are authorization checks present at the service layer (not just UI)?
-- Are secrets, tokens, or PII handled safely (not logged, not exposed)?
-- Do new endpoints or data paths have appropriate access controls?
-- Are SQL queries parameterized? Is output encoded to prevent XSS?
+### Pass 2: Security & Trust Perimeter
+- Does input validation occur before consumption?
+- Does authorization enforcement happen at service boundaries (not UI only)?
+- Are credentials, tokens, and PII handled securely (never logged, never exposed)?
+- Do newly introduced endpoints and data access channels enforce access policies?
+- Are database queries parameterized? Is output properly encoded?
 
-### Pass 3: Integration & Side Effects
-- How do these changes interact with existing code?
-- Are there unintended side effects on callers or consumers?
-- Do changes to shared utilities affect other modules?
-- Are database migrations backward-compatible?
-- Are API contract changes backward-compatible?
+### Pass 3: System Integration & Ripple Effects
+- How do these modifications interact with surrounding code?
+- Could unintended consequences affect dependent components?
+- Do shared utility changes propagate correctly to consumers?
+- Can database schema changes support backward compatibility?
+- Can API modifications preserve existing contracts?
 
-### Pass 4: Maintainability & Clarity
-- Would a new team member understand this code without the PR description?
-- Are names descriptive and consistent with project conventions?
-- Is complexity justified, or could the same result be achieved more simply?
-- Are there magic numbers, unclear abbreviations, or misleading names?
+### Pass 4: Clarity & Long-term Sustainability
+- Could an unfamiliar developer comprehend this without external documentation?
+- Are identifiers meaningful and consistent with project conventions?
+- Is complexity warranted, or could simpler approaches achieve identical outcomes?
+- Are unexplained literal values, cryptic abbreviations, or deceptive names present?
 
-### Pass 5: Evidence & Completeness
-- Did the implementer run the build and include output?
-- Do tests exist for new behavior, and do test assertions verify real outcomes?
-- Are all requirements from the task specification addressed?
-- Is there scope creep — changes beyond what was specified?
+### Pass 5: Substantiation & Scope Adherence
+- Did the author execute build processes and provide tangible evidence?
+- Do tests exist for new functionality with assertions verifying actual behavior?
+- Are specification requirements comprehensively addressed?
+- Does scope creep introduce changes beyond stated objectives?
 
-### When to Use All Passes
+### Appropriate Pass Selection
 
-**Full multi-pass review**: New features, cross-module changes, security-sensitive code, public API changes.
+**Complete multi-pass inspection**: New feature development, cross-module modifications, security-critical code, public interface changes.
 
-**Abbreviated review (Passes 1, 4, 5 only)**: Single-file bug fixes, documentation changes, configuration changes, test additions.
+**Condensed inspection (Passes 1, 4, 5 exclusively)**: Isolated bug fixes, documentation updates, configuration adjustments, test augmentations.
 
-The review output format should still use the standard Findings structure (Critical / Moderate / Minor), but consider which pass uncovered each finding — this helps the author understand the nature of the issue.
+Review output should employ the standard Findings taxonomy (Critical / Moderate / Minor), annotating which pass surfaced each finding—this contextualizes the issue category for the author.

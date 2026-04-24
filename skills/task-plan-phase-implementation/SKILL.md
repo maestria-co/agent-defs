@@ -6,68 +6,64 @@ user-invocable: false
 
 # Phase: Implementation
 
-Load this skill when the task's **primary concern is writing code** and the
-plan is ready. For tasks where scope is unclear, load
-`task-plan-phase-investigation` first. This skill does not cover testing
-delegation — that is in `task-plan-phase-testing`. Completion (retro, context
-updates) is in `task-plan-phase-completion`.
+Load this skill when the task's **dominant focus targets code generation** and planning is finalized. For tasks with fuzzy boundaries, load `task-plan-phase-investigation` first. This skill omits test delegation — consult `task-plan-phase-testing`. Closure operations (retrospective, context refresh) reside in `task-plan-phase-completion`.
 
-## Pre-Dispatch Checklist
+## Pre-Dispatch Validation
 
-Before dispatching any @coder step:
+Before initiating any @coder step:
 
-- [ ] Run `git status --short`. If staged changes exist from previous agent work, commit or stash them before dispatching — a committing agent will sweep unrelated staged changes into its commit.
-- [ ] Confirm the plan's current step is fully specified: files, patterns, acceptance criteria.
-- [ ] If the step creates new files: include "commit the new file" as an explicit acceptance criterion. @coder agents often leave new files untracked unless explicitly instructed to commit.
+- [ ] Execute `git status --short`. Staged alterations from previous agent operations require commit or stash before dispatch — committing agents will incorporate unrelated staged files.
+- [ ] Confirm current plan step embodies complete specifications: target files, pattern citations, acceptance thresholds.
+- [ ] For file creation: explicitly mandate "commit the new file" as acceptance threshold. @coder agents commonly abandon new files untracked absent explicit directive.
 
-## @coder Dispatch Structure
+## @coder Delegation Structure
 
-Every @coder delegation must include all of these fields:
+All @coder dispatches require these components:
 
 ```
-Step [N]: [description]
-Files to create/modify:
-  - [path/to/file]: [what to do]
-Patterns to follow:
-  - [reference to .context/standards/ or .context/architecture/]
-Research/architecture findings: [summary or "N/A"]
-Acceptance criteria:
-  - [Specific, verifiable outcome]
-  - Commit all created/modified files
+Step [N]: [step characterization]
+Files to create/alter:
+  - [file/path]: [required action]
+Patterns for adherence:
+  - [.context/standards/ or .context/architecture/ citation]
+Research/architecture conclusions: [synopsis or "N/A"]
+Acceptance thresholds:
+  - [Concrete, verifiable outcome]
+  - Commit all created/altered files
 ```
 
-## Step Completion Verification
+## Step Completion Confirmation
 
-After each @coder step completes:
+Following each @coder step:
 
-1. Run `git status --short` — verify no untracked new files remain.
-2. Confirm the acceptance criteria are met.
-3. Update `plan.md` `## Progress` section: check the step, add an outcome note (`— [brief description of what was done/changed]`).
-4. If the project has a build step: confirm the build passes before the next step.
+1. Execute `git status --short` — confirm zero untracked new files persist.
+2. Confirm acceptance threshold satisfaction.
+3. Refresh `plan.md` `## Progress` section: mark step finalized, append outcome notation (`— [terse characterization of implementation/alterations]`).
+4. For projects with build workflows: confirm build success before progression.
 
-## Deviation Handling
+## Deviation Resolution
 
-When @coder reports a deviation from the plan (different approach, unexpected blocker, different files touched):
+When @coder reports plan deviation (alternative methodology, unexpected obstruction, distinct files altered):
 
 1. Document immediately in `plan.md` `## Decisions`.
-2. Assess impact: does the deviation affect subsequent steps?
-3. If the deviation is architectural: consult @architect before proceeding.
-4. If the deviation is minor (same outcome, different path): proceed, keeping the Decisions note.
-5. If @coder fails on the same issue repeatedly: invoke `systematic-debugging` skill before retrying.
+2. Assess footprint: does deviation influence downstream steps?
+3. For architectural deviation: consult @architect before progression.
+4. For trivial deviation (identical outcome, distinct route): progress while preserving Decisions notation.
+5. For repeated failures on identical obstacles: load `systematic-debugging` skill before retry.
 
-## Progress Tracking
+## Progress Continuity
 
-Keep `plan.md` current throughout:
+Maintain `plan.md` currency throughout:
 
-- Mark steps complete with outcome notes (not just checkmarks).
-- Move new ambiguities to `## Open Questions / Blockers` as they arise.
-- Add newly discovered files to `## Key Files`.
+- Mark finalized steps with outcome notations (beyond mere checkmarks).
+- Channel emerging uncertainties to `## Open Questions / Blockers` as identified.
+- Append newly identified files to `## Key Files`.
 
-## Relationship to Other Skills
+## Skill Interdependencies
 
-- **`systematic-debugging`**: Invoke when @coder fails on the same issue repeatedly.
-- **`task-plan-phase-architecture`**: When deviation handling reveals an architectural blocker, load this skill.
-- **`task-plan-phase-testing`**: If post-implementation work is primarily about tests, load the testing skill next.
-- **`task-plan`**: Use to update `plan.md` at each step boundary.
+- **`systematic-debugging`**: Load for repeated @coder failures on identical obstacles.
+- **`task-plan-phase-architecture`**: When deviation resolution exposes architectural obstructions, load this skill.
+- **`task-plan-phase-testing`**: For predominantly test-focused post-implementation effort, load the test skill next.
+- **`task-plan`**: Use to refresh `plan.md` at step transitions.
 
-**Does NOT cover:** investigation, architecture review, testing delegation, retrospective, completion docs.
+**Excluded scope:** investigation, architectural audit, test delegation, retrospectives, closure files.

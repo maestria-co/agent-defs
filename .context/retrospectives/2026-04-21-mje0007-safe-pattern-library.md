@@ -1,15 +1,15 @@
-## 2026-04-21 — mje0007: Safe Pattern Library (ICON cherry-pick)
+## 2026-04-21 — mje0007: Safe Pattern Library
 
 ### What Went Well
 
-- Scoping the cherry-pick before touching any code prevented wholesale ICON adoption;
+- Scoping the cherry-pick before touching any code prevented wholesale adoption;
   the final diff is targeted and purposeful rather than a bulk import
 - Structural validation (Python script) caught two real bugs — a broken `code-analysis`
   skill ref in `code-researcher` and a missing `name` frontmatter key in
   `context-specialist` — that would have silently degraded agent behavior
-- The Anti-Rationalization and Scope Guard tables from ICON are genuinely useful;
+- The Anti-Rationalization and Scope Guard tables are genuinely useful;
   adding them to all agents creates a consistent discipline layer across the entire fleet
-- Adapting ICON skills by stripping topology-cache and iconrc references before
+- Adapting skills by stripping topology-cache and iconrc references before
   committing kept the repo self-contained with no external dependencies
 
 ### What Could Be Improved
@@ -36,7 +36,7 @@
   start for any task involving Python validation scripts.
 
 - **context-specialist phase-sub-skills consolidation created an untestable unit**:
-  Merging 4 ICON sub-skills (detect-tree-position, impl-leaf, impl-branch, impl-root)
+  Merging 4 sub-skills (detect-tree-position, impl-leaf, impl-branch, impl-root)
   into one `context-specialist-impl/SKILL.md` was correct for reducing surface area,
   but the merged skill is now ~250 lines and has no automated test. → Dogfood the
   context-specialist agent on a real repo before the branch merges.
@@ -52,8 +52,8 @@
   The validator was recreated twice across the session. Committing it to `scripts/validate.sh`
   would make it available for CI and future tasks without reconstruction.
 
-- **Missing frontmatter `name:` key is easy to miss** when adapting ICON agents:
-  ICON uses a different frontmatter schema. Always run the structural validator
+- **Missing frontmatter `name:` key is easy to miss** when adapting agents:
+  The source used a different frontmatter schema. Always run the structural validator
   immediately after creating a new agent file, not at the end of the phase.
 
 - **The coder TDD contradiction (`Write tests first` vs. `Testing is @tester's job`)

@@ -6,77 +6,71 @@ user-invocable: false
 
 # Phase: Testing
 
-Load this skill when the task's **primary concern is test quality**. This
-includes: fixing failing tests, adding coverage to under-tested code, or
-driving a feature implementation test-first (TDD). For tasks where testing is
-just a trailing step after implementation — not the primary concern — load
-`task-plan-phase-completion` instead, which covers light validation.
+Load this skill when the task's **dominant focus targets test quality**. This encompasses: remediating failing tests, augmenting coverage for under-tested implementations, or implementing features via test-driven development (TDD). For tasks treating testing as trailing test step rather than primary objective — load `task-plan-phase-completion` instead, which addresses lightweight tests.
 
 ## When to Load This Skill
 
-Load `task-plan-phase-testing` when the task matches any of these:
+Load `task-plan-phase-testing` when tasks exhibit these characteristics:
 
-- **Failing tests**: Task is "fix the failing test suite" or "fix N broken tests"
-- **Coverage**: Task is "add tests for X" or "bring coverage above N%"
-- **TDD**: Task drives implementation via tests written first
-- **Test refactor**: Task is cleaning up or restructuring existing tests
+- **Failing tests**: Task targets "remediate failing test suite" or "repair N broken tests"
+- **Coverage expansion**: Task targets "add tests for X" or "elevate coverage beyond N%"
+- **TDD methodology**: Task implements features via test-first approach
+- **Test restructuring**: Task involves refactoring or cleaning extant test suites
 
-Do NOT load this skill when:
-- Testing is one final verification step after implementation (use completion)
-- The codebase has no tests and adding tests is not the stated goal
+Bypass when:
+- Tests represent terminal confirmation step post-implementation (use completion)
+- Implementation lacks tests and test addition isn't stated objective
 
 ## @tester Delegation Structure
 
-Every tester delegation must include all of these fields. The @tester agent
-will invoke `testing-discipline` internally; you do not need to invoke it.
+All tester dispatches require these components. The @tester agent internally loads `testing-discipline`; direct loading unnecessary.
 
 ```
-What to test: [feature, module, or failure description]
-Files involved:
-  - [path/to/file]: [what it does]
-Test requirements from the plan: [list from plan.md acceptance criteria]
-Existing test patterns: [reference to .context/testing/ files]
-Specific scenarios to cover:
-  - [scenario 1 — happy path]
-  - [scenario 2 — error/edge case]
-  - [scenario 3 — boundary condition]
-Success criteria:
-  - All specified scenarios have passing tests
-  - No test smells (no mocking internals, no testing implementation details)
-  - [coverage target, if any]
+What to test: [feature, module, or failure characterization]
+Implicated files:
+  - [file/path]: [operational purpose]
+Test requirements from plan: [plan.md acceptance criteria catalog]
+Extant test patterns: [.context/testing/ citations]
+Targeted scenarios for tests:
+  - [scenario 1 — nominal execution]
+  - [scenario 2 — error/boundary scenario]
+  - [scenario 3 — edge scenario]
+Success thresholds:
+  - All catalogued scenarios possess passing tests
+  - Zero test smells (no internal mocking, no implementation detail tests)
+  - [coverage threshold, when specified]
 ```
 
-## Test Status Tracking
+## Test Status Monitoring
 
-Add this table to `plan.md` `## Progress` section when dispatching @tester:
+Insert this matrix into `plan.md` `## Progress` section when dispatching @tester:
 
 ```markdown
-| Test Area | Status | Notes |
-|-----------|--------|-------|
+| Test Domain | Status | Annotations |
+|-------------------|--------|-------------|
 | Unit — [component] | ⏸️ Pending | — |
 | Integration — [flow] | ⏸️ Pending | — |
 | Coverage | ⏸️ Pending | — |
-| Bugs found | — | — |
+| Defects discovered | — | — |
 ```
 
-Status: ⏸️ Pending · 🔄 In Progress · ✅ Done · ❌ Blocked
+Status indicators: ⏸️ Pending · 🔄 In Progress · ✅ Complete · ❌ Obstructed
 
-Update after @tester completes. If bugs are found, route each to a @coder step
-before proceeding.
+Refresh post-@tester completion. Channel discovered defects to @coder steps before progression.
 
 ## Debugging Failing Tests
 
-When tests are failing and the root cause is unclear:
+When tests fail with opaque causation:
 
-1. If @tester fails to identify the cause after one pass, invoke `systematic-debugging` before re-dispatching.
-2. If the same test fails across 3+ @tester attempts, invoke `systematic-debugging` — the root cause is structural, not incidental.
-3. Document each debugging step in `plan.md` `## Decisions` as it runs.
+1. Following initial @tester pass without causation identification, load `systematic-debugging` before re-dispatch.
+2. Following 3+ @tester attempts on identical failures, load `systematic-debugging` — causation is architectural, not superficial.
+3. Archive each diagnosis action in `plan.md` `## Decisions` as performed.
 
-## Relationship to Other Skills
+## Skill Interdependencies
 
-- **`testing-discipline`**: @tester invokes this internally. You do not need to invoke it.
-- **`systematic-debugging`**: Invoke when tests are failing and root cause is unclear after the first @tester pass, or after 3+ failed attempts.
-- **`task-plan-phase-implementation`**: If fixing tests requires code changes, delegate those via the implementation skill, then return to testing.
-- **`task-plan-phase-completion`**: Load after testing is done to close the task: code review, context updates, retrospective.
+- **`testing-discipline`**: @tester loads internally. Direct loading unnecessary.
+- **`systematic-debugging`**: Load when test failures exhibit unclear causation following initial @tester pass, or following 3+ failed attempts.
+- **`task-plan-phase-implementation`**: For test remediation requiring code alterations, dispatch via implementation skill, then resume tests.
+- **`task-plan-phase-completion`**: Load post-test completion to finalize task: code audit, context refresh, retrospective.
 
-**Does NOT cover:** investigation, architecture, @coder dispatch, retrospective, context updates, completion summary.
+**Excluded scope:** investigation, architecture, @coder orchestration, retrospectives, context updates, completion summary.

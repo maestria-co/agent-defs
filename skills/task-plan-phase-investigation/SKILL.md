@@ -6,109 +6,105 @@ user-invocable: false
 
 # Phase: Investigation
 
-Load this skill when the task's **primary concern is understanding scope or
-gathering research**. For tasks where the path is already clear (implementation,
-testing), skip this skill and load the appropriate phase skill directly. For
-simple tasks (single-component fix, established pattern), skip phase skills
-entirely.
+Load this skill when the task's **predominant challenge involves boundary comprehension or research accumulation**. When implementation pathways are self-evident (coding, tests), bypass this skill for applicable phase skill. When tasks are straightforward (isolated remediation, documented patterns), omit phase skills entirely.
 
-## Context Gathering Checklist
+## Context Accumulation Protocol
 
-Before forming any hypothesis or plan, read in order:
+Prior to hypothesis construction or planning, read in sequence:
 
-1. `.github/copilot-instructions.md` — project overview, tech stack, key commands
-2. `.context/overview.md` — system architecture, module roles
-3. `.context/decisions.md` or `.context/decisions/` — prior choices that constrain this task
-4. `.context/retrospectives.md` or `.context/retrospectives/` — scan for lessons relevant to this type of task
-5. Relevant `.context/domains/` files — entities, rules, API patterns for touched areas
-6. Existing task folder (`plan.md`) if re-entering after context compaction
+1. `.github/copilot-instructions.md` — project synopsis, toolchain, essential commands
+2. `.context/overview.md` — architectural topology, component responsibilities
+3. `.context/decisions.md` or `.context/decisions/` — historical determinations constraining current effort
+4. `.context/retrospectives.md` or `.context/retrospectives/` — extract lessons relevant to this task category
+5. Relevant `.context/domains/` files — domain entities, business constraints, API conventions for implicated regions
+6. Pre-existing task directory (`plan.md`) when resuming post-compaction
 
-## Complexity Assessment
+## Complexity Classification
 
-Rate before planning:
+Classify before planning:
 
-| Rating | Criteria |
-|--------|----------|
-| **Simple** | Single component, no architectural questions, established patterns |
-| **Medium** | Multiple components, requires sequencing, one or two architectural questions |
-| **Complex** | Module-level changes, new patterns, migrations, cross-service boundaries, significant unknowns |
+| Classification | Indicators |
+|----------------|------------|
+| **Simple** | Isolated component, zero architectural uncertainty, precedented patterns |
+| **Medium** | Multi-component footprint, ordering requirements, limited architectural uncertainties |
+| **Complex** | Module-crossing alterations, novel patterns, migration efforts, service-crossing boundaries, substantial unknowns |
 
-- Simple → skip task folder, track inline.
-- Medium or Complex → create task folder and `plan.md` immediately (invoke `task-plan` skill), before any other work.
+- Simple → bypass task directory, sustain inline tracking.
+- Medium or Complex → create task directory with `plan.md` immediately (load `task-plan` skill), before all other operations.
 
-## When to Delegate to @researcher
+## When to Delegate to Researcher
 
 **Delegate when:**
-- Working with a specific library or framework version and currency matters
-- Upgrading a dependency with potential breaking changes
-- Adopting a pattern whose current best-practice form is uncertain
-- Integrating an external service and the current API/SDK is unfamiliar
+- Using particular library/framework versions where currency matters
+- Upgrading dependencies with possible breaking alterations
+- Implementing patterns whose contemporary best practices remain uncertain
+- Connecting external services with unfamiliar current APIs/SDKs
 
-**Skip when:**
-- The approach is already documented in `.context/`
-- This is a purely internal refactor with no external dependency questions
-- The task is a bug fix with a clear root cause
+**Bypass delegation when:**
+- Methodology already captured in `.context/`
+- Pure internal restructuring without external dependency concerns
+- Bug remediation with diagnosed causation
 
 ## @researcher Delegation Structure
 
-Every researcher delegation must include all of these fields:
+All researcher dispatches require these components:
 
 ```
-Topic: [specific library/framework/technology]
-Current version: [X.Y.Z] → Target version: [A.B.C] (if applicable)
-Questions:
-  - [Specific question 1]
-  - [Specific question 2]
-Decision this research will inform: [What choice depends on the findings]
-Constraints: [Any relevant constraints from the task]
+Topic: [precise library/framework/technology]
+Current version: [X.Y.Z] → Target version: [A.B.C] (when applicable)
+Queries:
+  - [Concrete query 1]
+  - [Concrete query 2]
+Decision informed by research: [Choice contingent on conclusions]
+Constraints: [Task-relevant limitations]
 ```
 
 ## @planner Delegation Structure
 
-Every planner delegation must include all of these fields:
+All planner dispatches require these components:
 
 ```
-Task: [TASK-ID and description]
-Objective: [What we're accomplishing and why]
-Affected areas: [Modules/files/domains involved]
+Task: [TASK-ID with characterization]
+Objective: [Achievement target and rationale]
+Implicated domains: [Modules/artifacts/domains involved]
 Complexity: Simple / Medium / Complex
 Relevant context:
-  - [Key constraint or pattern from .context/]
-  - [Key constraint or pattern from .context/]
-Research findings: [Summary of @researcher output, or "N/A — no research needed"]
-Open questions for planner: [Anything still ambiguous that planner should address]
+  - [Relevant constraint or pattern from .context/]
+  - [Relevant constraint or pattern from .context/]
+Research conclusions: [Researcher output synopsis, or "N/A — research unnecessary"]
+Outstanding queries for planner: [Persisting ambiguities for planner resolution]
 ```
 
-## Investigation-First Plans
+## Investigation-Driven Plans
 
-If the root cause or scope is unknown at the start (bugs, poorly-scoped requests), use a two-step plan immediately — do not wait for the investigation to complete:
+When causation or boundaries are initially opaque (defects, ill-defined requests), deploy two-step plans immediately — avoid awaiting investigation finalization:
 
 ```markdown
 ## Progress
-- [ ] Investigate: [describe the symptom or unknown] ← IN PROGRESS
-- [ ] Update this plan with findings and next steps
+- [ ] Investigate: [symptom or unknown characterization] ← IN PROGRESS
+- [ ] Revise this plan incorporating conclusions and subsequent actions
 ```
 
-Create the task folder and `plan.md` with these two steps. After investigation, replace them with the full plan before any fix work begins.
+Establish task directory and `plan.md` containing these steps. Post-investigation, supersede them with comprehensive plan before commencing remediation effort.
 
-## Investigation Exit Criteria
+## Investigation Completion Thresholds
 
-Investigation is complete when all of these are true:
+Investigation concludes when these conditions hold:
 
-- Scope is fully understood — all affected files and modules identified
-- All significant unknowns are resolved or explicitly logged as Open Questions
-- The plan contains sequenced steps with file-level granularity
-- Dependencies between steps are identified
-- Acceptance criteria are defined for each step
+- Boundaries fully comprehended — all implicated files and modules enumerated
+- All substantial unknowns resolved or explicitly catalogued as Open Queries
+- Plan contains ordered steps with artifact-level precision
+- Inter-step dependencies identified
+- Per-step acceptance thresholds established
 
-Do not proceed to architecture or implementation while open questions remain that could change the plan's structure.
+Avoid advancing to architecture or implementation while unresolved queries could restructure the plan.
 
-## Relationship to Other Skills
+## Skill Interdependencies
 
-- **`systematic-debugging`**: When the task is a bug with unclear root cause, invoke `systematic-debugging` during investigation to trace the root cause before planning a fix.
-- **`design-first`**: When investigation reveals multiple valid implementation approaches, invoke `design-first` to explore and select one before planning.
-- **`task-plan`**: Governs `plan.md` format and update triggers. This skill governs HOW to investigate; `task-plan` governs the plan document.
-- **`task-plan-phase-implementation`**: Load after investigation when the primary work shifts to writing code.
-- **`task-plan-phase-testing`**: Load after investigation when the primary work shifts to tests.
+- **`systematic-debugging`**: For bugs with obscure causation, load `systematic-debugging` during investigation to trace causation before planning remediation.
+- **`design-first`**: When investigation exposes multiple viable implementation strategies, load `design-first` to evaluate and select prior to planning.
+- **`task-plan`**: Governs `plan.md` structure and refresh triggers. This skill governs investigation methodology; `task-plan` governs plan documentation.
+- **`task-plan-phase-implementation`**: Load post-investigation when primary effort transitions to code generation.
+- **`task-plan-phase-testing`**: Load post-investigation when primary effort transitions to tests.
 
-**Does NOT cover:** architecture review, @coder dispatch, testing delegation, retrospective.
+**Excluded scope:** architectural audit, @coder orchestration, validation delegation, retrospectives.
