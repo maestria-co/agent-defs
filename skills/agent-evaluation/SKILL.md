@@ -76,3 +76,15 @@ PRIORITY FIXES: (urgency-ordered)
 OPEN QUESTIONS: (required clarifications before implementing fixes)
 1. [clarification needed]
 2. [etc.]
+
+---
+
+## Anti-Rationalization Audit
+
+When adding or editing Anti-Rationalization rows in any agent:
+
+1. Read every item in the agent's **Process** section.
+2. Check for direct contradictions — a Process step that would require the behavior the Anti-Rationalization row forbids.
+3. Remove or reword any conflicting Process step before committing.
+
+A contradiction between Process and Anti-Rationalization is worse than a gap — the agent will exhibit inconsistent behavior on every invocation.

@@ -64,10 +64,10 @@
 
 ### Promotion Items
 
-- [ ] "Run structural validator immediately after creating a new agent" → promote to
+- [x] "Run structural validator immediately after creating a new agent" → promote to
   `agents/_shared/conventions.md` as a creation checklist item
-- [ ] "Manager token count ~5,100 tokens is an accepted tradeoff for the orchestrator role"
+- [x] "Manager token count ~5,100 tokens is an accepted tradeoff for the orchestrator role"
   → promote to `.context/decisions/` as an ADR
-- [ ] "When adding Anti-Rationalization rows, audit Process section for contradictions"
+- [x] "When adding Anti-Rationalization rows, audit Process section for contradictions"
   → promote to `skills/agent-evaluation/SKILL.md` as a check item
-- [ ] Commit `scripts/validate.sh` as a permanent artifact
+- [x] Commit `scripts/validate.sh` as a permanent artifact
