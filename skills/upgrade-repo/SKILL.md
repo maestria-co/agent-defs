@@ -4,8 +4,11 @@ description: >
   Safely upgrade a language version, framework, or major dependency. Use when someone
   says "upgrade Node to v22", "migrate to React 19", "we need to get off this old
   version", "update our framework", or "how do we upgrade X?". Also triggers when a
-  security advisory requires a version bump. Prevents the most common upgrade pitfalls:
-  skipping migration guides, multi-major jumps, and losing rollback options.
+  security advisory requires a version bump. Scope is infrastructure only: manifests,
+  lock files, build configuration, and source changes required by the new version.
+  Content drift discovered during an upgrade (outdated docs, stale patterns) is out
+  of scope — delegate those to `context-maintenance`. Prevents the most common upgrade
+  pitfalls: skipping migration guides, multi-major jumps, and losing rollback options.
 ---
 
 # Skill: Upgrade Repo
@@ -138,6 +141,9 @@ the reason in `.context/decisions/`.
 
 - Read the migration guide before writing any code
 - One major version per upgrade branch — not multiple
+- **Scope is infrastructure only** — manifests, lock files, build config, and source changes
+  required by the new version. If you discover outdated documentation or stale patterns during
+  the upgrade, note them and delegate to `context-maintenance` — do not fix them in this branch
 - Merge only when all tests are green
 - Never upgrade in a production hotfix branch — upgrades need dedicated branches and full testing
 - Always tag before upgrading so you can roll back

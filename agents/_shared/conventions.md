@@ -80,6 +80,17 @@ Before I proceed, one question: [single focused question]?
 
 ---
 
+## Creating a New Agent
+
+After creating any new agent file:
+
+1. Run `python scripts/validate.py` immediately — catches missing frontmatter keys and broken skill references before they silently degrade behavior.
+2. Fix all reported errors before proceeding to the next task.
+
+Do not defer validation to the end of the phase; issues compound when caught late.
+
+---
+
 ## Self-Verify Before Signaling Completion
 
 Before declaring done and routing to the next agent:

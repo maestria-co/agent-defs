@@ -35,14 +35,29 @@ Look for `.context/overview.md` in the current working directory.
 
 **Check 2 — Locate the skill kit template**
 
-Find the `context_template/` directory. Check these locations in order:
+Find the `context_template/` directory using the **find-context-template** skill.
+
+Detection approach (safe pattern):
+
+```bash
+template_dir=""
+if [ -d ~/.copilot/skills/_shared/context_template/ ]; then
+  template_dir=~/.copilot/skills/_shared/context_template
+elif [ -d ~/.claude/skills/_shared/context_template/ ]; then
+  template_dir=~/.claude/skills/_shared/context_template
+fi
+```
+
+Check locations in order:
 
 1. `~/.copilot/skills/_shared/context_template/` (Copilot install)
 2. `~/.claude/skills/_shared/context_template/` (Claude Code install)
 3. Ask the user for the path
 
-- If found → note the path.
-- If not found → **fall back** to generating files from scratch using the structure in Step 2.
+- If found → note the path and verify it contains required files (see **find-context-template** skill)
+- If not found → **fall back** to generating files from scratch using the structure in Step 2
+
+**Security note:** Do not use nested command substitution like `$(realpath ...)` — use direct tilde expansion or `cd` + `pwd` for path resolution.
 
 ---
 
@@ -148,6 +163,11 @@ for f in .context/META.md .context/overview.md .context/architecture.md \
   [ -s "$f" ] && echo "✅ $f" || echo "❌ $f — missing or empty"
 done
 ```
+
+**Quality bar:** Before finishing, apply the **context-document-guidelines** skill to each
+generated file. Each file must pass the quality checklist (specific to this project, contains
+real file paths, explains rationale, not generic boilerplate). Files that only contain
+placeholder text should be flagged for human completion rather than left as misleading stubs.
 
 ---
 

@@ -9,7 +9,6 @@ See `skills/GUIDE.md` for the full skill selection guide.
 ```
 agents/          # Agent definitions (*.agent.md)
 skills/          # Composable skills (each in its own folder with SKILL.md)
-prompts/         # Reusable prompt files (*.prompt.md)
 .context/        # Project context (decisions, retrospectives, tasks)
 context_template/ # Template for generating .context/ in other projects
 recipes/         # End-to-end workflow examples
@@ -40,7 +39,6 @@ Pick a skill directly based on your task:
 | Git commit conventions                      | `commit-discipline`      | `skills/commit-discipline/SKILL.md`      |
 | Reflect after completing a task             | `task-retrospective`     | `skills/task-retrospective/SKILL.md`     |
 | Promote patterns to reusable skills         | `knowledge-graduation`   | `skills/knowledge-graduation/SKILL.md`   |
-| Orchestrate 3+ skills                       | `coordinating-work`      | `skills/coordinating-work/SKILL.md`      |
 | Sync `.context/` docs with codebase         | `context-review`         | `skills/context-review/SKILL.md`         |
 | Evaluate a SKILL.md file                    | `evaluate-skill`         | `skills/evaluate-skill/SKILL.md`         |
 
@@ -53,20 +51,13 @@ Specialist agents are invoked by the Manager via delegation.
 
 | Agent      | File                         | Skill equivalent         |
 | ---------- | ---------------------------- | ------------------------ |
-| Manager    | `agents/manager.agent.md`    | `coordinating-work`      |
+| Manager    | `agents/manager.agent.md`    | `planning-tasks`         |
 | Planner    | `agents/planner.agent.md`    | `planning-tasks`         |
 | Researcher | `agents/researcher.agent.md` | `researching-options`    |
 | Architect  | `agents/architect.agent.md`  | `designing-systems`      |
 | Coder      | `agents/coder.agent.md`      | `implementing-features`  |
 | Tester     | `agents/tester.agent.md`     | `writing-tests`          |
 | Reviewer   | `agents/reviewer.agent.md`   | `verification-checklist` |
-
-### Orchestration Agents
-
-| Agent             | File                                | Purpose                       |
-| ----------------- | ----------------------------------- | ----------------------------- |
-| Workspace-Manager | `agents/workspace-manager.agent.md` | Multi-project workspace tasks |
-| Monorepo-Manager  | `agents/monorepo-manager.agent.md`  | Cross-package monorepo tasks  |
 
 ### Specialized Support Agents
 

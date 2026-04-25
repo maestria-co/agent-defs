@@ -29,8 +29,11 @@ Quick reference for selecting and composing skills in `skills/`.
 | Making a git commit                               | `commit-discipline`           |
 | Reflecting after completing a task                | `task-retrospective`          |
 | Promoting patterns to reusable skills             | `knowledge-graduation`        |
-| Composing 3+ patterns for a complex workflow      | `coordinating-work`           |
 | Evaluating a SKILL.md file                        | `evaluate-skill`              |
+| Creating or editing a skill definition            | `writing-skills`              |
+| Evaluating an agent system for design issues      | `agent-evaluation`            |
+| Reviewing code against quality standards          | `code-quality-rules`          |
+| Resolving context root for a monorepo/workspace   | `resolve-repo-context`        |
 | Formatting a spec as a Jira user story            | `jira-story`                  |
 | Formatting a spec as an Asana task                | `asana-story`                 |
 | Formatting a spec as a Linear issue               | `linear-story`                |
@@ -47,7 +50,6 @@ Quick reference for selecting and composing skills in `skills/`.
 | Assessing impact/risk before a code change        | `impact-assessor`             |
 | Evaluating evidence quality before acting on it   | `evidence-analyzer`           |
 | Finding and prioritizing technical debt / hacks   | `workaround-detector`         |
-| Explaining a technical concept in plain language  | `eli5-extractor`              |
 | Orchestrating full bug triage end-to-end          | `triage-orchestration`        |
 | Triaging and routing incoming support tickets     | `support-triage`              |
 | Upgrading a language, framework, or major dep     | `upgrade-repo`                |
@@ -56,6 +58,38 @@ Quick reference for selecting and composing skills in `skills/`.
 | Assessing compute/carbon footprint of a change    | `ecological-impact`           |
 | Querying and analyzing application logs           | `log-query`                   |
 | Analyzing code paths, patterns, and usage         | `code-analysis`               |
+
+---
+
+## Skills vs. Agents: When to Use Each
+
+**Skills** run in the current context window — no new window, no delegation:
+- Use when the work is simple enough to complete within the current session
+- Use when you need the output immediately as input to the next step
+- Invoked by reading the SKILL.md and following it directly
+
+**Agents** run in a separate context window via the task tool — full isolation:
+- Use when the work is complex enough to benefit from a dedicated context (implementation, testing, deep research)
+- Use when you want to keep the manager's context clean (long-running sub-tasks)
+- Use when the sub-task has its own plan, files, and decisions
+- Invoked via the `task` tool with `agent_type: "[AgentName]"`
+
+**Rule of thumb:** If the next step after this work requires the full output to be in
+your context (e.g., reading a report before making a decision), use a skill. If the
+sub-task is fire-and-verify (you check results, not process them inline), use an agent.
+
+### Internal Skills (not user-invocable)
+
+These skills are loaded by agents on demand. Do not invoke them directly.
+
+| If your task involves…                                       | Internal skill                        |
+| ------------------------------------------------------------ | ------------------------------------- |
+| Investigating scope (unclear task, unknown approach)         | `task-plan-phase-investigation`       |
+| Making architectural decisions as primary task work          | `task-plan-phase-architecture`        |
+| Writing code when plan is ready                              | `task-plan-phase-implementation`      |
+| Running tests as primary task concern                        | `task-plan-phase-testing`             |
+| Closing a task (review, context updates, retro)              | `task-plan-phase-completion`          |
+| Detecting tree position + initializing branch/root `.context/` | `context-specialist-impl`          |
 
 ---
 
@@ -74,7 +108,7 @@ patterns is only justified when outputs from one pattern are required inputs for
 
 - You're just doing one thing (implement a feature, write a test)
 - Two patterns are independent (research and test-writing for separate features)
-- Adding `coordinating-work` would be more ceremony than the task itself
+- Two patterns already handle the task without orchestration overhead
 
 ---
 
@@ -241,13 +275,6 @@ planning-tasks
 - **When NOT to use:** Patterns that haven't met all 4 graduation criteria
 - **Degree of freedom:** Medium
 
-### `coordinating-work`
-
-- **Input:** Complex task requiring 3+ pattern types
-- **Output:** Sequenced plan + completion summary
-- **When NOT to use:** Single-pattern tasks, two independent patterns
-- **Degree of freedom:** Low
-
 ---
 
 ## Choosing by Task Type
@@ -319,7 +346,6 @@ All skills follow the conventions in `skills/_shared/conventions.md`:
 | `commit-discipline`           | Git commits                                                  |
 | `task-retrospective`          | `.context/retrospectives/`                                   |
 | `knowledge-graduation`        | `skills/[new-skill]/SKILL.md` + `GUIDE.md`                   |
-| `coordinating-work`           | Orchestrates others; no direct file output                   |
 | `context-review`              | `.context/` documentation files                              |
 | `common-constraints`          | Nothing (behavioral constraints, always active)              |
 | `testing-discipline`          | Nothing (quality standards, referenced during testing)       |
@@ -339,8 +365,7 @@ All skills follow the conventions in `skills/_shared/conventions.md`:
 | `impact-assessor`             | Impact assessment report (in chat)                           |
 | `evidence-analyzer`           | Evidence quality assessment (in chat)                        |
 | `workaround-detector`         | Workaround report; optionally tickets/`.context/` notes      |
-| `eli5-extractor`              | Plain-language explanation (in chat or doc)                  |
-| `triage-orchestration`        | `.context/retrospectives/`; bug fix + regression test        |
+| `categorizer`                 | Categorized issue table (in chat or file)                    |
 | `support-triage`              | Triage report; routed tickets                                |
 | `upgrade-repo`                | Updated manifests + source code; git commits                 |
 | `start-worktree`              | Git worktree directory                                       |
@@ -348,3 +373,13 @@ All skills follow the conventions in `skills/_shared/conventions.md`:
 | `ecological-impact`           | Impact report (in chat)                                      |
 | `log-query`                   | Findings summary (in chat)                                   |
 | `code-analysis`               | Analysis report (in chat or `.context/`)                     |
+| `writing-skills`              | `skills/[new-skill]/SKILL.md` (guidance; actual write is manual) |
+| `agent-evaluation`            | Evaluation report (in chat)                                  |
+| `code-quality-rules`          | Nothing (quality standards reference — loaded by reviewer)   |
+| `resolve-repo-context`        | Nothing (returns structured JSON; run as explore sub-agent)  |
+| `task-plan-phase-investigation` | `plan.md` (investigation checklist + two-step seed)        |
+| `task-plan-phase-architecture` | `plan.md` Decisions section                                 |
+| `task-plan-phase-implementation` | Source code (via @coder); updates `plan.md` progress      |
+| `task-plan-phase-testing`     | Test files (via @tester); updates `plan.md` progress         |
+| `task-plan-phase-completion`  | `.context/retrospectives/` + context updates (via retro)     |
+| `context-specialist-impl`     | `.context/` directory (branch or root initialization)        |

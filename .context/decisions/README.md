@@ -14,7 +14,7 @@ When working with AI agents, context about *why* something was built a certain w
 
 | ID | Title | Status | Date |
 |---|---|---|---|
-| — | *(none yet — first one will be ADR-001)* | — | — |
+| ADR-001 | Manager Agent Token Count Tradeoff | Accepted | 2026-04-21 |
 
 ---
 

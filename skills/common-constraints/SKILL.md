@@ -179,13 +179,39 @@ You may expand scope when:
 
 ---
 
+## Constraint 7: Shell Command Self-Check
+
+**Why this matters:** Shell commands can silently work around failures — swallowing errors with
+`|| true`, hiding stderr, or constructing commands dynamically in ways that are hard to audit.
+Running such commands without inspection makes failures invisible and erodes trust in the output.
+
+Before executing any shell command:
+
+1. **Read the command completely** before running it
+2. **Flag silent-workaround patterns:**
+   - `|| true` or `|| :` — suppresses failure exit codes
+   - `2>/dev/null` without an explicit reason — hides error output
+   - `${var@P}`, `${!var}`, `eval`, or chained variable assignments building commands — blocked entirely
+3. **If a workaround pattern is present:** stop, explain the concern, and ask the user to confirm
+4. **If the command is safe:** proceed
+
+### Violations
+
+```
+BAD:  Silently running `rm -rf "$dir" 2>/dev/null || true` without comment
+GOOD: Flagging that the command swallows all errors, asking if that's intentional before running
+```
+
+---
+
 ## Quick Reference
 
-| Constraint  | One-liner                   |
-| ----------- | --------------------------- |
-| Evidence    | Show proof, not claims      |
-| Escalation  | 3 strikes → stop and report |
-| Read-first  | Understand before changing  |
-| Conventions | Follow project patterns     |
-| Self-review | Check your own work         |
-| Scope       | Do what was asked, no more  |
+| Constraint        | One-liner                             |
+| ----------------- | ------------------------------------- |
+| Evidence          | Show proof, not claims                |
+| Escalation        | 3 strikes → stop and report           |
+| Read-first        | Understand before changing            |
+| Conventions       | Follow project patterns               |
+| Self-review       | Check your own work                   |
+| Scope             | Do what was asked, no more            |
+| Shell self-check  | Inspect commands before running them  |

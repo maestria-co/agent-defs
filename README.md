@@ -12,7 +12,6 @@ Works with **GitHub Copilot**, **Claude Code**, and any AI assistant that accept
 agents/           # Agent definitions (*.agent.md)
 skills/           # Composable skills (SKILL.md per folder)
                   #   _shared/context_template/ — .context/ template used by initialize-* skills
-prompts/          # Reusable prompt files (*.prompt.md)
 .context/         # Project context (decisions, retrospectives)
 context_template/ # Template for generating .context/ in other projects
 recipes/          # End-to-end workflow examples
@@ -23,7 +22,7 @@ build-guide/      # Build guide documentation
 
 ## Skills
 
-21 skills organized into four categories:
+19 skills organized into four categories:
 
 ### Infrastructure Skills
 
@@ -63,7 +62,6 @@ build-guide/      # Build guide documentation
 | `commit-discipline`      | Git commit conventions and branch management  | `skills/commit-discipline/SKILL.md`      |
 | `task-retrospective`     | Structured reflection after completing tasks  | `skills/task-retrospective/SKILL.md`     |
 | `knowledge-graduation`   | Promote validated patterns to reusable skills | `skills/knowledge-graduation/SKILL.md`   |
-| `coordinating-work`      | Orchestrate 3+ interdependent skills          | `skills/coordinating-work/SKILL.md`      |
 | `evaluate-skill`         | Evaluate a SKILL.md file for quality          | `skills/evaluate-skill/SKILL.md`         |
 
 **Skill selection guide:** `skills/GUIDE.md`
@@ -74,7 +72,7 @@ build-guide/      # Build guide documentation
 
 The **Manager** is the primary entry point for all multi-step development tasks. It reads project context, delegates to specialist agents, tracks progress, and enforces discipline constraints.
 
-### Core Agents (12 total)
+### Core Agents (10 total)
 
 | Agent      | File                         | Description                                      |
 | ---------- | ---------------------------- | ------------------------------------------------ |
@@ -85,13 +83,6 @@ The **Manager** is the primary entry point for all multi-step development tasks.
 | Coder      | `agents/coder.agent.md`      | Code implementation from specs                   |
 | Tester     | `agents/tester.agent.md`     | Test writing and execution                       |
 | Reviewer   | `agents/reviewer.agent.md`   | Code review for correctness and quality          |
-
-### Orchestration Agents
-
-| Agent             | File                                | Description                   |
-| ----------------- | ----------------------------------- | ----------------------------- |
-| Workspace-Manager | `agents/workspace-manager.agent.md` | Multi-project workspace tasks |
-| Monorepo-Manager  | `agents/monorepo-manager.agent.md`  | Cross-package monorepo tasks  |
 
 ### Specialized Support Agents
 

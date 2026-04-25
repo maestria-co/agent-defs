@@ -36,7 +36,14 @@
 | `docs/` | |
 
 ## Team Conventions
-[Coding conventions, branch naming, PR process, etc. that every agent should follow]
+
+**Task ID Pattern:** All tasks use the `MKT-####` format (see `.context/standards.md` for full details)
+- Format: `MKT-` prefix + 4-digit zero-padded number
+- Next available: `MKT-0002`
+- Task folders: `.context/tasks/MKT-####/`
+- Branch naming: `feature/MKT-####-description` or `bugfix/MKT-####-description`
+
+**Coding Standards:** See `.context/standards.md` for naming conventions, error handling patterns, and code style requirements.
 
 ## Current State
 [What phase is the project in? What's actively being worked on?]

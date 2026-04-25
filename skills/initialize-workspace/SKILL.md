@@ -14,9 +14,9 @@ user-invocable: true
 ## Purpose
 
 Run initialize-repo (or upgrade-repo if .context/ exists) across all projects in
-a VS Code multi-root workspace, then generate workspace-level cross-project context
-that the workspace-manager agent can use. This skill enables the agent system to
-understand multi-project relationships, shared dependencies, and cross-project workflows.
+a VS Code multi-root workspace, then generate workspace-level cross-project context.
+This skill enables the agent system to understand multi-project relationships, shared
+dependencies, and cross-project workflows.
 
 ---
 
@@ -59,7 +59,7 @@ influence another's. Each gets its own `.context/overview.md`, `.context/standar
 ## Phase 4: Generate Workspace Overview
 
 Create `.context/workspace-overview.md` at the **workspace root** (not inside
-any project folder). This is the entry point for the workspace-manager agent.
+any project folder). This is the workspace-level entry point for cross-project tasks.
 
 ```markdown
 # Workspace Overview
@@ -92,8 +92,8 @@ any project folder). This is the entry point for the workspace-manager agent.
 
 ## Agent Entry Point
 
-For tasks spanning multiple projects, use:
-@workspace-manager [task description]
+For tasks spanning multiple projects, use the **Manager** agent — it will coordinate
+across projects as needed.
 
 ## Maintenance
 
@@ -157,8 +157,7 @@ For each discovered relationship, document: type, direction, interface, and spec
 **Next steps:**
 
 1. Review and commit context changes in each project
-2. Use `@workspace-manager` for cross-project tasks
-```
+2. Use the **Manager** agent for cross-project tasks```
 
 ---
 
