@@ -63,6 +63,8 @@ Write a comment block listing every test case you plan to write, grouped by cate
 //   - Missing/expired/tampered tokens
 ```
 
+**See `references/code-patterns.md` for concrete test structure examples** (model testing, service testing, integration testing).
+
 ### Step 2 — Write Happy Path Tests
 
 Verify that the code does what it's supposed to do for valid, expected input.
@@ -105,8 +107,8 @@ Run tests with the no-watch flag:
 - Refactors: coverage must not decrease from before the refactor
 
 - If all tests pass and coverage is met → proceed to output.
-- If tests fail → diagnose and fix tests (not the implementation, unless the implementation is wrong).
-- If code is untestable (global state, no dependency injection) → report it. Do not mock the thing under test.
+- If tests fail → diagnose and fix tests (not the implementation, unless the implementation is wrong). **See `references/troubleshooting.md` for common failures and diagnostics.**
+- If code is untestable (global state, no dependency injection) → report it. **See `references/edge-cases.md` for untestable patterns and how to unblock them.** Do not mock the thing under test.
 
 ### Step 7 — Report
 
@@ -145,80 +147,6 @@ Suggested next: implementing-features (refactor for testability, then return to 
 
 ---
 
-## Examples
-
-<examples>
-
-<example>
-<scenario>Testing a new model with encrypted fields</scenario>
-<input>
-<task>Write tests for OAuthProvider model and migration.</task>
-<context>
-- src/models/OAuthProvider.js — just implemented (Sequelize + encrypted tokens)
-- db/migrations/20240315-create-oauth-provider.js — just implemented
-- Existing test style: tests/models/User.test.js (Jest, Sequelize mock)
-- Coverage target: ≥90%
-</context>
-</input>
-<output>
-Tests: ✅ All passing
-Coverage: 94% | Tests: 12 (unit: 12)
-Files: tests/models/OAuthProvider.test.js
-
-Test cases covered:
-Happy path: create valid OAuthProvider, retrieve by userId+provider
-Edge cases: null userId, empty provider string, token at max length
-Error cases: duplicate (userId+provider) raises unique constraint, invalid provider value
-Security cases: accessToken encrypted at rest (stored value differs from plaintext input)
-</output>
-</example>
-
-<example>
-<scenario>Writing a regression test for a bug fix</scenario>
-<input>
-<task>Add regression test for the case-sensitive email bug fix.</task>
-<context>
-- Bug: login failed for mixed-case emails (e.g., User@Example.com)
-- Fix applied in src/services/auth.js:47 — .toLowerCase() added before DB lookup
-- Existing tests: tests/services/auth.test.js
-</context>
-</input>
-<output>
-Tests: ✅ All passing
-Coverage: 91% (unchanged) | Tests: 8 (7 existing + 1 new)
-Files: tests/services/auth.test.js (added 1 test)
-
-Added test: "login succeeds for mixed-case email"
-- Input: { email: "User@Example.COM", password: "correct" }
-- Expected: 200 with user session
-- Validates: bug does not regress
-</output>
-</example>
-
-<example>
-<scenario>Test blocked by untestable code</scenario>
-<input>
-<task>Write tests for the token refresh service.</task>
-<context>
-- src/services/tokenRefresh.js — directly imports and calls a global Redis client
-- No dependency injection; client is a module-level singleton
-</context>
-</input>
-<output>
-Tests: ❌ Blocked
-Reason: src/services/tokenRefresh.js imports Redis client as a module-level singleton
-with no injection point. Cannot mock the Redis client without mocking the implementation
-itself, which tests internals rather than behavior.
-
-Suggested next: implementing-features — refactor tokenRefresh.js to accept a redis 
-client as a constructor/function parameter, then return to writing-tests.
-</output>
-</example>
-
-</examples>
-
----
-
 ## Constraints
 
 - Do not write production code — route testability fixes to `implementing-features`
@@ -227,4 +155,5 @@ client as a constructor/function parameter, then return to writing-tests.
 - Always use no-watch flags — never leave a hanging test runner
 - Always leave the test suite green before completing — do not hand off a broken suite
 - Test the contract (behavior), not the internals (implementation)
+- **See `references/edge-cases.md` for patterns that block testability** and how to report them to `implementing-features` for refactoring
 - Scope: reads and writes test files; reads implementation files and spec; does not modify source code
