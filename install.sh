@@ -117,8 +117,24 @@ $SKILLS_BLOCK" > "$CLAUDE_MD"
   else
     # Update existing — replace block if present, otherwise append
     if grep -q "$MARKER_START" "$CLAUDE_MD"; then
-      # Replace between markers using perl (portable across macOS/Linux)
-      perl -i -0pe "s/$MARKER_START.*?$MARKER_END/$SKILLS_BLOCK/s" "$CLAUDE_MD"
+      # Replace between markers using python3 (avoids perl backtick/pipe escaping issues)
+      TMPBLOCK=$(mktemp)
+      printf '%s' "$SKILLS_BLOCK" > "$TMPBLOCK"
+      python3 - "$CLAUDE_MD" "$TMPBLOCK" "$MARKER_START" "$MARKER_END" <<'PYEOF'
+import sys
+md_path, block_path, start_marker, end_marker = sys.argv[1:]
+with open(md_path) as f:
+    content = f.read()
+with open(block_path) as f:
+    new_block = f.read()
+start_idx = content.find(start_marker)
+end_idx = content.find(end_marker)
+if start_idx != -1 and end_idx != -1:
+    new_content = content[:start_idx] + new_block + content[end_idx + len(end_marker):]
+    with open(md_path, 'w') as f:
+        f.write(new_content)
+PYEOF
+      rm "$TMPBLOCK"
       echo "  Updated skills block in $CLAUDE_MD"
     else
       printf "\n\n%s" "$SKILLS_BLOCK" >> "$CLAUDE_MD"
