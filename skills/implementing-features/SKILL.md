@@ -42,6 +42,12 @@ Read in this order before writing a single line of code:
 2. Existing code in the area being changed (patterns, naming, error handling)
 3. `.context/decisions/` ADRs relevant to this area
 
+**Apply content-aware reading strategies:**
+- If reading JSON config → use jq to query specific fields
+- If reading code → grep for exports/functions first, then view_range for relevant sections
+- If checking logs → filter for errors/warnings with grep before requesting full logs
+- See `context-loader` skill for complete content-aware patterns
+
 - If an ADR constrains this implementation → follow it. Do not contradict ADRs silently.
 - If you discover a conflict between the spec and an existing ADR → stop and surface it.
 
