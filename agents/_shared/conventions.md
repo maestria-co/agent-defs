@@ -247,6 +247,45 @@ The cache breakpoint (`cache_control: {type: "ephemeral"}` on Anthropic) belongs
 | ✅ Shared conventions (`_shared/*.md`) | ❌ One-off or scratch prompts |
 | ✅ Any reusable system prompt | ❌ Per-request messages injected at runtime |
 
+### Measuring Cache Effectiveness
+
+After restructuring a file, verify that caching is actually working by inspecting the usage fields returned with every API response.
+
+**Metrics to check**
+
+| Provider | Field | Meaning |
+|----------|-------|---------|
+| Anthropic | `cache_read_input_tokens` | Tokens served from cache (you paid 10% of base price) |
+| Anthropic | `cache_creation_input_tokens` | Tokens written to cache (you paid 125% of base price) |
+| OpenAI | `cached_tokens` | Tokens served from cache (discounted rate) |
+| OpenAI | `cache_write_tokens` | Tokens written to cache (no extra cost pre-GPT-5.6; 125% for GPT-5.6+) |
+
+**Interpreting the numbers**
+
+| Scenario | cache_read / cached_tokens | cache_creation / cache_write | What it means |
+|----------|---------------------------|------------------------------|---------------|
+| First call (cold) | 0 | > 0 | Expected — cache is being written for the first time |
+| Subsequent calls (warm) | > 0 | 0 | ✅ Working — prefix matched, served from cache |
+| Every call | 0 | 0 | ❌ Not caching — prompt is below minimum threshold or structure is wrong |
+| Every call | 0 | > 0 | ❌ Cache writes never hit — breakpoint lands on dynamic content |
+
+**Validation steps**
+
+Run this procedure after restructuring any agent or skill file:
+
+1. Identify an agent you want to validate. Confirm its static content meets the minimum token threshold (512–4,096 tokens depending on model; 1,024 for OpenAI).
+2. Invoke the agent 10 times with **identical static content** and a **different task** each time (varying only the Dynamic Bottom).
+3. Log `cache_read_input_tokens` (or `cached_tokens`) and `cache_creation_input_tokens` (or `cache_write_tokens`) from each response.
+4. Verify that calls 2–10 all show `cache_read > 0` and `cache_creation = 0`. Call 1 is expected to show `cache_creation > 0`.
+5. Calculate cost savings: `(cache_read_tokens × 0.10) vs (full_input_tokens × 1.0)` — a well-structured agent should show roughly 90% savings on static tokens for calls 2–10.
+6. Compare against your pre-restructure baseline. Hit rate should increase; cost per invocation should decrease.
+
+**Warning signs**
+
+- **`cache_read` is always 0 across all calls** → dynamic content is inside the static zone; the prefix hash changes every invocation. Find and move it below the cache breakpoint.
+- **Both metrics are 0 on every call** → prompt is below the minimum cacheable threshold for the model in use. Expand static content until it crosses the threshold.
+- **`cache_creation > 0` on every call** → the cache breakpoint is placed on dynamic content. Move the breakpoint to the last static block instead.
+
 ---
 
 ## Anti-Patterns
