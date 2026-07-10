@@ -27,14 +27,15 @@ Structure agent and skill files with static content at the top and dynamic conte
 
 ## Task Breakdown
 
-1. [ ] Review existing agent and skill files to understand current structure patterns ← CURRENT
-2. [ ] Add "Cache-Friendly File Structure" section to `agents/_shared/conventions.md` with rationale and examples
-3. [ ] Create or update `agents/_shared/agent-template.md` to demonstrate the cache-friendly layout
+1. [x] Review existing agent and skill files to understand current structure patterns
+2. [ ] Add "Cache-Friendly File Structure" section to `agents/_shared/conventions.md` with rationale and examples ← CURRENT
+3. [ ] Create `agents/_shared/agent-template.md` to demonstrate the cache-friendly layout
 4. [ ] Add "When to Apply This Pattern" guidance to clarify scope
 5. [ ] Verify all acceptance criteria are met with concrete evidence
 
 ## Progress Log
 
+- **2026-07-10 (15:00):** Completed structure survey and caching research. Agents are already 80-95% static. Manager is most dynamic (15-20%). Research confirms static-at-top is required for prefix caching to work.
 - **2026-07-10:** Task MKT-0005 created from Trello card. Branch and plan.md initialized.
 
 ## Blockers
