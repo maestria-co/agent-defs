@@ -32,19 +32,32 @@ Add output efficiency guidelines to agent definitions so agents use concise outp
 
 ## Steps
 
-1. **[PENDING]** Analyze current agent output patterns to identify verbosity patterns and insertion points for efficiency guidelines.
+1. **[DONE]** Analyze current agent output patterns to identify verbosity patterns and insertion points for efficiency guidelines.
+   - Reviewed manager, coder, and tester agents
+   - Identified insertion points before Anti-Rationalization/Constraints sections
 
-2. **[PENDING]** Design output efficiency guidelines: define 3 scenarios (Routine, Complex, Error) with specific guidance for each.
+2. **[DONE]** Design output efficiency guidelines: define 3 scenarios (Routine, Complex, Error) with specific guidance for each.
+   - 3 scenarios defined with When/Do/Don't patterns
+   - Consistent formatting across all agents
 
-3. **[PENDING]** Add "Output Efficiency Guidelines" section to `agents/manager.agent.md` distinguishing the 3 scenarios.
+3. **[DONE]** Add "Output Efficiency Guidelines" section to `agents/manager.agent.md` distinguishing the 3 scenarios.
+   - Added section before Anti-Rationalization (+52 lines)
+   - 3 subsections with guidance and examples
 
-4. **[PENDING]** Add "Code Output Efficiency" section to `agents/coder.agent.md` showing patterns for routine vs complex code changes.
+4. **[DONE]** Add "Code Output Efficiency" section to `agents/coder.agent.md` showing patterns for routine vs complex code changes.
+   - Added section before Constraints (+60 lines)
+   - 2 subsections: Routine and Complex code changes
 
-5. **[PENDING]** Add "Test Output" section to `agents/tester.agent.md` showing concise summaries for passing tests, full output for failures.
+5. **[DONE]** Add "Test Output" section to `agents/tester.agent.md` showing concise summaries for passing tests, full output for failures.
+   - Added section before Constraints (+59 lines)
+   - 2 subsections: Passing and Failing tests
 
-6. **[PENDING]** Test guidelines clarity: verify all 6 acceptance criteria are met.
+6. **[DONE]** Test guidelines clarity: verify all 6 acceptance criteria are met.
+   - All 6 ACs verified ✅
 
-7. **[PENDING]** Final verification: run checklist, commit, and prepare for completion.
+7. **[DONE]** Final verification: run checklist, commit, and prepare for completion.
+   - Committed: ca594d9
+   - Ready for retrospective
 
 ---
 
@@ -71,4 +84,5 @@ None yet.
 
 ## Progress Log
 
+- **2026-07-10 08:38** — Implementation complete. All 6 ACs verified. Committed ca594d9. Next: retrospective.
 - **2026-07-10 08:31** — Task created, branch feature/MKT-0004-output-verbosity created
