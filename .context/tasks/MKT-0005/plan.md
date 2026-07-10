@@ -26,6 +26,9 @@ Structure agent and skill files with static content at the top and dynamic conte
 - **Decision:** Created validation-plan.md with production measurement script
   **Rationale:** User asked "should we be running any tests?" We cannot invoke agents through APIs from dev environment, but we can provide a validation script and success criteria for production deployment.
 
+- **Decision:** Researched both GitHub Copilot CLI and Claude Code caching implementations
+  **Rationale:** User asked "will this reduce my token use in the CLI?" — revealed critical gap in assumptions. Both CLIs actively cache but differently: Copilot CLI = harness-controlled (preventive value), Claude Code = transparent user-controlled (optimization value). Added CLI-specific subsection to conventions.md.
+
 ## Key Files
 
 - `agents/_shared/conventions.md` — Shared conventions for all agents; will contain the new cache-friendly structure guidance
@@ -39,10 +42,13 @@ Structure agent and skill files with static content at the top and dynamic conte
 4. [x] Add "When to Apply This Pattern" guidance to clarify scope
 5. [x] Add "Measuring Cache Effectiveness" subsection with validation steps
 6. [x] Create validation artifact documenting how to measure benefits in production
-7. [ ] Verify all acceptance criteria are met with concrete evidence ← CURRENT
+7. [x] Research CLI caching implementations (Copilot CLI + Claude Code)
+8. [x] Add Claude Code-specific guidance to conventions.md
+9. [ ] Verify all acceptance criteria are met with concrete evidence ← CURRENT
 
 ## Progress Log
 
+- **2026-07-10 (17:00):** Added Claude Code-specific guidance to conventions.md (CLAUDE.md usage, /usage command, 200-line guideline, cache invalidation triggers, comparison table). Created copilot-cli-caching-research.md and claude-cli-caching-research.md. Confirmed both CLIs actively cache: Copilot CLI = 94% hit rate (harness-controlled), Claude Code = transparent (user-visible metrics). Pattern has HIGH applicability to Claude Code, MEDIUM-HIGH to Copilot CLI.
 - **2026-07-10 (16:40):** Created validation-plan.md with Python script template for production measurement. Explains we can't run actual API tests from dev environment but provides tooling for when agents are deployed.
 - **2026-07-10 (16:30):** User asked about running tests to measure benefits. We can document validation approach but cannot run actual API invocations from this environment. Will create validation artifact with instructions.
 - **2026-07-10 (16:00):** Added "Measuring Cache Effectiveness" subsection with metrics, validation steps, and warning signs. User question about proof prompted this enhancement.
