@@ -286,6 +286,77 @@ Run this procedure after restructuring any agent or skill file:
 - **Both metrics are 0 on every call** → prompt is below the minimum cacheable threshold for the model in use. Expand static content until it crosses the threshold.
 - **`cache_creation > 0` on every call** → the cache breakpoint is placed on dynamic content. Move the breakpoint to the last static block instead.
 
+### Claude Code (Claude CLI) Specifics
+
+> Source: `.context/tasks/MKT-0005/claude-cli-caching-research.md`
+
+The cache-friendly structure pattern applies **more directly** to Claude Code than to GitHub Copilot CLI because caching is transparent — users can see hit/miss counts, control invalidation, and structure CLAUDE.md to maximize savings.
+
+**CLAUDE.md file scopes**
+
+| Scope | Location | When Loaded |
+|-------|----------|-------------|
+| User global | `~/.claude/CLAUDE.md` | Every session |
+| Project | `./CLAUDE.md` or `./.claude/CLAUDE.md` | Every session at launch |
+| Local (gitignored) | `./CLAUDE.local.md` | Every session |
+| Subdirectory | `./subdir/CLAUDE.md` | On-demand when reading files in that directory |
+
+CLAUDE.md content is loaded into the **"Project context"** cache layer — cached across turns within a session, written once at session start. Mid-session edits have no effect until the next session restart.
+
+**200-line guideline**
+
+Anthropic recommends keeping CLAUDE.md **under 200 lines**. Beyond that, adherence degrades and the cached prefix grows large enough to hurt rather than help. Apply the Static/Dynamic split from [Example Agent Structure](#example-agent-structure) — put stable rules first; keep dynamic or session-specific content out of CLAUDE.md entirely.
+
+**Viewing cache metrics in Claude Code**
+
+```
+/usage
+```
+
+The `/usage` command reports `cache_creation_input_tokens` and `cache_read_input_tokens` per turn — the same fields described in the [Measuring Cache Effectiveness](#measuring-cache-effectiveness) table above. Use them to confirm that CLAUDE.md restructuring produced real cache hits.
+
+**Cache invalidation triggers**
+
+| Action | Effect |
+|--------|--------|
+| Switch model mid-session | ❌ Cache bust |
+| Change effort level | ❌ Cache bust |
+| Connect / disconnect MCP server (non-deferred) | ❌ Cache bust |
+| `/compact` command | ❌ Cache bust |
+| Upgrade Claude Code version | ❌ Cache bust |
+| Edit CLAUDE.md mid-session | ✅ No effect until next session (cache preserved) |
+| Edit project files | ✅ Cache preserved |
+| `/rewind` command | ✅ Cache preserved |
+| Spawn subagents | ✅ Cache preserved |
+
+**Actionable rules for Claude Code**
+
+- ✅ Keep CLAUDE.md under 200 lines
+- ✅ Put the most stable rules at the top of CLAUDE.md (they anchor the cached prefix)
+- ✅ Never embed dynamic content in CLAUDE.md (branch names, dates, task IDs, current sprint)
+- ✅ Minimize `@import` references — imported content joins the cache prefix and inflates it
+- ✅ Prefer deferred MCP servers — deferred tools don't trigger cache invalidation on connect
+- ✅ Decide on model and effort level before starting a long session — switching mid-session busts the cache
+
+**Cache TTL**
+
+| User type | Default TTL | Opt-in |
+|-----------|-------------|--------|
+| Pro / Max / Team (subscription) | 1 hour, automatic, no extra cost | — |
+| API key | 5 minutes | `ENABLE_PROMPT_CACHING_1H=1` for 1-hour TTL |
+
+A well-structured CLAUDE.md stays warm across breaks in a subscription session. If you are on API key billing, enabling the 1-hour TTL is worth it for any session longer than 5 minutes.
+
+**Claude Code vs GitHub Copilot CLI — caching comparison**
+
+| Aspect | Claude Code | GitHub Copilot CLI |
+|--------|-------------|-------------------|
+| Cache visibility | `/usage` shows metrics per turn | No user-visible metrics |
+| User control | Env vars, strategic `/compact` timing, model choice | Harness-controlled |
+| MKT-0005 applicability | **Direct** — structure choices directly affect cache prefix | **Indirect** — prevents prefix corruption |
+| Cache TTL | 1 hour (subscription) / 5 min (API default) | Unknown (harness-controlled) |
+| Who pays | User (API key) or included (subscription) | User (AI credits) |
+
 ---
 
 ## Anti-Patterns
