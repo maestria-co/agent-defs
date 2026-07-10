@@ -195,6 +195,60 @@ Follow `_shared/handoff-protocol.md`. Always include: what you've done, what the
 
 ---
 
+## Cache-Friendly File Structure
+
+Structure agent and skill files so **static content appears at the top** and **dynamic content appears at the bottom**. This is not a style preference — it is a technical requirement for prompt prefix caching to function.
+
+### Why it matters
+
+Cache systems (Anthropic, OpenAI) match prefixes starting from **byte 0**. The prefix hash covers every token from the beginning of the prompt to the cache breakpoint. If any token before the breakpoint changes — even one — the hash changes, and no prior cache entry matches. The result: a full re-computation on every request, even when 95% of the content below that change is identical.
+
+**The rule:** static content at the top → stable prefix hash → cache hit on every subsequent call.  
+**The failure mode:** dynamic content at the top → different prefix hash every request → cache miss on every call, paying full input cost each time.
+
+### Static / Dynamic Content Split
+
+Target a **70% static / 30% dynamic** split:
+
+| Zone | Target | What Goes Here |
+|------|--------|----------------|
+| **Static Top** | ~70% | Role definition, capabilities, workflow steps, behavioral rules, few-shot examples, tool definitions, shared conventions |
+| **Dynamic Bottom** | ~30% | Current task, user query, session state, runtime context, per-invocation overrides |
+
+Content in the Static Top must be identical across every invocation of that agent or skill. Content in the Dynamic Bottom changes per request and must never appear before the cache breakpoint.
+
+### Example Agent Structure
+
+```
+[YAML frontmatter]                         ← Static — metadata never changes per invocation
+# Agent Name                               ← Static
+Role / identity paragraph                  ← Static
+When to invoke / delegation protocol       ← Static
+Process / workflow steps                   ← Static
+Skills to apply                            ← Static
+Output format                              ← Static
+Behavior tiers                             ← Static
+Constraints / anti-patterns                ← Static  ← CACHE BREAKPOINT (last static block)
+──────────────────────────────────────────────────────────────────────────
+# Current Task              (injected)     ← Dynamic — different every call
+Task ID, description, acceptance criteria  ← Dynamic
+Session context / prior turns              ← Dynamic
+Runtime overrides                          ← Dynamic
+```
+
+The cache breakpoint (`cache_control: {type: "ephemeral"}` on Anthropic) belongs on the **last static block** — not on any dynamic block. Placing it on dynamic content means the breakpoint hash changes on every request; the cache system never finds a prior matching entry and writes a new one every time.
+
+### When to Apply This Pattern
+
+| Apply to | Don't apply to |
+|----------|----------------|
+| ✅ Agent definition files (`*.agent.md`) | ❌ Task plans (`.context/tasks/*/plan.md`) |
+| ✅ Skill files (`SKILL.md`) | ❌ Session logs and conversation history |
+| ✅ Shared conventions (`_shared/*.md`) | ❌ One-off or scratch prompts |
+| ✅ Any reusable system prompt | ❌ Per-request messages injected at runtime |
+
+---
+
 ## Anti-Patterns
 
 - ❌ Silently assuming intent without checking
