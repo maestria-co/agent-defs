@@ -67,9 +67,38 @@ done
 
 echo ""
 
-# ── Claude Code: update CLAUDE.md ─────────────────────────────────────────────
+# ── Claude Code: update models and CLAUDE.md ──────────────────────────────────
 
 if $CLAUDE_MODE; then
+  # Fix model format: replace dots with dashes (e.g., claude-sonnet-4.5 → claude-sonnet-4-5)
+  # Use Python for better cross-platform compatibility with regex
+  python3 - "$INSTALL_DIR/agents" <<'PYEOF'
+import sys
+import re
+import os
+from pathlib import Path
+
+agents_dir = sys.argv[1]
+for agent_file in Path(agents_dir).glob("*.agent.md"):
+    with open(agent_file, 'r') as f:
+        content = f.read()
+    
+    # Replace model format: handle both quoted and unquoted values
+    # claude-{name}-{digit}.{digit} → claude-{name}-{digit}-{digit}
+    updated = re.sub(
+        r'model:\s*"?(claude-[a-z]+-\d)\.(\d)"?',
+        r'model: \1-\2',
+        content
+    )
+    
+    if updated != content:
+        with open(agent_file, 'w') as f:
+            f.write(updated)
+
+PYEOF
+  echo "  Updated agent model formats to use dashes"
+  echo ""
+
   CLAUDE_MD="$INSTALL_DIR/CLAUDE.md"
   MARKER_START="<!-- skills:start -->"
   MARKER_END="<!-- skills:end -->"
