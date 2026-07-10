@@ -181,3 +181,76 @@ Reflection and improvement. Run after tasks complete.
 - If no skill matches the task, proceed without one — don't force-fit
 - Follow skills/\_shared/conventions.md for all cross-cutting behaviors
 - When a skill says "stop and check in with the user," do it — don't skip checkpoints
+
+---
+
+## Efficient Skill Loading
+
+Skills have two layers: a lean `SKILL.md` (always read) and optional `references/` files (load on demand).
+Load only what the current task requires.
+
+### Two-Phase Workflow
+
+**Discovery Phase** — start here, every time.
+
+1. Read the skill's `SKILL.md`
+2. Check pre-flight conditions
+3. Begin work immediately
+
+**Deep Dive Phase** — trigger only when needed.
+
+1. Hit a specific scenario the core file doesn't cover (edge case, error pattern, troubleshooting)
+2. Identify the matching reference file
+3. Load it, handle the scenario, continue
+
+Move to Deep Dive only when the task demands it — not as a precaution.
+
+---
+
+### What NOT to Do
+
+- **Don't pre-load all references** before starting. Loading `references/` speculatively expands context without benefit.
+- **Don't read multiple full skills** to find the right one. Use `skills/GUIDE.md` to select first, then read only the chosen skill.
+- **Don't re-read a skill you've already loaded** in the same session. Trust your working memory — re-reading wastes context.
+- **Don't treat references as required reading.** Most tasks complete using only the core `SKILL.md`.
+
+---
+
+### What TO Do
+
+- **Read skills on demand.** Load a `SKILL.md` when a task matches it, not before.
+- **Load references only for specific scenarios.** A reference file solves a concrete problem — wait until that problem appears.
+- **Trust your memory within a session.** If you read a skill 10 messages ago, it's still active; don't reload it.
+- **Stop and evaluate before loading.** Ask: "Can I continue without this reference?" If yes, continue.
+
+---
+
+### Example Workflow: Implementing a Feature
+
+```
+1. Task arrives: "Add retry logic to the payment service"
+
+2. IDENTIFY — matches implementing-features
+   → Read: skills/implementing-features/SKILL.md          ← Discovery Phase
+
+3. START — write the retry logic using core guidance
+
+4. HIT EDGE CASE — "How should I structure error fallback patterns?"
+   → Decision point: Can I continue without a reference? No — this is a specific pattern question.
+   → Read: skills/implementing-features/references/code-patterns.md   ← Deep Dive Phase
+
+5. CONTINUE — apply the pattern, finish implementation
+```
+
+The reference loaded at step 4 because a concrete question triggered it — not as preparation.
+
+---
+
+### When to Load References
+
+| Scenario | Reference to load | When to load |
+|---|---|---|
+| Unsure how to structure error handling | `implementing-features/references/code-patterns.md` | When writing error paths, not before |
+| Test coverage for an edge case | `writing-tests/references/edge-cases.md` | When the edge case is identified |
+| Build is failing and cause is unclear | `systematic-debugging/references/troubleshooting.md` | When standard steps don't resolve it |
+| Commit message format is non-obvious | `commit-discipline/references/` | When drafting the commit, not at task start |
