@@ -16,11 +16,15 @@ Structure agent and skill files with static content at the top and dynamic conte
 - [x] Given the `agents/_shared/agent-template.md`, when I read it, then it shows the cache-friendly structure as the recommended layout
 - [x] Given cache-friendly guidance, when I read the "When to Apply This Pattern" section, then it clarifies: Apply to agents/skills/conventions; Don't apply to task plans, session logs, one-off prompts
 - [x] Given the "Measuring Cache Effectiveness" section, when I read it, then it provides concrete steps to validate the pattern works (metrics to check, validation procedure, warning signs)
+- [x] Given `.context/tasks/MKT-0005/validation-plan.md`, when I read it, then it provides a production validation script and success criteria for measuring actual benefits
 
 ## Decisions
 
 - **Decision:** Added "Measuring Cache Effectiveness" subsection to validate the pattern works
   **Rationale:** User question "how do we prove this had benefits?" revealed gap in acceptance criteria. Added concrete validation steps (run 10 times, check metrics, compare baseline) so teams can verify cache hit improvements.
+
+- **Decision:** Created validation-plan.md with production measurement script
+  **Rationale:** User asked "should we be running any tests?" We cannot invoke agents through APIs from dev environment, but we can provide a validation script and success criteria for production deployment.
 
 ## Key Files
 
@@ -34,10 +38,13 @@ Structure agent and skill files with static content at the top and dynamic conte
 3. [x] Create `agents/_shared/agent-template.md` to demonstrate the cache-friendly layout
 4. [x] Add "When to Apply This Pattern" guidance to clarify scope
 5. [x] Add "Measuring Cache Effectiveness" subsection with validation steps
-6. [ ] Verify all acceptance criteria are met with concrete evidence ← CURRENT
+6. [x] Create validation artifact documenting how to measure benefits in production
+7. [ ] Verify all acceptance criteria are met with concrete evidence ← CURRENT
 
 ## Progress Log
 
+- **2026-07-10 (16:40):** Created validation-plan.md with Python script template for production measurement. Explains we can't run actual API tests from dev environment but provides tooling for when agents are deployed.
+- **2026-07-10 (16:30):** User asked about running tests to measure benefits. We can document validation approach but cannot run actual API invocations from this environment. Will create validation artifact with instructions.
 - **2026-07-10 (16:00):** Added "Measuring Cache Effectiveness" subsection with metrics, validation steps, and warning signs. User question about proof prompted this enhancement.
 - **2026-07-10 (15:30):** Created agent-template.md demonstrating cache-friendly structure. Added Cache-Friendly File Structure section to conventions.md.
 - **2026-07-10 (15:00):** Completed structure survey and caching research. Agents are already 80-95% static. Manager is most dynamic (15-20%). Research confirms static-at-top is required for prefix caching to work.
