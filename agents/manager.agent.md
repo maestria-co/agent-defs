@@ -127,6 +127,22 @@ Determine the task scope and decide on task management:
     --title "[inferred from plan.md first line]"
   ```
 
+### Reading Task Plans
+
+When loading a `plan.md` that uses the 4-section template (Active Task / Next Up /
+Blocked / Completed Tasks), read in this order:
+
+1. **Active Task** — Read first. Contains the current step and enough context to resume work.
+2. **Next Up** — Read second. Understand upcoming steps before delegating.
+3. **Blocked / Waiting** — Check before proceeding. Address any blockers.
+4. **Completed Tasks** — **Skip** unless historical context is required (e.g., debugging a regression, tracing a past decision).
+
+> The `<details>` block keeps Completed Tasks collapsed. Do not expand it during routine
+> session starts — it contains information you do not need to load.
+
+For plans that use the standard format (Task Breakdown + Progress Log), apply the
+Cold Resume Protocol in the `task-plan` skill.
+
 ### 4. Check Retrospectives
 
 Read the last 3–5 entries in `.context/retrospectives/`. Extract lessons tagged to the current task type (same domain, same specialist, same pattern). Pass relevant lessons to specialists in the delegation context. Skip for simple tasks.

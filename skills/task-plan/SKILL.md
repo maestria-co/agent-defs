@@ -188,3 +188,74 @@ When resuming a task from a plan:
 - Always update the progress log before ending a work session
 - Keep the plan concise — if any section exceeds 30 lines, it needs pruning
 - The plan is the source of truth for task state — not chat history
+
+---
+
+## Plan.md Template Structure
+
+For tasks that span multiple sessions or involve frequent agent handoffs, use this
+4-section template to keep active work visible and completed work out of the way.
+Agents read **Active Task** and **Next Up** to resume — they skip **Completed Tasks**
+by default.
+
+```markdown
+## Active Task
+
+**Step:** [Current step name]
+**Status:** In Progress
+
+[1–3 sentences: what you are doing right now and any critical context for this step]
+
+## Next Up
+
+1. [Next step] — brief description
+2. [Step after that] — brief description
+3. [Further step] — brief description
+
+## Blocked / Waiting
+
+- [Blocker description] — [status] — waiting on [who/what]
+
+_(Empty if no active blockers)_
+
+<details>
+<summary>Completed Tasks</summary>
+
+- [x] [Step name] — [brief outcome or note]
+- [x] [Step name] — [brief outcome or note]
+
+</details>
+```
+
+### Section Guidance
+
+**Active Task** — The current in-progress step. An agent must be able to pick up
+work from this section alone. Keep it to 3–5 lines. Update it whenever the active
+step changes.
+
+**Next Up** — The ordered backlog of upcoming steps. Gives sequencing context
+without requiring the full plan breakdown. Move a step here from Completed Tasks
+when it finishes; promote it to Active Task when it starts.
+
+**Blocked / Waiting** — Anything preventing progress. Leave empty if unblocked.
+One line per blocker with a status note and who/what it depends on.
+
+**Completed Tasks** — Historical record wrapped in a `<details>` block. Agents
+skip this section during routine session starts. Read it only when historical
+context is needed — for example, debugging a regression or understanding a past
+decision.
+
+### When to Use This Template
+
+| Situation                                    | Use 4-section template? |
+| -------------------------------------------- | ----------------------- |
+| Task spans 3+ work sessions                  | Yes                     |
+| Task Breakdown has 5+ steps                  | Yes                     |
+| Multiple agents handing off work             | Yes                     |
+| Short task, single session                   | No — standard format    |
+| Simple bug fix or one-file change            | No — standard format    |
+
+### Example
+
+See `.context/tasks/MKT-0003/example-plan.md` for a realistic demonstration of
+this template in use.
