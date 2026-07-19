@@ -79,6 +79,133 @@ After loading context, note the key facts in your working memory:
 
 ---
 
+## Content-Aware Reading Strategies
+
+Match your reading strategy to the file type. Loading entire files is often inefficient — use targeted queries instead.
+
+### JSON and Structured Data
+
+❌ **Inefficient:**
+```bash
+view package.json  # Loads entire file (1000+ lines)
+```
+
+✅ **Efficient:**
+```bash
+jq '.dependencies' package.json           # Query specific field
+jq '.scripts | keys' package.json        # List available scripts
+jq '.version, .name' package.json        # Extract multiple fields
+```
+
+**When to use:** Configuration files (package.json, tsconfig.json), API responses, data exports
+
+---
+
+### Code Files
+
+❌ **Inefficient:**
+```bash
+view src/services/UserService.ts  # Loads entire file hoping to find relevant functions
+```
+
+✅ **Efficient:**
+```bash
+# Step 1: Find exports/functions first
+grep -n "export\|function\|class" src/services/UserService.ts
+
+# Step 2: Load only relevant sections
+view src/services/UserService.ts --view_range [45, 75]  # Load only the function you need
+```
+
+**When to use:** Understanding existing code, finding implementation patterns, locating specific functions
+
+---
+
+### Log Files
+
+❌ **Inefficient:**
+```bash
+view logs/app.log  # Loads entire log (10,000+ lines)
+```
+
+✅ **Efficient:**
+```bash
+# Step 1: Filter for problems first
+grep -i "error\|warn\|fatal" logs/app.log | tail -20
+
+# Step 2: If you need context around an error
+grep -B 5 -A 5 "specific error message" logs/app.log
+```
+
+**When to use:** Debugging, error investigation, production incident analysis
+
+---
+
+### Documentation
+
+❌ **Inefficient:**
+```bash
+view README.md  # Entire file when you only need setup instructions
+```
+
+✅ **Efficient:**
+```bash
+# Search for specific section
+grep -A 10 "## Installation" README.md
+grep -A 5 "## Quick Start" README.md
+
+# Or load specific line range if you know the structure
+view README.md --view_range [1, 30]  # Just the overview
+```
+
+**When to use:** Finding setup instructions, API documentation, specific sections of long docs
+
+---
+
+### Test Output
+
+❌ **Inefficient:**
+```bash
+bash "npm test" --initial_wait 120  # Wait for all output, read everything
+```
+
+✅ **Efficient:**
+```bash
+# Step 1: Run tests, capture output
+bash "npm test 2>&1 | tee /tmp/test-output.txt" --initial_wait 60
+
+# Step 2: Filter for failures
+grep -i "fail\|error" /tmp/test-output.txt
+
+# Step 3: Only if failures exist, read relevant sections
+grep -B 10 "FAILED" /tmp/test-output.txt
+```
+
+**When to use:** Test execution, CI/CD debugging, coverage analysis
+
+---
+
+### Decision Flow: Which Strategy to Use?
+
+```
+Is the file JSON/YAML/structured data?
+  → Use jq/yq to query specific fields
+
+Is the file source code?
+  → grep for exports/functions first, then view_range
+
+Is the file a log?
+  → Filter for errors/warnings first with grep
+
+Is the file documentation?
+  → Search for section headers, load ranges
+
+Is the file test output?
+  → Capture to temp file, filter for failures
+```
+
+---
+
 ## When to Create New Context
 
 During or after a task, create new `.context/` files when:
