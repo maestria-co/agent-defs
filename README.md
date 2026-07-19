@@ -66,6 +66,30 @@ build-guide/      # Build guide documentation
 
 **Skill selection guide:** `skills/GUIDE.md`
 
+### Skill Structure: Sidecar References Pattern
+
+Some skills use a **sidecar references pattern** to keep the main SKILL.md concise (~150–200 lines) while preserving detailed content in organized reference files. This pattern improves readability for agents and humans alike.
+
+**How it works:**
+1. Main `SKILL.md` contains the core workflow, pre-flight checks, and execution steps
+2. `references/` subdirectory contains focused files by use case:
+   - `code-patterns.md` — Code examples and implementation patterns
+   - `edge-cases.md` — Boundary conditions, gotchas, and how to handle them
+   - `troubleshooting.md` — Common problems, diagnostics, and resolution steps
+
+3. Cross-references in the main file point agents to reference files at natural decision points
+
+**Example skills using this pattern:**
+- `implementing-features` — See `references/code-patterns.md` for implementation examples
+- `writing-tests` — See `references/code-patterns.md`, `edge-cases.md`, and `troubleshooting.md` for testing examples
+- `agentic-evaluation` — See `references/output-template.md` for report structure
+
+**Why this pattern:**
+- ✅ Main files remain actionable without reading references
+- ✅ Reference files are independently readable
+- ✅ Agents can load context on-demand, reducing token overhead
+- ✅ Natural decision points guide agents to supplementary details exactly when needed
+
 ---
 
 ## Agents
